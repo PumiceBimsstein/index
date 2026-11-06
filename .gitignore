@@ -1,0 +1,17 @@
+# .gitignore
+
+# 1. 依存関係
+node_modules/
+elm-stuff/
+
+# 2. アプリ固有の不要なファイル・退避ディレクトリ
+oldversion/
+
+# 3. OS & エディタの一時ファイル
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+src/converttext/
+src/convert.bat

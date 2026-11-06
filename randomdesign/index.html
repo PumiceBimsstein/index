@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>個人サイト用プロンプト ランダム生成ジェネレーター</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- ★ id="themeLink" を付与（JSでここを差し替えます） -->
+  <link id="themeLink" rel="stylesheet" href="style.css">
+
+  <!-- テーマ切り替えUIの共通スタイル（テーマCSSの差し替え対象外・CSS変数で各テーマに追従） -->
+  <link rel="stylesheet" href="theme-switcher.css">
+</head>
+<body>
+
+<!-- ★ 右上に表示されるテーマ切り替えドロップダウン -->
+<div class="theme-switcher-wrapper" data-tooltip="作成例">
+  <label for="themeSwitcherSelect">THEME:</label>
+  <select id="themeSwitcherSelect" aria-label="テーマ切り替え（作成例）">
+    <!-- JSで自動挿入されます -->
+  </select>
+</div>
+
+<div class="container">
+  <h1>個人サイト用 プロンプトジェネレーター</h1>
+  <p class="desc">デザインセットの一括選択、各項目の手動変更、またはランダム抽選を組み合わせてAI用プロンプトを生成します。</p>
+
+  <!-- デザインセット一括選択エリア -->
+  <div class="set-selector-panel">
+    <label for="setSelect" class="panel-label">デザインセット一括選択：</label>
+    <select id="setSelect" onchange="onSetChange(this.value)">
+      <!-- JSで動的生成 -->
+    </select>
+  </div>
+
+  <div class="action-panel">
+    <button class="primary" onclick="generateAllRandom()">🎲 すべてランダムで再生成</button>
+    <button class="secondary" id="copyBtn" onclick="copyPrompt()">📋 コピーする</button>
+  </div>
+
+  <div class="parts-grid">
+    <!-- ① 雰囲気 -->
+    <div class="part-card">
+      <div class="part-header">
+        <span class="part-title">① 全体の雰囲気</span>
+        <div class="part-controls">
+          <select id="select-mood" class="part-select" onchange="onManualSelect('mood', this.value)"></select>
+          <button class="reroll-btn" onclick="rerollPart('mood')">再抽選</button>
+        </div>
+      </div>
+      <p class="part-text" id="text-mood"></p>
+    </div>
+
+    <!-- ② 配色 -->
+    <div class="part-card">
+      <div class="part-header">
+        <span class="part-title">② 色合い・配色</span>
+        <div class="part-controls">
+          <select id="select-color" class="part-select" onchange="onManualSelect('color', this.value)"></select>
+          <button class="reroll-btn" onclick="rerollPart('color')">再抽選</button>
+        </div>
+      </div>
+      <p class="part-text" id="text-color"></p>
+    </div>
+
+    <!-- ③ フォント -->
+    <div class="part-card">
+      <div class="part-header">
+        <span class="part-title">③ フォント・文字</span>
+        <div class="part-controls">
+          <select id="select-font" class="part-select" onchange="onManualSelect('font', this.value)"></select>
+          <button class="reroll-btn" onclick="rerollPart('font')">再抽選</button>
+        </div>
+      </div>
+      <p class="part-text" id="text-font"></p>
+    </div>
+
+    <!-- ④ 装飾 -->
+    <div class="part-card">
+      <div class="part-header">
+        <span class="part-title">④ 装飾・ディテール</span>
+        <div class="part-controls">
+          <select id="select-deco" class="part-select" onchange="onManualSelect('deco', this.value)"></select>
+          <button class="reroll-btn" onclick="rerollPart('deco')">再抽選</button>
+        </div>
+      </div>
+      <p class="part-text" id="text-deco"></p>
+    </div>
+  </div>
+
+  <div class="result-box">
+    <label for="output">結合された完成プロンプト（そのままAIへ貼り付け可能）</label>
+    <textarea id="output" readonly></textarea>
+  </div>
+</div>
+
+<script src="design-sets.js"></script>
+<script src="app.js"></script>
+<!-- ★ テーマスイッチャー用スクリプトを読み込み -->
+<script src="theme-switcher.js"></script>
+</body>
+</html>

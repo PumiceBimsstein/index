@@ -1,0 +1,384 @@
+@import url("https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Noto+Sans+JP:wght@500;700;900&display=swap");
+
+/* ==========================================================
+   銀河帝国の行政機関
+   濃紺 / 白 / シルバー + ゴールド（格式のアクセント）
+   ========================================================== */
+
+:root {
+  --navy-deep: #060d1f;
+  --navy: #0a1630;
+  --navy-panel: #0f1f45;
+  --navy-line: #24407a;
+  --white: #f4f7fb;
+  --text: #e3e9f4;
+  --silver: #b8c2d3;
+  --silver-dim: #7d8aa3;
+  --gold: #c8a24a;
+  --gold-bright: #e3c36f;
+
+  --heading: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --body: "BIZ UDPGothic", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+
+  /* 帝国の紋章（八芒星と二重の環） */
+  --emblem: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'><circle cx='36' cy='36' r='34' fill='none' stroke='%23c8a24a' stroke-width='1.6'/><circle cx='36' cy='36' r='29' fill='none' stroke='%23c8a24a' stroke-width='1' stroke-dasharray='1.5 3'/><path d='M36 16 39.06 28.61 50.14 21.86 43.39 32.94 56 36 43.39 39.06 50.14 50.14 39.06 43.39 36 56 32.94 43.39 21.86 50.14 28.61 39.06 16 36 28.61 32.94 21.86 21.86 32.94 28.61Z' fill='%23c8a24a'/><circle cx='36' cy='36' r='4' fill='%230a1630' stroke='%23c8a24a' stroke-width='1.2'/></svg>");
+
+  /* 認証印 */
+  --seal: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><g fill='none' stroke='%23e3c36f'><circle cx='50' cy='50' r='47' stroke-width='2.4'/><circle cx='50' cy='50' r='42' stroke-width='1'/><circle cx='50' cy='50' r='35' stroke-width='1' stroke-dasharray='2 3'/></g><text x='50' y='58' text-anchor='middle' font-size='24' font-weight='900' fill='%23e3c36f' font-family='sans-serif'>&%23x8A8D;&%23x8A3C;</text><path d='M50 17l2 5.5h5.8l-4.7 3.4 1.8 5.5-4.9-3.4-4.9 3.4 1.8-5.5-4.7-3.4H48z' fill='%23e3c36f'/></svg>");
+
+  /* 星屑 */
+  --stars: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260' fill='%23ffffff'><circle cx='24' cy='46' r='.9' opacity='.55'/><circle cx='140' cy='18' r='.7' opacity='.4'/><circle cx='222' cy='96' r='1.1' opacity='.5'/><circle cx='80' cy='160' r='.8' opacity='.4'/><circle cx='188' cy='214' r='.7' opacity='.5'/><circle cx='120' cy='110' r='.6' opacity='.3'/><circle cx='36' cy='230' r='1' opacity='.45'/></svg>");
+}
+
+* { box-sizing: border-box; }
+
+/* 背景：厳格なグリッド（40px の細罫線、200px ごとに太罫線）と星屑 */
+html {
+  background:
+    linear-gradient(rgba(140, 175, 255, 0.11) 1px, transparent 1px) 0 0 / 200px 200px,
+    linear-gradient(90deg, rgba(140, 175, 255, 0.11) 1px, transparent 1px) 0 0 / 200px 200px,
+    linear-gradient(rgba(120, 160, 255, 0.05) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, rgba(120, 160, 255, 0.05) 1px, transparent 1px) 0 0 / 40px 40px,
+    var(--stars),
+    radial-gradient(ellipse at 50% -10%, #14285a, transparent 62%);
+  background-attachment: fixed;
+  background-color: var(--navy-deep);
+}
+
+body {
+  font-family: var(--body);
+  background: transparent;
+  color: var(--text);
+  line-height: 1.9;
+  margin: 0;
+  padding: 5rem 1.5rem 6rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* 見出しと紋章 */
+h1 {
+  font-family: var(--heading);
+  font-size: 1.55rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--white);
+  margin: 0 0 0.9rem;
+}
+
+h1::before {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1.1rem;
+  background: var(--emblem) center / contain no-repeat;
+}
+
+/* ゴールドの二重罫 */
+h1::after {
+  content: "";
+  display: block;
+  height: 6px;
+  margin-top: 1rem;
+  background:
+    linear-gradient(var(--gold), var(--gold)) top / 100% 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) bottom / 100% 1px no-repeat;
+}
+
+.desc {
+  text-align: center;
+  color: var(--silver);
+  font-size: 0.92rem;
+  margin: 0 0 2.5rem;
+}
+
+/* 一括選択パネル */
+.set-selector-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.2rem 1.5rem;
+  background: var(--navy-panel);
+  border: 1px solid var(--navy-line);
+  border-left: 4px solid var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.panel-label {
+  font-family: var(--heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--silver);
+}
+
+select {
+  font-family: var(--body);
+  font-size: 0.92rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--silver-dim);
+  background: var(--navy-deep);
+  color: var(--white);
+  border-radius: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+select option {
+  background: var(--navy-deep);
+  color: var(--white);
+}
+
+select:focus {
+  border-color: var(--gold-bright);
+}
+
+/* ボタン */
+.action-panel {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+button {
+  font-family: var(--heading);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+button.primary {
+  flex: 2;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: var(--navy-deep);
+  border: 1px solid var(--gold-bright);
+  padding: 0.85rem 1.2rem;
+  font-weight: 900;
+}
+
+button.primary:hover {
+  background: var(--white);
+  border-color: var(--white);
+}
+
+button.secondary {
+  flex: 1;
+  background: transparent;
+  color: var(--silver);
+  border: 1px solid var(--silver-dim);
+  padding: 0.85rem 1.2rem;
+  font-weight: 700;
+}
+
+button.secondary:hover {
+  color: var(--white);
+  border-color: var(--white);
+}
+
+button:focus-visible, select:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+}
+
+/* 番号付きの情報パネル */
+.parts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 4rem;
+  counter-reset: section;
+}
+
+.part-card {
+  position: relative;
+  counter-increment: section;
+  padding: 1.5rem 1.8rem 1.8rem 5.4rem;
+  background:
+    linear-gradient(var(--gold), var(--gold)) top 7px right 7px / 14px 1px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) top 7px right 7px / 1px 14px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) bottom 7px right 7px / 14px 1px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) bottom 7px right 7px / 1px 14px no-repeat,
+    linear-gradient(180deg, rgba(20, 40, 90, 0.78), rgba(10, 22, 52, 0.9));
+  border: 1px solid var(--navy-line);
+  border-top: 2px solid var(--gold);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* 区画番号の欄 */
+.part-card::before {
+  content: counter(section, decimal-leading-zero);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 1.3rem;
+  font-family: var(--heading);
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--gold-bright);
+  background: rgba(200, 162, 74, 0.08);
+  border-right: 1px solid var(--navy-line);
+}
+
+.part-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--navy-line);
+}
+
+.part-title {
+  font-family: var(--heading);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--white);
+}
+
+.part-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.part-select {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.5rem;
+  max-width: 190px;
+}
+
+.reroll-btn {
+  background: transparent;
+  color: var(--gold-bright);
+  border: 1px solid var(--gold);
+  padding: 0.25rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.reroll-btn:hover {
+  background: var(--gold);
+  color: var(--navy-deep);
+}
+
+.part-text {
+  font-size: 0.97rem;
+  margin: 0;
+  min-height: 3.5em;
+  color: var(--text);
+}
+
+/* 結果と認証印 */
+.result-box {
+  position: relative;
+  border-top: 1px solid var(--gold);
+  padding-top: 1.5rem;
+}
+
+.result-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(4px);
+  background: var(--gold);
+}
+
+.result-box::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 14px;
+  width: 92px;
+  height: 92px;
+  background: var(--seal) center / contain no-repeat;
+  opacity: 0.55;
+  transform: rotate(-14deg);
+  pointer-events: none;
+}
+
+.result-box label {
+  display: block;
+  font-family: var(--heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--silver);
+  margin: 0.5rem 0 1.4rem;
+  max-width: calc(100% - 110px);
+}
+
+textarea {
+  width: 100%;
+  height: 230px;
+  border: 1px solid var(--navy-line);
+  border-radius: 0;
+  padding: 1rem 1.1rem;
+  font-size: 0.92rem;
+  line-height: 1.85;
+  font-family: var(--body);
+  resize: vertical;
+  background: #050b1a;
+  color: var(--white);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--gold-bright);
+}
+
+@media (max-width: 540px) {
+  body { padding: 3.5rem 1rem 4rem; }
+  h1 { font-size: 1.25rem; letter-spacing: 0.1em; }
+  .action-panel { flex-direction: column; }
+  .part-card { padding: 1.4rem 1.2rem 1.6rem 3.9rem; }
+  .part-card::before { width: 2.7rem; font-size: 1.15rem; }
+  .part-header { flex-direction: column; align-items: flex-start; }
+  .part-controls { width: 100%; justify-content: space-between; }
+  .part-select { flex: 1; max-width: none; }
+  .result-box::after { width: 68px; height: 68px; right: 6px; }
+  .result-box label { max-width: calc(100% - 80px); }
+}
+
+/* ==========================================================
+   テーマ切り替えUI（theme-switcher.css の変数を上書き）
+   ========================================================== */
+:root {
+  --switcher-bg: rgba(6, 13, 31, 0.92);
+  --switcher-blur: blur(4px);
+  --switcher-border: 1px solid var(--gold);
+  --switcher-radius: 0;
+  --switcher-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+  --switcher-font: var(--body);
+  --switcher-color: var(--silver);
+  --switcher-select-bg: var(--navy);
+  --switcher-select-color: var(--white);
+  --switcher-select-border: 1px solid var(--silver-dim);
+  --switcher-select-radius: 0;
+  --switcher-accent: var(--gold-bright);
+  --switcher-tip-bg: var(--gold);
+  --switcher-tip-color: var(--navy-deep);
+  --switcher-tip-border: 1px solid var(--gold-bright);
+  --switcher-tip-radius: 0;
+  --switcher-tip-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}

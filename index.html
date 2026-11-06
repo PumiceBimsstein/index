@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive</title>
+  <meta name="description" content="制作したWebアプリ、ツール、資料のアーカイブです。">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- Google Fonts: Noto Sans JP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    (function() {
+      const theme = localStorage.getItem("selected-theme") === "dark" ? "dark" : "paper";
+      document.write('<link id="theme-style" rel="stylesheet" href="./style-' + theme + '.css">');
+    })();
+  </script>
+  <noscript>
+    <link id="theme-style" rel="stylesheet" href="./style-paper.css">
+  </noscript>
+
+  <script src="./contents.js" defer></script>
+  <script src="./main.js" defer></script>
+</head>
+<body>
+  <div class="site-wrapper">
+    <!-- ヘッダー -->
+    <header class="site-header">
+      <div class="header-inner">
+        <h1 class="site-title">
+          <a href="./index.html">Archive</a>
+        </h1>
+        <p class="site-description">自作のWebアプリ、ツール、各種資料を整理した個人アーカイブです。</p>
+      </div>
+      <button type="button" id="theme-toggle" class="theme-toggle" role="switch" aria-checked="false" aria-label="ダークモード切り替え">
+        <span class="toggle-slider"></span>
+      </button>
+    </header>
+
+    <!-- メインコンテンツ（main.js により動的生成） -->
+    <main class="site-main" id="main-content" aria-live="polite">
+      <!-- カテゴリーセクションがここに展開されます -->
+    </main>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <ul class="footer-links">
+            <li><a href="./about/">About</a></li>
+            <!-- <li><a href="./rss.xml">RSS</a></li> -->
+          </ul>
+        </nav>
+
+        <p class="copyright">&copy; 2026 Archive. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

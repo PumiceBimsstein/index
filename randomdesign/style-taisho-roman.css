@@ -1,0 +1,312 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;700;800&display=swap');
+
+:root {
+  /* 配色：葡萄酒色、琥珀色、乳白鳥の子色、濃紺、くすみ金 */
+  --wine-red: #681a24;
+  --wine-deep: #470e16;
+  --amber: #c57d2b;
+  --amber-soft: rgba(197, 125, 43, 0.15);
+  --cream-paper: #f8f3e8;
+  --cream-card: #fffdf8;
+  --navy-japan: #182236;
+  --gold-tarnish: #bba061;
+  --gold-border: #9e8346;
+  --wood-antique: #2c1a16;
+
+  --font-mincho: "Shippori Mincho", "Yu Mincho", serif;
+  --font-gothic: "Noto Sans JP", sans-serif;
+  --font-classic-serif: "Cormorant Garamond", serif;
+}
+
+* { box-sizing: border-box; }
+
+/* 背景：ステンドグラスの光が差し込むアンティーク洋館の壁面 */
+body {
+  font-family: var(--font-gothic);
+  background-color: #ede4d1;
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(104, 26, 36, 0.08), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(24, 34, 54, 0.12), transparent 45%),
+    /* ダイヤ型（菱格子・和モダンステンドグラス） */
+    linear-gradient(135deg, rgba(187, 160, 97, 0.08) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(187, 160, 97, 0.08) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(187, 160, 97, 0.08) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(187, 160, 97, 0.08) 25%, transparent 25%);
+  background-size: 100% 100%, 100% 100%, 28px 28px, 28px 28px, 28px 28px, 28px 28px;
+  background-position: center, center, 0 14px, 14px 14px, 14px 0, 0 0;
+  background-attachment: fixed;
+  color: var(--wood-antique);
+  line-height: 1.9;
+  margin: 0;
+  padding: 4rem 1.5rem 6rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* メインコンテナ：アール・ヌーヴォー調の二重飾り額縁 */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--cream-card);
+  border: 4px double var(--gold-border);
+  outline: 1px solid var(--wine-red);
+  outline-offset: -10px;
+  box-shadow: 
+    0 16px 40px rgba(44, 26, 22, 0.22),
+    inset 0 0 50px rgba(197, 125, 43, 0.06);
+  padding: 3.5rem 2.8rem;
+  position: relative;
+}
+
+/* 誌面ヘッダー装飾：銀座洋食店や百貨店広告風のレトロ欧文 */
+.container::before {
+  content: "— MODERNISME TAISHO ROMANCA —";
+  display: block;
+  font-family: var(--font-classic-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--gold-border);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(187, 160, 97, 0.35);
+}
+
+/* 見出し：優雅な明朝体 */
+h1 {
+  font-family: var(--font-mincho);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--wine-red);
+  text-align: center;
+  margin: 0 0 0.4rem;
+}
+
+.desc {
+  font-family: var(--font-gothic);
+  text-align: center;
+  color: var(--navy-japan);
+  font-size: 0.88rem;
+  margin: 0 0 2.5rem;
+  padding-bottom: 1.25rem;
+  /* 唐草・ステンドグラス風のアクセントライン */
+  background-image: 
+    radial-gradient(circle, var(--wine-red) 2px, transparent 2px),
+    linear-gradient(to right, transparent, var(--gold-border), transparent);
+  background-size: 12px 12px, 70% 1px;
+  background-position: center bottom, center bottom;
+  background-repeat: no-repeat;
+}
+
+/* デザインセット選択パネル：ステンドグラス・寄木細工風 */
+.set-selector-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--cream-paper);
+  border: 1px solid var(--gold-border);
+  border-left: 6px solid var(--wine-red);
+  border-right: 6px solid var(--navy-japan);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.panel-label {
+  font-family: var(--font-mincho);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy-japan);
+  letter-spacing: 0.08em;
+}
+
+select {
+  font-family: var(--font-gothic);
+  font-size: 0.9rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--cream-card);
+  color: var(--wood-antique);
+  border: 1px solid var(--gold-border);
+  border-radius: 0;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--wine-red);
+  box-shadow: 0 0 6px rgba(104, 26, 36, 0.25);
+}
+
+/* 操作パネルボタン */
+.action-panel {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+button {
+  font-family: var(--font-mincho);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.25s ease;
+}
+
+/* 主ボタン：深紅と金箔の押し印風 */
+button.primary {
+  flex: 2;
+  background: var(--wine-red);
+  color: #fff9f0;
+  border: 1px solid var(--wine-deep);
+  padding: 0.85rem 1.4rem;
+  box-shadow: 0 3px 6px rgba(104, 26, 36, 0.25);
+}
+
+button.primary:hover {
+  background: var(--wine-deep);
+  box-shadow: 0 0 10px rgba(197, 125, 43, 0.5);
+}
+
+/* 副ボタン：濃紺 */
+button.secondary {
+  flex: 1;
+  background: var(--cream-paper);
+  color: var(--navy-japan);
+  border: 1px solid var(--navy-japan);
+  padding: 0.85rem 1.2rem;
+}
+
+button.secondary:hover {
+  background: var(--navy-japan);
+  color: #fff9f0;
+}
+
+/* 各項目カード */
+.parts-grid {
+  display: block;
+  margin-bottom: 3.5rem;
+}
+
+.part-card {
+  border-top: 1px solid rgba(187, 160, 97, 0.4);
+  padding: 1.8rem 0 2rem;
+}
+
+.part-card:last-child {
+  border-bottom: 1px solid rgba(187, 160, 97, 0.4);
+}
+
+.part-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+/* 見出しタイトル */
+.part-title {
+  font-family: var(--font-mincho);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--navy-japan);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* タイトル前の和洋折衷ダイヤ記号 */
+.part-title::before {
+  content: "◆";
+  font-size: 0.75rem;
+  color: var(--amber);
+}
+
+.part-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.part-select {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.6rem;
+  max-width: 180px;
+}
+
+.reroll-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-mincho);
+  font-size: 0.75rem;
+  color: var(--wine-red);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.reroll-btn:hover {
+  color: var(--amber);
+}
+
+.part-text {
+  font-family: var(--font-gothic);
+  font-size: 0.94rem;
+  color: var(--wood-antique);
+  margin: 0;
+  min-height: 3.6em;
+  padding-left: 1rem;
+  border-left: 2px solid var(--amber-soft);
+}
+
+/* 完成プロンプト欄：洋古書・雑誌の特設枠 */
+.result-box {
+  border-top: 2px solid var(--wine-red);
+  padding-top: 1.8rem;
+}
+
+.result-box label {
+  display: block;
+  font-family: var(--font-mincho);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--wine-red);
+  margin-bottom: 0.85rem;
+}
+
+textarea {
+  width: 100%;
+  height: 230px;
+  background-color: var(--cream-paper);
+  border: 1px solid var(--gold-border);
+  box-shadow: inset 0 2px 6px rgba(44, 26, 22, 0.08);
+  border-radius: 0;
+  padding: 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.85;
+  font-family: var(--font-gothic);
+  color: var(--wood-antique);
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--wine-red);
+  box-shadow: 0 0 8px rgba(104, 26, 36, 0.2);
+}
+
+@media (max-width: 560px) {
+  body { padding: 2rem 1rem 3rem; }
+  .container { padding: 2rem 1.25rem 2.5rem; outline: none; }
+  .action-panel { flex-direction: column; }
+  .part-header { flex-direction: column; align-items: flex-start; }
+  .part-controls { width: 100%; justify-content: space-between; }
+  .part-select { flex: 1; max-width: none; }
+}

@@ -1,0 +1,251 @@
+:root {
+  --paper: #ffffff;
+  --ink: #111111;
+  --ink-soft: #5a5a5a;
+  --rule: #d8d8d8;
+  --accent: #1f5eff;
+  --mono: "SF Mono", "Menlo", "Consolas", "Liberation Mono", "Courier New", monospace;
+  --sans: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.9;
+  margin: 0;
+  padding: 5rem 1.5rem 6rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.75rem;
+}
+
+.desc {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0 0 2.5rem;
+}
+
+/* 一括選択パネル */
+.set-selector-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  background: #f8f8f8;
+  border: 1px solid var(--rule);
+  margin-bottom: 2rem;
+}
+
+.panel-label {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+select {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+select:focus {
+  border-color: var(--ink);
+}
+
+.action-panel {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 3.5rem;
+}
+
+button {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+button.primary {
+  flex: 2;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 0.8rem 1.2rem;
+  font-weight: 600;
+}
+
+button.primary:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+button.secondary {
+  flex: 1;
+  background: var(--paper);
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  padding: 0.8rem 1.2rem;
+}
+
+button.secondary:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+button:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.parts-grid {
+  display: block;
+  margin-bottom: 4rem;
+}
+
+.part-card {
+  border-top: 1px solid var(--rule);
+  padding: 1.75rem 0 2rem;
+}
+
+.part-card:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.part-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.part-title {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+.part-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.part-select {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.5rem;
+  max-width: 190px;
+}
+
+.reroll-btn {
+  background: none;
+  border: none;
+  padding: 0.2rem 0;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--rule);
+}
+
+.reroll-btn:hover {
+  color: var(--ink);
+  text-decoration-color: var(--ink);
+}
+
+.part-text {
+  font-size: 0.95rem;
+  margin: 0;
+  min-height: 3.5em;
+  color: var(--ink);
+}
+
+.result-box {
+  border-top: 1px solid var(--ink);
+  padding-top: 1.5rem;
+}
+
+.result-box label {
+  display: block;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+textarea {
+  width: 100%;
+  height: 220px;
+  box-sizing: border-box;
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  padding: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  font-family: var(--sans);
+  resize: vertical;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+@media (max-width: 540px) {
+  body { padding: 3rem 1.25rem 4rem; }
+  .action-panel { flex-direction: column; }
+  .part-header { flex-direction: column; align-items: flex-start; }
+  .part-controls { width: 100%; justify-content: space-between; }
+  .part-select { flex: 1; max-width: none; }
+}
+
+/* ==========================================================
+   テーマ切り替えUI（theme-switcher.css の変数を上書き）
+   ========================================================== */
+:root {
+  --switcher-bg: rgba(255, 255, 255, 0.95);
+  --switcher-blur: none;
+  --switcher-border: 1px solid var(--ink);
+  --switcher-radius: 0;
+  --switcher-shadow: none;
+  --switcher-font: var(--mono);
+  --switcher-color: var(--ink-soft);
+  --switcher-select-bg: var(--paper);
+  --switcher-select-color: var(--ink);
+  --switcher-select-border: 1px solid var(--rule);
+  --switcher-select-radius: 0;
+  --switcher-accent: var(--accent);
+  --switcher-tip-bg: var(--ink);
+  --switcher-tip-color: var(--paper);
+  --switcher-tip-border: 1px solid var(--ink);
+  --switcher-tip-radius: 0;
+  --switcher-tip-shadow: none;
+}

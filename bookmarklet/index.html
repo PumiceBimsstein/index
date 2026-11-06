@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<title>ebook-library</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="glass top">
+  <div class="brand"><span class="prompt">$</span> ebook-library<span class="cursor">_</span></div>
+  <nav class="tabs">
+    <button class="tab active" data-view="library">library</button>
+    <button class="tab" data-view="editor">json</button>
+    <button class="tab" data-view="guide">使い方</button>
+  </nav>
+  <button id="open-bm" class="btn">bookmarklets</button>
+</header>
+
+<main>
+  <section id="view-library" class="view active">
+    <div class="toolbar glass">
+      <div class="bar">
+        <div class="grp filter">
+          <input id="search" type="search" placeholder="タイトル・著者で検索">
+          <select id="site-filter">
+            <option value="">すべてのサイト</option>
+            <option value="dbook">dbook</option>
+            <option value="bookwalker">bookwalker</option>
+          </select>
+        </div>
+        <span class="stat mono dim"><b id="count">0</b> 件 · 選択 <b id="sel-count">0</b></span>
+      </div>
+      <div class="bar">
+        <div class="grp">
+          <button class="btn" id="sel-all" title="現在表示中の書籍をすべて選択します">表示中を選択</button>
+          <button class="btn" id="sel-none" title="選択を解除します">選択解除</button>
+          <button class="btn danger" id="del-sel" title="選択した書籍を一覧から削除します">選択を削除</button>
+        </div>
+        <div class="grp">
+          <button class="btn" id="clip-add" title="クリップボードのJSONを読み取って一覧に追加します">クリップボードから追加</button>
+        </div>
+        <div class="grp out">
+          <button class="btn primary" id="copy-json" title="表示対象の書籍をJSON形式でクリップボードにコピーします">JSONをコピー</button>
+          <button class="btn primary" id="exp-json" title="表示対象の書籍をJSONファイルとして保存します">JSONを出力</button>
+          <button class="btn primary" id="exp-csv" title="表示対象の書籍をCSVファイルとして保存します">CSVを出力</button>
+        </div>
+      </div>
+    </div>
+    <p class="hint mono dim" id="hint"></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th><input type="checkbox" id="chk-all" title="表示中を全選択"></th>
+          <th>cover</th>
+          <th class="sortable" data-sort="title">title<i></i></th>
+          <th class="sortable" data-sort="author">author<i></i></th>
+          <th class="sortable" data-sort="ebookSite">site<i></i></th>
+          <th>links</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="view-editor" class="view">
+    <div class="toolbar glass">
+      <div class="grp">
+        <button class="btn primary" id="ed-replace" title="入力したJSONで一覧を置き換えます">置き換えて反映</button>
+        <button class="btn primary" id="ed-merge" title="入力したJSONを既存の一覧に追加・更新します">マージして反映</button>
+        <button class="btn" id="ed-format">整形</button>
+      </div>
+      <span class="spacer"></span>
+      <div class="grp">
+        <button class="btn" id="ed-all">一覧を読み込む</button>
+        <button class="btn" id="ed-selected">選択を読み込む</button>
+        <button class="btn" id="ed-file">ファイルを開く</button>
+      </div>
+      <input type="file" id="file-input" accept=".json,application/json" hidden>
+    </div>
+    <textarea id="json-text" spellcheck="false" placeholder="ブックマークレットでコピーしたJSONをここに貼り付け → マージして反映"></textarea>
+    <p id="status" class="mono"></p>
+  </section>
+  <section id="view-guide" class="view">
+    <article class="guide glass">
+      <h2 class="mono">はじめに</h2>
+      <p>ebook-library は、dbook と BOOK☆WALKER で購入済みの書籍を集め、一覧にして CSV や JSON で出力するツールです。データはこのブラウザ内に保存され、サーバーには送信されません。</p>
+
+      <h2 class="mono">1. ブックマークレットを登録する</h2>
+      <p>「bookmarklets」ボタンを開き、dbook・BOOK☆WALKER それぞれのボタンをブックマークバーへドラッグします。</p>
+      <p>ブックマークバーが表示されていない場合は Ctrl + Shift + B（Mac は Cmd + Shift + B）で表示できます。</p>
+
+      <h2 class="mono">2. 書籍を取得する</h2>
+      <p>dbook は<a href="https://dbook.docomo.ne.jp/my/history/access/?for=checked" target="_blank" rel="noopener noreferrer">購入履歴のページ</a>、BOOK☆WALKER は<a href="https://bookwalker.jp/holdBooks/?page=1" target="_blank" rel="noopener noreferrer">保有書籍一覧のページ</a>を開き、「一覧を取得」を押すと、購入済みの書籍だけが取り込まれます。BOOK☆WALKER では保有書籍一覧ページで同じように実行します。ページをまたいで取得する場合は、BOOK☆WALKER の確認ダイアログで次のページへ進めます。取得データは各サイトごとにブラウザへ蓄積されます。</p>
+
+      <h2 class="mono">3. ライブラリへ取り込む</h2>
+      <p>取得したサイトで「データをコピー」を押してから、ebook-library の library タブで「クリップボードから追加」を押します。</p>
+      <p>同じ書籍は重複して追加されません。読み取りが許可されない場合は json タブの入力欄に貼り付けて「マージして反映」を押してください。</p>
+      
+      <h2 class="mono">4. 一覧を整理する</h2>
+      <p>検索欄とサイトの絞り込みで表示を絞れます。列見出しを押すと並べ替えられ、その順序は保存されるので、出力やコピーも同じ順になります。チェックボックスで書籍を選ぶと、出力とコピーは選択した書籍だけが対象になります。何も選ばないときは表示中のすべてが対象です。</p>
+
+      <h2 class="mono">5. 出力する</h2>
+      <p>「JSONをコピー」はクリップボードへ、「JSONを出力」「CSVを出力」はファイルとして保存します。</p>
+
+      <h2 class="mono">6. json タブで直接編集する</h2>
+      <p>json タブでは一覧の内容を JSON として確認・編集できます。「置き換えて反映」は一覧全体を入力内容で置き換え、「マージして反映」は同じ書籍を更新しつつ新しい書籍を追加します。JSON に誤りがある場合は、エラーの位置が表示されます。</p>
+
+      <h2 class="mono">注意</h2>
+      <p>書籍データはブラウザに保存されます。ブラウザのデータを消去すると一覧も消えるため、必要に応じて JSON か CSV を出力して保管してください。</p>
+      <p>ブックマークレットは、サイトの構造が変わると動かなくなることがあります。</p>    </article>
+  </section>
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="modal glass">
+    <div class="modal-head"><b class="mono">bookmarklets</b><button class="btn" id="close-bm">閉じる</button></div>
+    <p class="dim">リンクをブックマークバーへドラッグして登録します。バーが無い場合は Ctrl/Cmd + Shift + B で表示できます。取得後は「データをコピー」で出力し、libraryの「クリップボードから追加」を押すか、json タブで貼り付けてください。</p>
+    <div class="site-head"><a href="https://dbook.docomo.ne.jp/my/history/access/?for=checked" target="_blank" rel="noopener noreferrer"><h3 class="mono">dbook</h3></a></div>
+    <div class="bm-group" id="bm-dbook"></div>
+    <div class="site-head"><a href="https://bookwalker.jp/holdBooks/?page=1" target="_blank" rel="noopener noreferrer"><h3 class="mono">bookwalker</h3></a></div>
+    <div class="bm-group" id="bm-bookwalker"></div>
+  </div>
+</div>
+
+<script src="bookmarklets.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

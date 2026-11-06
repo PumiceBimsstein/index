@@ -1,0 +1,108 @@
+/* ==========================================================
+   テーマ切り替えUI 共通スタイル
+   このファイルはテーマ切り替えで差し替えられません。
+   見た目は下記の CSS 変数で決まり、各テーマCSSの :root で上書きできます。
+   未定義のテーマでは、右側のフォールバック値（白基調）が使われます。
+
+   --switcher-bg / --switcher-blur / --switcher-border / --switcher-radius
+   --switcher-shadow / --switcher-font / --switcher-color
+   --switcher-select-bg / --switcher-select-color / --switcher-select-border
+   --switcher-select-radius / --switcher-accent
+   --switcher-tip-bg / --switcher-tip-color / --switcher-tip-border
+   --switcher-tip-radius / --switcher-tip-shadow
+   ========================================================== */
+
+.theme-switcher-wrapper {
+  position: absolute; /* スクロールに追従させない */
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background: var(--switcher-bg, rgba(255, 255, 255, 0.92));
+  -webkit-backdrop-filter: var(--switcher-blur, blur(4px));
+  backdrop-filter: var(--switcher-blur, blur(4px));
+  border: var(--switcher-border, 1px solid #bbb);
+  border-radius: var(--switcher-radius, 0);
+  box-shadow: var(--switcher-shadow, 0 2px 6px rgba(0, 0, 0, 0.15));
+  font-family: var(--switcher-font, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.theme-switcher-wrapper label {
+  margin: 0;
+  color: var(--switcher-color, #333);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
+.theme-switcher-wrapper select {
+  flex: none;
+  max-width: none;
+  padding: 2px 4px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--switcher-select-color, #111);
+  background: var(--switcher-select-bg, #fff);
+  border: var(--switcher-select-border, 1px solid #ccc);
+  border-radius: var(--switcher-select-radius, 0);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.theme-switcher-wrapper select:focus,
+.theme-switcher-wrapper select:focus-visible {
+  border-color: var(--switcher-accent, #1f5eff);
+  box-shadow: none;
+  outline: 2px solid var(--switcher-accent, #1f5eff);
+  outline-offset: 1px;
+}
+
+.theme-switcher-wrapper select option {
+  background: var(--switcher-select-bg, #fff);
+  color: var(--switcher-select-color, #111);
+}
+
+/* ホバー時のツールチップ（data-tooltip の文言を表示） */
+.theme-switcher-wrapper::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  padding: 3px 10px;
+  white-space: nowrap;
+  color: var(--switcher-tip-color, #fff);
+  background: var(--switcher-tip-bg, #222);
+  border: var(--switcher-tip-border, 1px solid transparent);
+  border-radius: var(--switcher-tip-radius, 0);
+  box-shadow: var(--switcher-tip-shadow, 0 2px 6px rgba(0, 0, 0, 0.25));
+  font-size: 11px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-3px);
+  transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+  pointer-events: none;
+}
+
+.theme-switcher-wrapper:hover::after,
+.theme-switcher-wrapper:has(select:focus-visible)::after {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switcher-wrapper::after { transition: none; }
+}
