@@ -8176,7 +8176,7 @@ var $author$project$Main$renderCurvesAndCurrent = function (model) {
 					$elm$svg$Svg$Attributes$points(
 					$author$project$Main$ptsToPolyline(spacePts)),
 					$elm$svg$Svg$Attributes$fill('none'),
-					$elm$svg$Svg$Attributes$stroke('#ffffff'),
+					$elm$svg$Svg$Attributes$stroke('#baa2d1'),
 					$elm$svg$Svg$Attributes$strokeWidth(
 					$author$project$Main$px(lw)),
 					$elm$svg$Svg$Attributes$strokeOpacity('0.9')
@@ -8946,7 +8946,7 @@ var $author$project$Main$viewTabParams = function (model) {
 				'±T長',
 				6,
 				'1',
-				'8',
+				'28',
 				'0.2',
 				model.t,
 				$author$project$Main$fmtF(model.t) + 'π',

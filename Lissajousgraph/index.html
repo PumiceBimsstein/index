@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
   <title>Lissajous Curves - リサジュー図形シミュレーター</title>
   
   <meta name="description" content="直交する2つの単振動が織りなすリサジュー図形の世界。平面の基本形から円運動の投影、3次元時空間、立体空間曲線までを体験できる4つのシミュレーター集。">
@@ -59,7 +61,7 @@
     }
 
     p.lead {
-      color: var(--mute);
+      color: var(--text);
       font-size: 0.85rem;
       letter-spacing: 1px;
       line-height: 1.5;
@@ -79,7 +81,7 @@
     /* レスポンシブグリッド */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
       width: 100%;
       max-width: 1200px;
@@ -183,6 +185,24 @@
       background: var(--cyan);
       color: #070710;
       font-weight: bold;
+    }
+
+    /* Extras セクション */
+    .extra {
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .extra h2 {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--mute);
+      font-weight: normal;
+      margin-bottom: 16px;
     }
 
     footer {
@@ -290,7 +310,7 @@
       </div>
     </a>
 
-    <!-- 4. 3D空間曲線・完全版 (Elm + svg3D) -->
+    <!-- 4. 3D空間曲線 (Elm + svg3D) -->
     <a href="./locus/" class="card">
       <div class="thumb">
         <img class="thumb-img" src="./locus/preview.png" alt="3D Space Curve Preview" loading="lazy" />
@@ -303,32 +323,39 @@
       </div>
     </a>
 
+  </main>
+
+  <section class="extra">
+    <h2>Extras</h2>
+    <div class="grid">
+
     <!-- 5. 3Dリサジュー曲線 -->
     <a href="./3D/" class="card">
       <div class="thumb">
-        <img class="thumb-img" src="./3D/lissajous.svg" alt="3D Space Curve Preview" loading="lazy" />
+        <img class="thumb-img" src="./3D/lissajous.svg" alt="3次元リサジュー図形のプレビュー。x・y・zの3つの単振動が描く立体的な軌道" loading="lazy" />
       </div>
       <div class="content">
         <div class="tag">05 · 3D Lissajous</div>
-        <div class="title">3次元のリサジュー曲線<span>↗</span></div>
-        <div class="desc">3次元に拡張したリサジュー曲線。</div>
+        <div class="title">3次元のリサジュー図形<span>↗</span></div>
+        <div class="desc">3次元に拡張したリサジュー図形。</div>
         <div class="btn">起動する <span>▶</span></div>
       </div>
     </a>
 
-    <!-- 6. 4Dリサジュー曲線 -->
+    <!-- 6. 4Dリサジュー図形 -->
     <a href="./4D/" class="card">
       <div class="thumb">
-        <img class="thumb-img" src="./4D/4Dlissajous.png" alt="4D Space Curve Preview" loading="lazy" />
+        <img class="thumb-img" src="./4D/4DLissajous.png" alt="4次元リサジュー図形を3次元空間に投影したプレビュー" loading="lazy" />
       </div>
       <div class="content">
         <div class="tag">06 · 4D Lissajous</div>
-        <div class="title">4次元のリサジュー曲線<span>↗</span></div>
-        <div class="desc">4次元に拡張したリサジュー曲線。はたしてこの実装は正しいのか。</div>
+        <div class="title">4次元のリサジュー図形<span>↗</span></div>
+        <div class="desc">4次元に拡張したリサジュー図形。はたしてこの実装は正しいのか。</div>
         <div class="btn">起動する <span>▶</span></div>
       </div>
     </a>
-  </main>
+    </div>
+  </section>
 
   <footer>
     Lissajous Curves Portal · Responsive Interactive Suite
