@@ -31,7 +31,7 @@ const contents = [
         // thumbnail: "./images/notes-design.png"
       },
       {
-        title: "書籍データ収集のためのブラウザ拡張機能",
+        title: "書籍データ収集のためのブラウザ拡張機能(現在非公開)",
         description: "電子書籍サイトから購入済みの書籍のデータを取得して一覧にする拡張機能。Micaで使用するデータを収集するために作成。面倒なので使う価値なし。",
         url: ""
         // thumbnail 省略例
@@ -50,7 +50,7 @@ const contents = [
       {
         title: "リサジュー図形を眺める",
         description: "SVGで動くリサジュー図形を眺める。",
-        url: "./Lissajousgraph/base/",
+        url: "./Lissajousgraph/",
         // thumbnail: "./images/notes-design.png"
       },
       // {

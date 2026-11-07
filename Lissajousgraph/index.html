@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lissajous Curves - リサジュー図形ポータル</title>
+  
+  <meta name="description" content="直交する2つの単振動が織りなすリサジュー図形の世界。平面の基本形から円運動の投影、3次元時空間、立体空間曲線までを体験できる4つのシミュレーター集。">
+  <meta property="og:title" content="Lissajous Curves - リサジュー図形ポータル">
+  <meta property="og:description" content="2つの振動が交差するとき、何が起きるのか。平面から3次元へと直感的に理解する4つの可視化アプリ。">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root {
+      --bg: #070710;
+      --card-bg: #0d0d18;
+      --border: #1a1a2c;
+      --border-hover: #00e5ff;
+      --cyan: #00e5ff;
+      --orange: #ff9800;
+      --green: #69f0ae;
+      --pink: #ff4081;
+      --text: #e0e0ea;
+      --mute: #ffffff55;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: monospace, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    p.lead {
+      color: var(--mute);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      line-height: 1.5;
+    }
+
+    .formula {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 5px 14px;
+      background: #0f0f1c;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--cyan);
+    }
+
+    /* レスポンシブグリッド */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-hover);
+      box-shadow: 0 10px 30px rgba(0, 229, 255, 0.12);
+    }
+
+    /* サムネイル画像枠 */
+    .thumb {
+      width: 100%;
+      height: 180px;
+      background: #090912;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden; /* ホバー時の画像はみ出しを防止 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* サムネイル画像本体 */
+    .thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 縦横比を維持して枠いっぱいにトリミング表示 */
+      display: block;
+      transition: transform 0.35s ease, opacity 0.25s ease;
+    }
+
+    /* カードホバー時の画像ズーム演出 */
+    .card:hover .thumb-img {
+      transform: scale(1.05);
+      opacity: 0.95;
+    }
+
+    .content {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mute);
+      margin-bottom: 4px;
+    }
+
+    .title {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .desc {
+      font-size: 0.8rem;
+      color: #888899;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .btn {
+      align-self: flex-start;
+      padding: 6px 14px;
+      background: #141c28;
+      border: 1px solid #233545;
+      color: var(--cyan);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .card:hover .btn {
+      background: var(--cyan);
+      color: #070710;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 48px;
+      color: #333344;
+      font-size: 0.75rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Lissajous Curves</h1>
+    <p class="lead">直交する2つの単振動が織りなす幾何学模様。<br>平面から時空間、3次元曲線へと直感的に理解する4つのシミュレーター。</p>
+    <div class="formula">x(t) = Ax·sin(at + δ) ｜ y(t) = Ay·sin(bt)</div>
+  </header>
+
+  <main class="grid">
+
+    <!-- 1. 基本のリサジュー図形 -->
+    <a href="./base/" class="card">
+      <div class="thumb">
+        <img class="thumb-img" src="./base/assets/preview.png" alt="Basic Lissajous Preview" loading="lazy" />
+      </div>
+      <div class="content">
+        <div class="tag">01 · Flat Canvas</div>
+        <div class="title">基本リサジュー図形 <span>↗</span></div>
+        <div class="desc">周波数比や位相差を変えて、多様に変化する平面上のリサジュー軌道を観察する基本シミュレーター。</div>
+        <div class="btn">起動する <span>▶</span></div>
+      </div>
+    </a>
+
+    <!-- 2. 円運動と直交投影 (Elm 2D) -->
+    <a href="./circles/" class="card">
+      <div class="thumb">
+        <img class="thumb-img" src="./circles/preview.png" alt="2D Projection Preview" loading="lazy" />
+      </div>
+      <div class="content">
+        <div class="tag">02 · Mechanism</div>
+        <div class="title">円運動による曲線の生成<span>↗</span></div>
+        <div class="desc">縦と横の2つの回転円運動（単振動）が直交してスクリーン上にリサジュー図形を生成する仕組みを可視化。</div>
+        <div class="btn">起動する <span>▶</span></div>
+      </div>
+    </a>
+
+    <!-- 3. 3次元時空間可視化 (Canvas HTML) -->
+    <a href="./curves/" class="card">
+      <div class="thumb">
+        <img class="thumb-img" src="./curves/preview.png" alt="3D Perspective Preview" loading="lazy" />
+      </div>
+      <div class="content">
+        <div class="tag">03 · 3D Perspective</div>
+        <div class="title">サインカーブと直行する平面<span>↗</span></div>
+        <div class="desc">直交する2面の壁を流れる正弦波と平面上のリサジュー図形。</div>
+        <div class="btn">起動する <span>▶</span></div>
+      </div>
+    </a>
+
+    <!-- 4. 3D空間曲線・完全版 (Elm + svg3D) -->
+    <a href="./locus/" class="card">
+      <div class="thumb">
+        <img class="thumb-img" src="./locus/preview.png" alt="3D Space Curve Preview" loading="lazy" />
+      </div>
+      <div class="content">
+        <div class="tag">04 · Vector Space</div>
+        <div class="title">3D空間曲線シミュレーター<span>↗</span></div>
+        <div class="desc">2つの正弦波が空間で合流する立体螺旋軌道。</div>
+        <div class="btn">起動する <span>▶</span></div>
+      </div>
+    </a>
+
+  </main>
+
+  <footer>
+    Lissajous Curves Portal · Responsive Interactive Suite
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>リサージュ曲線シミュレーター</title>
+  
+  <!-- ページの説明（meta description） -->
+  <meta name="description" content="直交する2つの単振動（x軸・y軸の円運動）からリサージュ曲線が生成される仕組みを視覚的に学べるインタラクティブシミュレーターです。周波数比、位相差、減衰係数、振幅をリアルタイムに変更して軌道を描画します。">
+  
+  <!-- 検索キーワード -->
+  <meta name="keywords" content="リサージュ曲線, Lissajous, ハーモノグラフ, Harmonograph, 物理シミュレーション, 単振動, 数学アート, Elm">
+  
+  <!-- SNSシェア用 (OGP) -->
+  <meta property="og:title" content="Lissajous / Harmonograph Simulator - リサージュ曲線シミュレーター">
+  <meta property="og:description" content="x・y軸の単振動とリサージュ曲線の関係を視覚化するシミュレーター。">
+  <meta property="og:type" content="website">
+
+  <style>
+    /* 読み込み時の画面チラつきを防ぐための背景色とリセット */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #070710;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body>
+  <div id="elm"></div>
+  <script src="main.js"></script>
+  <script>
+    var app = Elm.Main.init({
+      node: document.getElementById('elm')
+    });
+  </script>
+</body>
+</html>
