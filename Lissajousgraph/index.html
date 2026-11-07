@@ -72,8 +72,8 @@
       background: #0f0f1c;
       border: 1px solid var(--border);
       border-radius: 20px;
-      font-size: 0.8rem;
-      color: var(--cyan);
+      font-size: 1.2rem;
+      color: var(--text);
     }
 
     /* レスポンシブグリッド */
@@ -198,7 +198,55 @@
   <header>
     <h1>Lissajous Curves</h1>
     <p class="lead">直交する2つの単振動が織りなす幾何学模様。<br>平面から時空間、3次元曲線へと直感的に理解する4つのシミュレーター。</p>
-    <div class="formula">x(t) = Ax·sin(at + δ) ｜ y(t) = Ay·sin(bt)</div>
+    <!-- <div class="formula">x(t) = Ax·sin(at + δ) ｜ y(t) = Ay·sin(bt)</div> -->
+    <div class="formula">
+        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+            <!-- x(t) の式 -->
+            <mrow>
+            <mi>x</mi>
+            <mo stretchy="false">(</mo>
+            <mi>t</mi>
+            <mo stretchy="false">)</mo>
+            <mo>=</mo>
+            <msub>
+                <mi>A</mi>
+                <mi>x</mi>
+            </msub>
+            <!-- <mo>&#x22C5;</mo> -->
+            <mi mathvariant="normal">sin</mi>
+            <mo stretchy="false">(</mo>
+            <mi>a</mi>
+            <mi>t</mi>
+            <mo>+</mo>
+            <mi>δ</mi>
+            <mo stretchy="false">)</mo>
+            </mrow>
+
+            <!-- 区切り線 ｜ -->
+            <mspace width="1.2em"/>
+            <mo stretchy="false"></mo>
+            <mspace width="1.2em"/>
+
+            <!-- y(t) の式（修正済み） -->
+            <mrow>
+            <mi>y</mi>
+            <mo stretchy="false">(</mo>
+            <mi>t</mi>
+            <mo stretchy="false">)</mo>
+            <mo>=</mo>
+            <msub>
+                <mi>A</mi>
+                <mi>y</mi>
+            </msub>
+            <!-- <mo>&#x22C5;</mo> -->
+            <mi mathvariant="normal">sin</mi>
+            <mo stretchy="false">(</mo>
+            <mi>b</mi>
+            <mi>t</mi>
+            <mo stretchy="false">)</mo>
+            </mrow>
+        </math>
+    </div>
   </header>
 
   <main class="grid">
@@ -251,6 +299,19 @@
         <div class="tag">04 · Vector Space</div>
         <div class="title">3D空間曲線シミュレーター<span>↗</span></div>
         <div class="desc">2つの正弦波が空間で合流する立体螺旋軌道。</div>
+        <div class="btn">起動する <span>▶</span></div>
+      </div>
+    </a>
+
+    <!-- 5. 3D空間曲線・完全版 -->
+    <a href="./3D/" class="card">
+      <div class="thumb">
+        <img class="thumb-img" src="./3D/lissajous.svg" alt="3D Space Curve Preview" loading="lazy" />
+      </div>
+      <div class="content">
+        <div class="tag">05 · Vector Space</div>
+        <div class="title">3次元リサジュー曲線シミュレーター<span>↗</span></div>
+        <div class="desc">3次元に拡張したリサジュー曲線。</div>
         <div class="btn">起動する <span>▶</span></div>
       </div>
     </a>

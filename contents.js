@@ -9,13 +9,13 @@ const contents = [
     items: [
       {
         title: "Pumice",
-        description: "Markdown対応のドキュメント作成・閲覧ツール。データはローカルに保存され、AI機能はなし。自信作。",
+        description: "Markdown対応のドキュメント作成・閲覧ツール。PC専用でデータはローカルに保存され、AI機能はなし。自信作。",
         url: "https://pumicebimsstein.github.io/Pumice/",
         // thumbnail: "./images/Pumice.png"
       },
       {
         title: "Mica",
-        description: "CSVやJSONをカード形式で表示するデータビューア。電子書籍の本棚として作りました。フィルターがいい感じ。",
+        description: "CSVやJSONをカード形式で表示するデータビューア。PC専用で電子書籍の本棚として作りました。フィルターがいい感じ。",
         url: "https://pumicebimsstein.github.io/Mica/",
         // thumbnail: "./images/palette.png"
       }

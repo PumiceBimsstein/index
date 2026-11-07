@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Lissajous</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #06060f; overflow: hidden; }
+    /* スライダーのつまみを小さくする */
+    input[type=range] { cursor: pointer; }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #00e5ff;
+      cursor: pointer;
+    }
+    input[type=range]::-moz-range-thumb {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #00e5ff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- elm make --output=main.js でコンパイルしたファイルを読み込む -->
+  <script src="main.js"></script>
+  <script>
+    const app = Elm.Main.init({ node: document.getElementById("app") });
+
+    app.ports.exportSvg.subscribe(function(svgString) {
+      const blob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement("a");
+      a.href     = url;
+      a.download = "lissajous.svg";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
