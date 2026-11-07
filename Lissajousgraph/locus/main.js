@@ -6178,7 +6178,7 @@ var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Main$Idle = {$: 0};
 var $author$project$Main$TabParams = 0;
 var $elm$core$Basics$pi = _Basics_pi;
-var $author$project$Main$defaultParams = {q: 3.0, B: 0.6, C: 0.6, r: 2.0, l: $elm$core$Basics$pi / 2, E: 1.0};
+var $author$project$Main$defaultParams = {q: 3.0, B: 0.6, C: 0.6, r: 2.0, m: $elm$core$Basics$pi / 2, E: 1.0};
 var $elm_explorations$linear_algebra$Math$Vector3$i = A3(_MJS_v3, 1, 0, 0);
 var $elm_explorations$linear_algebra$Math$Matrix4$identity = _MJS_m4x4identity;
 var $elm_explorations$linear_algebra$Math$Vector3$j = A3(_MJS_v3, 0, 1, 0);
@@ -6195,7 +6195,7 @@ var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		{L: 0, j: $author$project$Main$Idle, O: $elm$core$Maybe$Nothing, P: true, o: 1.0, s: false, a: $author$project$Main$defaultParams, w: 600.0, Q: true, x: true, p: 1.0, U: false, V: false, W: true, X: false, y: 0.0, z: 0.0, A: 0.0, t: 5.0, F: 0.0, b: $author$project$Main$initTransform},
+		{L: 0, j: $author$project$Main$Idle, O: $elm$core$Maybe$Nothing, P: true, p: 1.0, s: false, a: $author$project$Main$defaultParams, w: 600.0, Q: true, x: true, k: 1.0, U: false, V: false, W: true, X: false, y: 0.0, z: 0.0, A: 0.0, t: 5.0, F: 0.0, b: $author$project$Main$initTransform},
 		$elm$core$Platform$Cmd$none);
 };
 var $author$project$Main$DragEnd = {$: 3};
@@ -6846,13 +6846,13 @@ var $author$project$Main$stepTarget = F3(
 							{r: newV})
 					});
 			case 2:
-				var newV = A3($elm$core$Basics$clamp, 0.0, 2.0 * $elm$core$Basics$pi, p.l + (sign * 0.05));
+				var newV = A3($elm$core$Basics$clamp, 0.0, 2.0 * $elm$core$Basics$pi, p.m + (sign * 0.05));
 				return _Utils_update(
 					model,
 					{
 						a: _Utils_update(
 							p,
-							{l: newV})
+							{m: newV})
 					});
 			case 3:
 				var newV = A3($elm$core$Basics$clamp, 0.1, 1.0, p.B + (sign * 0.05));
@@ -6911,20 +6911,20 @@ var $author$project$Main$stepTarget = F3(
 						b: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, newV - model.A, $elm_explorations$linear_algebra$Math$Vector3$k, model.b)
 					});
 			case 10:
-				var newV = A3($elm$core$Basics$clamp, 0.3, 4.0, model.p + (sign * 0.05));
+				var newV = A3($elm$core$Basics$clamp, 0.3, 4.0, model.k + (sign * 0.05));
 				return _Utils_update(
 					model,
-					{p: newV});
+					{k: newV});
 			case 11:
 				var newV = A3($elm$core$Basics$clamp, 200.0, 1500.0, model.w + (sign * 25.0));
 				return _Utils_update(
 					model,
 					{w: newV});
 			default:
-				var newV = A3($elm$core$Basics$clamp, 0.8, 4.5, model.o + (sign * 0.2));
+				var newV = A3($elm$core$Basics$clamp, 0.8, 4.5, model.p + (sign * 0.2));
 				return _Utils_update(
 					model,
-					{o: newV});
+					{p: newV});
 		}
 	});
 var $elm$core$List$sum = function (numbers) {
@@ -7264,11 +7264,11 @@ var $author$project$Main$update = F2(
 				}
 			case 4:
 				var deltaY = msg.a;
-				var newScale = A3($elm$core$Basics$clamp, 0.3, 4.0, model.p - (deltaY * 0.0015));
+				var newScale = A3($elm$core$Basics$clamp, 0.3, 4.0, model.k - (deltaY * 0.0015));
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{p: newScale}),
+						{k: newScale}),
 					$elm$core$Platform$Cmd$none);
 			case 5:
 				return _Utils_Tuple2(
@@ -7286,7 +7286,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{w: 600.0, p: 1.0, y: 0.0, z: 0.0, A: 0.0, b: $author$project$Main$initTransform}),
+						{w: 600.0, k: 1.0, y: 0.0, z: 0.0, A: 0.0, b: $author$project$Main$initTransform}),
 					$elm$core$Platform$Cmd$none);
 			case 7:
 				var tab = msg.a;
@@ -7384,9 +7384,9 @@ var $author$project$Main$update = F2(
 							a: _Utils_update(
 								p,
 								{
-									l: A2(
+									m: A2(
 										$elm$core$Maybe$withDefault,
-										p.l,
+										p.m,
 										$elm$core$String$toFloat(s))
 								})
 						}),
@@ -7400,7 +7400,7 @@ var $author$project$Main$update = F2(
 						{
 							a: _Utils_update(
 								p,
-								{l: v})
+								{m: v})
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 15:
@@ -7472,9 +7472,9 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							p: A2(
+							k: A2(
 								$elm$core$Maybe$withDefault,
-								model.p,
+								model.k,
 								$elm$core$String$toFloat(s))
 						}),
 					$elm$core$Platform$Cmd$none);
@@ -7496,9 +7496,9 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							o: A2(
+							p: A2(
 								$elm$core$Maybe$withDefault,
-								model.o,
+								model.p,
 								$elm$core$String$toFloat(s))
 						}),
 					$elm$core$Platform$Cmd$none);
@@ -7507,7 +7507,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{o: v}),
+						{p: v}),
 					$elm$core$Platform$Cmd$none);
 			case 23:
 				return _Utils_Tuple2(
@@ -7555,6 +7555,25 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
 	});
+var $author$project$Main$NoOp = {$: 33};
+var $author$project$Main$SetScale = function (a) {
+	return {$: 19, a: a};
+};
+var $author$project$Main$StartHold = F2(
+	function (a, b) {
+		return {$: 31, a: a, b: b};
+	});
+var $author$project$Main$StepMinus = 0;
+var $author$project$Main$StepPlus = 1;
+var $author$project$Main$TargetZoom = 10;
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$core$String$fromFloat = _String_fromNumber;
+var $elm$core$Basics$round = _Basics_round;
+var $author$project$Main$fmtF = function (f) {
+	return $elm$core$String$fromFloat(
+		$elm$core$Basics$round(f * 100) / 100);
+};
+var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -7563,8 +7582,198 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			$elm$json$Json$Encode$string(string));
 	});
+var $elm$html$Html$Attributes$max = $elm$html$Html$Attributes$stringProperty('max');
+var $elm$html$Html$Attributes$min = $elm$html$Html$Attributes$stringProperty('min');
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 1, a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
+var $elm$html$Html$button = _VirtualDom_node('button');
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 0, a: a};
+};
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var $elm$virtual_dom$VirtualDom$MayPreventDefault = function (a) {
+	return {$: 2, a: a};
+};
+var $elm$html$Html$Events$preventDefaultOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayPreventDefault(decoder));
+	});
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$Main$spanBtn = F2(
+	function (labelText, onStartMsg) {
+		return A2(
+			$elm$html$Html$button,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$Events$on,
+					'pointerdown',
+					$elm$json$Json$Decode$succeed(onStartMsg)),
+					A2(
+					$elm$html$Html$Events$on,
+					'pointerup',
+					$elm$json$Json$Decode$succeed($author$project$Main$EndHold)),
+					A2(
+					$elm$html$Html$Events$on,
+					'pointerleave',
+					$elm$json$Json$Decode$succeed($author$project$Main$EndHold)),
+					A2(
+					$elm$html$Html$Events$on,
+					'pointercancel',
+					$elm$json$Json$Decode$succeed($author$project$Main$EndHold)),
+					A2(
+					$elm$html$Html$Events$preventDefaultOn,
+					'contextmenu',
+					$elm$json$Json$Decode$succeed(
+						_Utils_Tuple2($author$project$Main$NoOp, true))),
+					A2($elm$html$Html$Attributes$style, 'width', '20px'),
+					A2($elm$html$Html$Attributes$style, 'height', '20px'),
+					A2($elm$html$Html$Attributes$style, 'padding', '0'),
+					A2($elm$html$Html$Attributes$style, 'background', '#15202e'),
+					A2($elm$html$Html$Attributes$style, 'color', '#00e5ff'),
+					A2($elm$html$Html$Attributes$style, 'border', '1px solid #233545'),
+					A2($elm$html$Html$Attributes$style, 'border-radius', '3px'),
+					A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+					A2($elm$html$Html$Attributes$style, 'font-family', 'monospace'),
+					A2($elm$html$Html$Attributes$style, 'font-size', '13px'),
+					A2($elm$html$Html$Attributes$style, 'font-weight', 'bold'),
+					A2($elm$html$Html$Attributes$style, 'display', 'flex'),
+					A2($elm$html$Html$Attributes$style, 'align-items', 'center'),
+					A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
+					A2($elm$html$Html$Attributes$style, 'user-select', 'none'),
+					A2($elm$html$Html$Attributes$style, 'touch-action', 'none')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(labelText)
+				]));
+	});
+var $elm$html$Html$Attributes$step = function (n) {
+	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
+};
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $author$project$Main$canvasZoomOverlay = function (model) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$Events$stopPropagationOn,
+				'pointerdown',
+				$elm$json$Json$Decode$succeed(
+					_Utils_Tuple2($author$project$Main$NoOp, true))),
+				A2(
+				$elm$html$Html$Events$stopPropagationOn,
+				'mousedown',
+				$elm$json$Json$Decode$succeed(
+					_Utils_Tuple2($author$project$Main$NoOp, true))),
+				A2(
+				$elm$html$Html$Events$stopPropagationOn,
+				'touchstart',
+				$elm$json$Json$Decode$succeed(
+					_Utils_Tuple2($author$project$Main$NoOp, true))),
+				A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+				A2($elm$html$Html$Attributes$style, 'bottom', '10px'),
+				A2($elm$html$Html$Attributes$style, 'right', '10px'),
+				A2($elm$html$Html$Attributes$style, 'display', 'flex'),
+				A2($elm$html$Html$Attributes$style, 'align-items', 'center'),
+				A2($elm$html$Html$Attributes$style, 'gap', '4px'),
+				A2($elm$html$Html$Attributes$style, 'background', 'rgba(13, 17, 26, 0.85)'),
+				A2($elm$html$Html$Attributes$style, 'padding', '4px 8px'),
+				A2($elm$html$Html$Attributes$style, 'border-radius', '6px'),
+				A2($elm$html$Html$Attributes$style, 'border', '1px solid rgba(0, 229, 255, 0.25)'),
+				A2($elm$html$Html$Attributes$style, 'backdrop-filter', 'blur(4px)'),
+				A2($elm$html$Html$Attributes$style, 'z-index', '10')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$author$project$Main$spanBtn,
+				'−',
+				A2($author$project$Main$StartHold, 10, 0)),
+				A2(
+				$elm$html$Html$input,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$type_('range'),
+						$elm$html$Html$Attributes$min('0.3'),
+						$elm$html$Html$Attributes$max('4.0'),
+						$elm$html$Html$Attributes$step('0.05'),
+						$elm$html$Html$Attributes$value(
+						$elm$core$String$fromFloat(model.k)),
+						$elm$html$Html$Events$onInput($author$project$Main$SetScale),
+						A2($elm$html$Html$Attributes$style, 'width', '80px'),
+						A2($elm$html$Html$Attributes$style, 'accent-color', '#00e5ff'),
+						A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+						A2($elm$html$Html$Attributes$style, 'margin', '0 2px')
+					]),
+				_List_Nil),
+				A2(
+				$author$project$Main$spanBtn,
+				'+',
+				A2($author$project$Main$StartHold, 10, 1)),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'font-size', '10px'),
+						A2($elm$html$Html$Attributes$style, 'color', '#00e5ff'),
+						A2($elm$html$Html$Attributes$style, 'min-width', '28px'),
+						A2($elm$html$Html$Attributes$style, 'text-align', 'right'),
+						A2($elm$html$Html$Attributes$style, 'font-family', 'monospace')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$author$project$Main$fmtF(model.k) + 'x')
+					]))
+			]));
+};
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
-var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$virtual_dom$VirtualDom$node = function (tag) {
 	return _VirtualDom_node(
 		_VirtualDom_noScript(tag));
@@ -7588,17 +7797,6 @@ var $elm$core$List$append = F2(
 var $elm$core$List$concat = function (lists) {
 	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
 };
-var $elm$virtual_dom$VirtualDom$MayPreventDefault = function (a) {
-	return {$: 2, a: a};
-};
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var $elm$html$Html$Events$preventDefaultOn = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$MayPreventDefault(decoder));
-	});
 var $author$project$Main$Point3D = F3(
 	function (x, y, z) {
 		return {f: x, g: y, av: z};
@@ -7621,7 +7819,7 @@ var $author$project$Main$applyTransform = F2(
 	function (model, p) {
 		var v = A3($elm_explorations$linear_algebra$Math$Vector3$vec3, p.f, p.g, p.av);
 		var tv = A2($elm_explorations$linear_algebra$Math$Matrix4$transform, model.b, v);
-		var s = model.p;
+		var s = model.k;
 		var scaledP = A3(
 			$author$project$Main$Point3D,
 			$elm_explorations$linear_algebra$Math$Vector3$getX(tv) * s,
@@ -7634,12 +7832,10 @@ var $elm$svg$Svg$Attributes$fontFamily = _VirtualDom_attribute('font-family');
 var $elm$svg$Svg$Attributes$fontSize = _VirtualDom_attribute('font-size');
 var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
 var $elm$svg$Svg$line = $elm$svg$Svg$trustedNode('line');
-var $elm$core$String$fromFloat = _String_fromNumber;
 var $author$project$Main$px = $elm$core$String$fromFloat;
 var $elm$svg$Svg$Attributes$stroke = _VirtualDom_attribute('stroke');
 var $elm$svg$Svg$Attributes$strokeDasharray = _VirtualDom_attribute('stroke-dasharray');
 var $elm$svg$Svg$Attributes$strokeWidth = _VirtualDom_attribute('stroke-width');
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$svg$Svg$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$svg$Svg$text_ = $elm$svg$Svg$trustedNode('text');
 var $elm$svg$Svg$Attributes$x = _VirtualDom_attribute('x');
@@ -7735,13 +7931,12 @@ var $elm$svg$Svg$g = $elm$svg$Svg$trustedNode('g');
 var $elm$core$Basics$sin = _Basics_sin;
 var $author$project$Main$posX = F2(
 	function (p, t) {
-		return (p.B * $elm$core$Basics$sin((p.q * t) + p.l)) * $author$project$Main$boxW;
+		return (p.B * $elm$core$Basics$sin((p.q * t) + p.m)) * $author$project$Main$boxW;
 	});
 var $author$project$Main$posY = F2(
 	function (p, t) {
 		return (p.C * $elm$core$Basics$sin(p.r * t)) * $author$project$Main$boxW;
 	});
-var $elm$core$Basics$round = _Basics_round;
 var $author$project$Main$lissajousPoints = function (model) {
 	var p = model.a;
 	var curT = model.F;
@@ -7858,7 +8053,7 @@ var $author$project$Main$wavePoints = function (model) {
 };
 var $author$project$Main$renderCurvesAndCurrent = function (model) {
 	var p = model.a;
-	var lw = model.o;
+	var lw = model.p;
 	var projLine = F3(
 		function (p1, p2, col) {
 			return A2(
@@ -8126,7 +8321,12 @@ var $author$project$Main$renderCanvas = function (model) {
 				true);
 		},
 		A2($elm$json$Json$Decode$field, 'deltaY', $elm$json$Json$Decode$float));
-	var mouseDownDec = A3(
+	var pointerMoveDec = A3(
+		$elm$json$Json$Decode$map2,
+		$author$project$Main$DragMove,
+		A2($elm$json$Json$Decode$field, 'clientX', $elm$json$Json$Decode$float),
+		A2($elm$json$Json$Decode$field, 'clientY', $elm$json$Json$Decode$float));
+	var pointerDownDec = A3(
 		$elm$json$Json$Decode$map2,
 		$author$project$Main$DragStart,
 		A2($elm$json$Json$Decode$field, 'clientX', $elm$json$Json$Decode$float),
@@ -8136,15 +8336,25 @@ var $author$project$Main$renderCanvas = function (model) {
 		_List_fromArray(
 			[
 				$elm$svg$Svg$Attributes$viewBox('0 0 500 500'),
+				A2($elm$html$Html$Attributes$style, 'touch-action', 'none'),
 				A2(
 				$elm$html$Html$Events$preventDefaultOn,
-				'mousedown',
+				'pointerdown',
 				A2(
 					$elm$json$Json$Decode$map,
 					function (m) {
 						return _Utils_Tuple2(m, true);
 					},
-					mouseDownDec)),
+					pointerDownDec)),
+				A2($elm$html$Html$Events$on, 'pointermove', pointerMoveDec),
+				A2(
+				$elm$html$Html$Events$on,
+				'pointerup',
+				$elm$json$Json$Decode$succeed($author$project$Main$DragEnd)),
+				A2(
+				$elm$html$Html$Events$on,
+				'pointercancel',
+				$elm$json$Json$Decode$succeed($author$project$Main$DragEnd)),
 				A2($elm$html$Html$Events$preventDefaultOn, 'wheel', wheelDec)
 			]),
 		$elm$core$List$concat(
@@ -8162,26 +8372,12 @@ var $author$project$Main$SetTab = function (a) {
 var $author$project$Main$TabCamera = 1;
 var $author$project$Main$TabDisplay = 2;
 var $author$project$Main$ToggleRunning = {$: 5};
-var $elm$html$Html$button = _VirtualDom_node('button');
-var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 0, a: a};
-};
-var $elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
 var $elm$html$Html$Events$onClick = function (msg) {
 	return A2(
 		$elm$html$Html$Events$on,
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$ResetView = {$: 30};
 var $author$project$Main$SetPerspective = function (a) {
 	return {$: 20, a: a};
@@ -8195,65 +8391,12 @@ var $author$project$Main$SetRotateY = function (a) {
 var $author$project$Main$SetRotateZ = function (a) {
 	return {$: 10, a: a};
 };
-var $author$project$Main$SetScale = function (a) {
-	return {$: 19, a: a};
-};
 var $author$project$Main$TargetPers = 11;
 var $author$project$Main$TargetRotX = 7;
 var $author$project$Main$TargetRotY = 8;
 var $author$project$Main$TargetRotZ = 9;
-var $author$project$Main$TargetZoom = 10;
 var $author$project$Main$TogglePerspective = {$: 23};
-var $author$project$Main$fmtF = function (f) {
-	return $elm$core$String$fromFloat(
-		$elm$core$Basics$round(f * 100) / 100);
-};
-var $author$project$Main$StepMinus = 0;
-var $author$project$Main$StepPlus = 1;
-var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
-var $elm$html$Html$Attributes$max = $elm$html$Html$Attributes$stringProperty('max');
-var $elm$html$Html$Attributes$min = $elm$html$Html$Attributes$stringProperty('min');
-var $elm$html$Html$Events$alwaysStop = function (x) {
-	return _Utils_Tuple2(x, true);
-};
-var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
-	return {$: 1, a: a};
-};
-var $elm$html$Html$Events$stopPropagationOn = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
-	});
-var $elm$json$Json$Decode$at = F2(
-	function (fields, decoder) {
-		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
-	});
-var $elm$json$Json$Decode$string = _Json_decodeString;
-var $elm$html$Html$Events$targetValue = A2(
-	$elm$json$Json$Decode$at,
-	_List_fromArray(
-		['target', 'value']),
-	$elm$json$Json$Decode$string);
-var $elm$html$Html$Events$onInput = function (tagger) {
-	return A2(
-		$elm$html$Html$Events$stopPropagationOn,
-		'input',
-		A2(
-			$elm$json$Json$Decode$map,
-			$elm$html$Html$Events$alwaysStop,
-			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
-};
-var $elm$html$Html$Attributes$step = function (n) {
-	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
-};
-var $author$project$Main$NoOp = {$: 33};
-var $author$project$Main$StartHold = F2(
-	function (a, b) {
-		return {$: 31, a: a, b: b};
-	});
 var $author$project$Main$stepBtn = F3(
 	function (labelText, target, dir) {
 		return A2(
@@ -8304,8 +8447,6 @@ var $author$project$Main$stepBtn = F3(
 					$elm$html$Html$text(labelText)
 				]));
 	});
-var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
-var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Main$sliderWithButtons = F8(
 	function (lbl, target, minV, maxV, stepV, curV, dispText, toMsg) {
 		return A2(
@@ -8455,8 +8596,8 @@ var $author$project$Main$viewTabCamera = function (model) {
 				'0.3',
 				'4.0',
 				'0.05',
-				model.p,
-				$author$project$Main$fmtF(model.p),
+				model.k,
+				$author$project$Main$fmtF(model.k),
 				$author$project$Main$SetScale),
 				model.Q ? A8(
 				$author$project$Main$sliderWithButtons,
@@ -8563,8 +8704,8 @@ var $author$project$Main$viewTabDisplay = function (model) {
 				'0.8',
 				'4.5',
 				'0.2',
-				model.o,
-				$author$project$Main$fmtF(model.o) + 'px',
+				model.p,
+				$author$project$Main$fmtF(model.p) + 'px',
 				$author$project$Main$SetLineWidth),
 				A2(
 				$elm$html$Html$div,
@@ -8591,11 +8732,11 @@ var $author$project$Main$viewTabDisplay = function (model) {
 									A2(
 									$elm$html$Html$Attributes$style,
 									'background',
-									($elm$core$Basics$abs(model.o - val) < 0.15) ? '#1a2538' : '#12121c'),
+									($elm$core$Basics$abs(model.p - val) < 0.15) ? '#1a2538' : '#12121c'),
 									A2(
 									$elm$html$Html$Attributes$style,
 									'color',
-									($elm$core$Basics$abs(model.o - val) < 0.15) ? '#00e5ff' : '#666'),
+									($elm$core$Basics$abs(model.p - val) < 0.15) ? '#00e5ff' : '#666'),
 									A2($elm$html$Html$Attributes$style, 'border', '1px solid #222230'),
 									A2($elm$html$Html$Attributes$style, 'border-radius', '3px'),
 									A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
@@ -8718,8 +8859,8 @@ var $author$project$Main$viewTabParams = function (model) {
 				'0',
 				'6.29',
 				'0.01',
-				p.l,
-				$author$project$Main$fmtF(p.l),
+				p.m,
+				$author$project$Main$fmtF(p.m),
 				$author$project$Main$SetDelta),
 				A2(
 				$elm$html$Html$div,
@@ -8746,11 +8887,11 @@ var $author$project$Main$viewTabParams = function (model) {
 									A2(
 									$elm$html$Html$Attributes$style,
 									'background',
-									($elm$core$Basics$abs(p.l - val) < 0.01) ? '#252545' : '#181828'),
+									($elm$core$Basics$abs(p.m - val) < 0.01) ? '#252545' : '#181828'),
 									A2(
 									$elm$html$Html$Attributes$style,
 									'color',
-									($elm$core$Basics$abs(p.l - val) < 0.01) ? '#00e5ff' : '#555'),
+									($elm$core$Basics$abs(p.m - val) < 0.01) ? '#00e5ff' : '#555'),
 									A2($elm$html$Html$Attributes$style, 'border', '1px solid #2a2a3a'),
 									A2($elm$html$Html$Attributes$style, 'border-radius', '3px'),
 									A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
@@ -8963,8 +9104,8 @@ var $author$project$Main$view = function (model) {
 				A2($elm$html$Html$Attributes$style, 'display', 'flex'),
 				A2($elm$html$Html$Attributes$style, 'flex-direction', 'column'),
 				A2($elm$html$Html$Attributes$style, 'align-items', 'center'),
-				A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
-				A2($elm$html$Html$Attributes$style, 'padding', '10px 14px'),
+				A2($elm$html$Html$Attributes$style, 'justify-content', 'flex-start'),
+				A2($elm$html$Html$Attributes$style, 'padding', '8px 10px 24px'),
 				A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box'),
 				A2($elm$html$Html$Attributes$style, 'font-family', 'monospace'),
 				A2($elm$html$Html$Attributes$style, 'user-select', 'none'),
@@ -8978,17 +9119,17 @@ var $author$project$Main$view = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('\r\n                .app-layout {\r\n                    display: flex;\r\n                    flex-direction: row;\r\n                    align-items: center;\r\n                    justify-content: center;\r\n                    gap: 20px;\r\n                    width: 100%;\r\n                    max-width: 1600px;\r\n                    flex: 1;\r\n                }\r\n                .canvas-container {\r\n                    flex: 1 1 500px;\r\n                    display: flex;\r\n                    justify-content: center;\r\n                    align-items: center;\r\n                    width: 100%;\r\n                    min-width: 0;\r\n                }\r\n                .canvas-container svg {\r\n                    width: 100%;\r\n                    height: auto;\r\n                    max-height: calc(100vh - 100px);\r\n                    max-width: calc(100vh - 100px);\r\n                    aspect-ratio: 1 / 1;\r\n                    background: #090910;\r\n                    border-radius: 8px;\r\n                    border: 1px solid #1a1a28;\r\n                    display: block;\r\n                    cursor: grab;\r\n                }\r\n                .controls-container {\r\n                    flex: 0 0 380px;\r\n                    width: 380px;\r\n                }\r\n                @media (max-width: 900px) {\r\n                    .app-layout {\r\n                        flex-direction: column !important;\r\n                        gap: 12px !important;\r\n                    }\r\n                    .canvas-container svg {\r\n                        max-height: none !important;\r\n                        max-width: 100% !important;\r\n                    }\r\n                    .controls-container {\r\n                        flex: none !important;\r\n                        width: 100% !important;\r\n                        max-width: 500px !important;\r\n                    }\r\n                }\r\n            ')
+						$elm$html$Html$text('\r\n                .app-layout {\r\n                    display: flex;\r\n                    flex-direction: row;\r\n                    align-items: center;\r\n                    justify-content: center;\r\n                    gap: 16px;\r\n                    width: 100%;\r\n                    max-width: 1600px;\r\n                }\r\n                .canvas-container {\r\n                    flex: 1 1 500px;\r\n                    display: flex;\r\n                    justify-content: center;\r\n                    align-items: center;\r\n                    width: 100%;\r\n                    min-width: 0;\r\n                    position: relative;\r\n                }\r\n                .canvas-container svg {\r\n                    width: 100%;\r\n                    height: auto;\r\n                    max-height: calc(100vh - 120px);\r\n                    max-width: calc(100vh - 120px);\r\n                    aspect-ratio: 1 / 1;\r\n                    background: #090910;\r\n                    border-radius: 8px;\r\n                    border: 1px solid #1a1a28;\r\n                    display: block;\r\n                    cursor: grab;\r\n                    touch-action: none;\r\n                }\r\n                .canvas-container svg:active {\r\n                    cursor: grabbing;\r\n                }\r\n                .controls-container {\r\n                    flex: 0 0 380px;\r\n                    width: 380px;\r\n                }\r\n                @media (max-width: 900px) {\r\n                    .app-layout {\r\n                        flex-direction: column !important;\r\n                        gap: 8px !important;\r\n                    }\r\n                    .canvas-container {\r\n                        flex: none !important;\r\n                        width: 100% !important;\r\n                        max-width: 500px !important;\r\n                    }\r\n                    .canvas-container svg {\r\n                        max-height: 70vh !important;\r\n                        max-width: 100% !important;\r\n                    }\r\n                    .controls-container {\r\n                        flex: none !important;\r\n                        width: 100% !important;\r\n                        max-width: 500px !important;\r\n                    }\r\n                }\r\n            ')
 					])),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
 						A2($elm$html$Html$Attributes$style, 'color', '#ffffff99'),
-						A2($elm$html$Html$Attributes$style, 'font-size', '14px'),
-						A2($elm$html$Html$Attributes$style, 'letter-spacing', '4px'),
+						A2($elm$html$Html$Attributes$style, 'font-size', '13px'),
+						A2($elm$html$Html$Attributes$style, 'letter-spacing', '3px'),
 						A2($elm$html$Html$Attributes$style, 'text-transform', 'uppercase'),
-						A2($elm$html$Html$Attributes$style, 'margin-bottom', '4px'),
+						A2($elm$html$Html$Attributes$style, 'margin-bottom', '2px'),
 						A2($elm$html$Html$Attributes$style, 'text-align', 'center')
 					]),
 				_List_fromArray(
@@ -8999,14 +9140,14 @@ var $author$project$Main$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						A2($elm$html$Html$Attributes$style, 'color', '#ffffff99'),
-						A2($elm$html$Html$Attributes$style, 'font-size', '11px'),
-						A2($elm$html$Html$Attributes$style, 'margin-bottom', '10px'),
+						A2($elm$html$Html$Attributes$style, 'color', '#ffffff66'),
+						A2($elm$html$Html$Attributes$style, 'font-size', '10px'),
+						A2($elm$html$Html$Attributes$style, 'margin-bottom', '6px'),
 						A2($elm$html$Html$Attributes$style, 'text-align', 'center')
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text('ドラッグ: 視点回転 ｜ ホイール: ズーム ｜ クリック: 再生/停止')
+						$elm$html$Html$text('ドラッグ/スワイプ: 回転 ｜ スライダー/ホイール: ズーム ｜ タップ: 再生/停止')
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -9024,7 +9165,8 @@ var $author$project$Main$view = function (model) {
 							]),
 						_List_fromArray(
 							[
-								$author$project$Main$renderCanvas(model)
+								$author$project$Main$renderCanvas(model),
+								$author$project$Main$canvasZoomOverlay(model)
 							])),
 						A2(
 						$elm$html$Html$div,
