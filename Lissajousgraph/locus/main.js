@@ -2727,7 +2727,7 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		I: func(record.I),
+		J: func(record.J),
 		at: record.at,
 		aq: record.aq
 	}
@@ -2997,7 +2997,7 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.I;
+		var message = !tag ? value : tag < 3 ? value.a : value.J;
 		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.at;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
@@ -4257,8 +4257,8 @@ function _Browser_getViewport()
 	return {
 		a5: _Browser_getScene(),
 		a8: {
-			f: _Browser_window.pageXOffset,
-			g: _Browser_window.pageYOffset,
+			b: _Browser_window.pageXOffset,
+			c: _Browser_window.pageYOffset,
 			ba: _Browser_doc.documentElement.clientWidth,
 			aD: _Browser_doc.documentElement.clientHeight
 		}
@@ -4299,8 +4299,8 @@ function _Browser_getViewportOf(id)
 				aD: node.scrollHeight
 			},
 			a8: {
-				f: node.scrollLeft,
-				g: node.scrollTop,
+				b: node.scrollLeft,
+				c: node.scrollTop,
 				ba: node.clientWidth,
 				aD: node.clientHeight
 			}
@@ -4334,14 +4334,14 @@ function _Browser_getElement(id)
 		return {
 			a5: _Browser_getScene(),
 			a8: {
-				f: x,
-				g: y,
+				b: x,
+				c: y,
 				ba: _Browser_doc.documentElement.clientWidth,
 				aD: _Browser_doc.documentElement.clientHeight
 			},
 			bg: {
-				f: x + rect.left,
-				g: y + rect.top,
+				b: x + rect.left,
+				c: y + rect.top,
 				ba: rect.width,
 				aD: rect.height
 			}
@@ -4431,11 +4431,11 @@ var _MJS_v2setY = F2(function(y, a) {
 });
 
 var _MJS_v2toRecord = function(a) {
-    return { f: a[0], g: a[1] };
+    return { b: a[0], c: a[1] };
 };
 
 var _MJS_v2fromRecord = function(r) {
-    return new Float64Array([r.f, r.g]);
+    return new Float64Array([r.b, r.c]);
 };
 
 var _MJS_v2add = F2(function(a, b) {
@@ -4544,11 +4544,11 @@ var _MJS_v3setZ = F2(function(z, a) {
 });
 
 var _MJS_v3toRecord = function(a) {
-    return { f: a[0], g: a[1], av: a[2] };
+    return { b: a[0], c: a[1], av: a[2] };
 };
 
 var _MJS_v3fromRecord = function(r) {
-    return new Float64Array([r.f, r.g, r.av]);
+    return new Float64Array([r.b, r.c, r.av]);
 };
 
 var _MJS_v3add = F2(function(a, b) {
@@ -4704,11 +4704,11 @@ var _MJS_v4setW = F2(function(w, a) {
 });
 
 var _MJS_v4toRecord = function(a) {
-    return { f: a[0], g: a[1], av: a[2], a9: a[3] };
+    return { b: a[0], c: a[1], av: a[2], a9: a[3] };
 };
 
 var _MJS_v4fromRecord = function(r) {
-    return new Float64Array([r.f, r.g, r.av, r.a9]);
+    return new Float64Array([r.b, r.c, r.av, r.a9]);
 };
 
 var _MJS_v4add = F2(function(a, b) {
@@ -5798,25 +5798,25 @@ var $elm$core$Array$treeFromBuilder = F2(
 	});
 var $elm$core$Array$builderToArray = F2(
 	function (reverseNodeList, builder) {
-		if (!builder.c) {
+		if (!builder.e) {
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.e),
+				$elm$core$Elm$JsArray$length(builder.g),
 				$elm$core$Array$shiftStep,
 				$elm$core$Elm$JsArray$empty,
-				builder.e);
+				builder.g);
 		} else {
-			var treeLen = builder.c * $elm$core$Array$branchFactor;
+			var treeLen = builder.e * $elm$core$Array$branchFactor;
 			var depth = $elm$core$Basics$floor(
 				A2($elm$core$Basics$logBase, $elm$core$Array$branchFactor, treeLen - 1));
 			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.h) : builder.h;
-			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.c);
+			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.e);
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.e) + treeLen,
+				$elm$core$Elm$JsArray$length(builder.g) + treeLen,
 				A2($elm$core$Basics$max, 5, depth * $elm$core$Array$shiftStep),
 				tree,
-				builder.e);
+				builder.g);
 		}
 	});
 var $elm$core$Basics$idiv = _Basics_idiv;
@@ -5829,7 +5829,7 @@ var $elm$core$Array$initializeHelp = F5(
 				return A2(
 					$elm$core$Array$builderToArray,
 					false,
-					{h: nodeList, c: (len / $elm$core$Array$branchFactor) | 0, e: tail});
+					{h: nodeList, e: (len / $elm$core$Array$branchFactor) | 0, g: tail});
 			} else {
 				var leaf = $elm$core$Array$Leaf(
 					A3($elm$core$Elm$JsArray$initialize, $elm$core$Array$branchFactor, fromIndex, fn));
@@ -6178,7 +6178,7 @@ var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Main$Idle = {$: 0};
 var $author$project$Main$TabParams = 0;
 var $elm$core$Basics$pi = _Basics_pi;
-var $author$project$Main$defaultParams = {q: 3.0, B: 0.6, C: 0.6, r: 2.0, m: $elm$core$Basics$pi / 2, E: 1.0};
+var $author$project$Main$defaultParams = {q: 3.0, C: 0.6, D: 0.6, r: 2.0, m: $elm$core$Basics$pi / 2, F: 1.0};
 var $elm_explorations$linear_algebra$Math$Vector3$i = A3(_MJS_v3, 1, 0, 0);
 var $elm_explorations$linear_algebra$Math$Matrix4$identity = _MJS_m4x4identity;
 var $elm_explorations$linear_algebra$Math$Vector3$j = A3(_MJS_v3, 0, 1, 0);
@@ -6195,7 +6195,7 @@ var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		{L: 0, j: $author$project$Main$Idle, O: $elm$core$Maybe$Nothing, P: true, p: 1.0, s: false, a: $author$project$Main$defaultParams, w: 600.0, Q: true, x: true, k: 1.0, U: false, V: false, W: true, X: false, y: 0.0, z: 0.0, A: 0.0, t: 5.0, F: 0.0, b: $author$project$Main$initTransform},
+		{M: 0, j: $author$project$Main$Idle, P: $elm$core$Maybe$Nothing, Q: true, p: 1.0, s: false, a: $author$project$Main$defaultParams, w: 600.0, R: true, x: true, k: 1.0, W: false, T: true, X: true, y: true, z: 0.0, A: 0.0, B: 0.0, t: 12.0, G: 0.0, d: $author$project$Main$initTransform},
 		$elm$core$Platform$Cmd$none);
 };
 var $author$project$Main$DragEnd = {$: 3};
@@ -6744,7 +6744,7 @@ var $elm$browser$Browser$Events$onMouseMove = A2($elm$browser$Browser$Events$on,
 var $elm$browser$Browser$Events$onMouseUp = A2($elm$browser$Browser$Events$on, 0, 'mouseup');
 var $author$project$Main$subscriptions = function (model) {
 	var holdSubs = function () {
-		var _v1 = model.O;
+		var _v1 = model.P;
 		if (!_v1.$) {
 			return _List_fromArray(
 				[
@@ -6855,15 +6855,6 @@ var $author$project$Main$stepTarget = F3(
 							{m: newV})
 					});
 			case 3:
-				var newV = A3($elm$core$Basics$clamp, 0.1, 1.0, p.B + (sign * 0.05));
-				return _Utils_update(
-					model,
-					{
-						a: _Utils_update(
-							p,
-							{B: newV})
-					});
-			case 4:
 				var newV = A3($elm$core$Basics$clamp, 0.1, 1.0, p.C + (sign * 0.05));
 				return _Utils_update(
 					model,
@@ -6872,43 +6863,52 @@ var $author$project$Main$stepTarget = F3(
 							p,
 							{C: newV})
 					});
-			case 5:
-				var newV = A3($elm$core$Basics$clamp, 0.1, 3.0, p.E + (sign * 0.1));
+			case 4:
+				var newV = A3($elm$core$Basics$clamp, 0.1, 1.0, p.D + (sign * 0.05));
 				return _Utils_update(
 					model,
 					{
 						a: _Utils_update(
 							p,
-							{E: newV})
+							{D: newV})
+					});
+			case 5:
+				var newV = A3($elm$core$Basics$clamp, 0.1, 3.0, p.F + (sign * 0.1));
+				return _Utils_update(
+					model,
+					{
+						a: _Utils_update(
+							p,
+							{F: newV})
 					});
 			case 6:
-				var newV = A3($elm$core$Basics$clamp, 1.0, 8.0, model.t + (sign * 0.2));
+				var newV = A3($elm$core$Basics$clamp, 1.0, 28.0, model.t + (sign * 0.2));
 				return _Utils_update(
 					model,
 					{t: newV});
 			case 7:
-				var newV = A3($elm$core$Basics$clamp, -$elm$core$Basics$pi, $elm$core$Basics$pi, model.y + (sign * 0.05));
-				return _Utils_update(
-					model,
-					{
-						y: newV,
-						b: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, newV - model.y, $elm_explorations$linear_algebra$Math$Vector3$i, model.b)
-					});
-			case 8:
 				var newV = A3($elm$core$Basics$clamp, -$elm$core$Basics$pi, $elm$core$Basics$pi, model.z + (sign * 0.05));
 				return _Utils_update(
 					model,
 					{
 						z: newV,
-						b: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, newV - model.z, $elm_explorations$linear_algebra$Math$Vector3$j, model.b)
+						d: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, newV - model.z, $elm_explorations$linear_algebra$Math$Vector3$i, model.d)
 					});
-			case 9:
+			case 8:
 				var newV = A3($elm$core$Basics$clamp, -$elm$core$Basics$pi, $elm$core$Basics$pi, model.A + (sign * 0.05));
 				return _Utils_update(
 					model,
 					{
 						A: newV,
-						b: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, newV - model.A, $elm_explorations$linear_algebra$Math$Vector3$k, model.b)
+						d: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, newV - model.A, $elm_explorations$linear_algebra$Math$Vector3$j, model.d)
+					});
+			case 9:
+				var newV = A3($elm$core$Basics$clamp, -$elm$core$Basics$pi, $elm$core$Basics$pi, model.B + (sign * 0.05));
+				return _Utils_update(
+					model,
+					{
+						B: newV,
+						d: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, newV - model.B, $elm_explorations$linear_algebra$Math$Vector3$k, model.d)
 					});
 			case 10:
 				var newV = A3($elm$core$Basics$clamp, 0.3, 4.0, model.k + (sign * 0.05));
@@ -7083,9 +7083,9 @@ var $author$project$Main$update = F2(
 			case 0:
 				var dt = msg.a;
 				var dtSec = dt * 0.001;
-				var newTime = model.x ? (model.F + (dtSec * model.a.E)) : model.F;
+				var newTime = model.x ? (model.G + (dtSec * model.a.F)) : model.G;
 				var _v1 = function () {
-					var _v2 = model.O;
+					var _v2 = model.P;
 					if (!_v2.$) {
 						var h = _v2.a;
 						var repeatInterval = 45.0;
@@ -7115,7 +7115,7 @@ var $author$project$Main$update = F2(
 				var modelAfterHold = _v1.b;
 				var updatedModel = _Utils_update(
 					modelAfterHold,
-					{O: updatedHold, F: newTime});
+					{P: updatedHold, G: newTime});
 				var _v3 = model.j;
 				switch (_v3.$) {
 					case 1:
@@ -7133,11 +7133,11 @@ var $author$project$Main$update = F2(
 							A2(
 								$elm$core$List$cons,
 								_Utils_Tuple2(angle, screenAxis),
-								d.N));
+								d.O));
 						var newTransform = (moveLen > 0.05) ? A2(
 							$elm_explorations$linear_algebra$Math$Matrix4$mul,
 							A2($elm_explorations$linear_algebra$Math$Matrix4$makeRotate, angle, screenAxis),
-							model.b) : model.b;
+							model.d) : model.d;
 						return _Utils_Tuple2(
 							_Utils_update(
 								updatedModel,
@@ -7145,8 +7145,8 @@ var $author$project$Main$update = F2(
 									j: $author$project$Main$Dragging(
 										_Utils_update(
 											d,
-											{N: newHistory, aj: d.ag, ak: d.ah})),
-									b: newTransform
+											{O: newHistory, aj: d.ag, ak: d.ah})),
+									d: newTransform
 								}),
 							$elm$core$Platform$Cmd$none);
 					case 2:
@@ -7160,10 +7160,10 @@ var $author$project$Main$update = F2(
 										_Utils_update(
 											c,
 											{am: newVel})),
-									b: A2(
+									d: A2(
 										$elm_explorations$linear_algebra$Math$Matrix4$mul,
 										A2($elm_explorations$linear_algebra$Math$Matrix4$makeRotate, c.am, c.ax),
-										model.b)
+										model.d)
 								}),
 							$elm$core$Platform$Cmd$none) : _Utils_Tuple2(
 							_Utils_update(
@@ -7181,7 +7181,7 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						stepped,
 						{
-							O: $elm$core$Maybe$Just(
+							P: $elm$core$Maybe$Just(
 								{an: dir, aa: 0.0, ai: 0.0, au: target})
 						}),
 					$elm$core$Platform$Cmd$none);
@@ -7189,7 +7189,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{O: $elm$core$Maybe$Nothing}),
+						{P: $elm$core$Maybe$Nothing}),
 					$elm$core$Platform$Cmd$none);
 			case 1:
 				var x = msg.a;
@@ -7199,7 +7199,7 @@ var $author$project$Main$update = F2(
 						model,
 						{
 							j: $author$project$Main$Dragging(
-								{ag: x, ah: y, N: _List_Nil, aj: x, ak: y, al: 0.0})
+								{ag: x, ah: y, O: _List_Nil, aj: x, ak: y, al: 0.0})
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 2:
@@ -7234,10 +7234,10 @@ var $author$project$Main$update = F2(
 								{j: $author$project$Main$Idle, x: !model.x}),
 							$elm$core$Platform$Cmd$none);
 					} else {
-						var avgVel = $elm$core$List$isEmpty(d.N) ? 0.0 : ($elm$core$List$sum(
-							A2($elm$core$List$map, $elm$core$Tuple$first, d.N)) / $elm$core$List$length(d.N));
+						var avgVel = $elm$core$List$isEmpty(d.O) ? 0.0 : ($elm$core$List$sum(
+							A2($elm$core$List$map, $elm$core$Tuple$first, d.O)) / $elm$core$List$length(d.O));
 						var avgAxis = function () {
-							var _v6 = $elm$core$List$head(d.N);
+							var _v6 = $elm$core$List$head(d.O);
 							if (!_v6.$) {
 								var _v7 = _v6.a;
 								var a = _v7.b;
@@ -7280,20 +7280,20 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{F: 0.0}),
+						{G: 0.0}),
 					$elm$core$Platform$Cmd$none);
 			case 30:
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{w: 600.0, k: 1.0, y: 0.0, z: 0.0, A: 0.0, b: $author$project$Main$initTransform}),
+						{w: 600.0, k: 1.0, z: 0.0, A: 0.0, B: 0.0, d: $author$project$Main$initTransform}),
 					$elm$core$Platform$Cmd$none);
 			case 7:
 				var tab = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{L: tab}),
+						{M: tab}),
 					$elm$core$Platform$Cmd$none);
 			case 8:
 				var val = msg.a;
@@ -7306,8 +7306,8 @@ var $author$project$Main$update = F2(
 							return _Utils_update(
 								m,
 								{
-									y: d,
-									b: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, d - m.y, $elm_explorations$linear_algebra$Math$Vector3$i, m.b)
+									z: d,
+									d: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, d - m.z, $elm_explorations$linear_algebra$Math$Vector3$i, m.d)
 								});
 						}));
 			case 9:
@@ -7321,8 +7321,8 @@ var $author$project$Main$update = F2(
 							return _Utils_update(
 								m,
 								{
-									z: d,
-									b: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, d - m.z, $elm_explorations$linear_algebra$Math$Vector3$j, m.b)
+									A: d,
+									d: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, d - m.A, $elm_explorations$linear_algebra$Math$Vector3$j, m.d)
 								});
 						}));
 			case 10:
@@ -7336,8 +7336,8 @@ var $author$project$Main$update = F2(
 							return _Utils_update(
 								m,
 								{
-									A: d,
-									b: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, d - m.A, $elm_explorations$linear_algebra$Math$Vector3$k, m.b)
+									B: d,
+									d: A3($elm_explorations$linear_algebra$Math$Matrix4$rotate, d - m.B, $elm_explorations$linear_algebra$Math$Vector3$k, m.d)
 								});
 						}));
 			case 11:
@@ -7413,9 +7413,9 @@ var $author$project$Main$update = F2(
 							a: _Utils_update(
 								p,
 								{
-									B: A2(
+									C: A2(
 										$elm$core$Maybe$withDefault,
-										p.B,
+										p.C,
 										$elm$core$String$toFloat(s))
 								})
 						}),
@@ -7430,9 +7430,9 @@ var $author$project$Main$update = F2(
 							a: _Utils_update(
 								p,
 								{
-									C: A2(
+									D: A2(
 										$elm$core$Maybe$withDefault,
-										p.C,
+										p.D,
 										$elm$core$String$toFloat(s))
 								})
 						}),
@@ -7447,9 +7447,9 @@ var $author$project$Main$update = F2(
 							a: _Utils_update(
 								p,
 								{
-									E: A2(
+									F: A2(
 										$elm$core$Maybe$withDefault,
-										p.E,
+										p.F,
 										$elm$core$String$toFloat(s))
 								})
 						}),
@@ -7513,37 +7513,37 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{Q: !model.Q}),
+						{R: !model.R}),
 					$elm$core$Platform$Cmd$none);
 			case 24:
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{P: !model.P}),
+						{Q: !model.Q}),
 					$elm$core$Platform$Cmd$none);
 			case 25:
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{U: !model.U}),
+						{W: !model.W}),
 					$elm$core$Platform$Cmd$none);
 			case 26:
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{X: !model.X}),
+						{y: !model.y}),
 					$elm$core$Platform$Cmd$none);
 			case 27:
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{W: !model.W}),
+						{X: !model.X}),
 					$elm$core$Platform$Cmd$none);
 			case 28:
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{V: !model.V}),
+						{T: !model.T}),
 					$elm$core$Platform$Cmd$none);
 			case 29:
 				return _Utils_Tuple2(
@@ -7799,7 +7799,7 @@ var $elm$core$List$concat = function (lists) {
 };
 var $author$project$Main$Point3D = F3(
 	function (x, y, z) {
-		return {f: x, g: y, av: z};
+		return {b: x, c: y, av: z};
 	});
 var $elm_explorations$linear_algebra$Math$Vector3$getX = _MJS_v3getX;
 var $elm_explorations$linear_algebra$Math$Vector3$getY = _MJS_v3getY;
@@ -7807,25 +7807,25 @@ var $elm_explorations$linear_algebra$Math$Vector3$getZ = _MJS_v3getZ;
 var $author$project$Main$project = F3(
 	function (isPers, distance, p) {
 		if (!isPers) {
-			return {f: p.f + 250.0, g: p.g + 250.0};
+			return {b: p.b + 250.0, c: p.c + 250.0};
 		} else {
 			var safeDist = A2($elm$core$Basics$max, 250.0, distance);
 			var s = safeDist / (safeDist + p.av);
-			return {f: (p.f * s) + 250.0, g: (p.g * s) + 250.0};
+			return {b: (p.b * s) + 250.0, c: (p.c * s) + 250.0};
 		}
 	});
 var $elm_explorations$linear_algebra$Math$Matrix4$transform = _MJS_v3mul4x4;
 var $author$project$Main$applyTransform = F2(
 	function (model, p) {
-		var v = A3($elm_explorations$linear_algebra$Math$Vector3$vec3, p.f, p.g, p.av);
-		var tv = A2($elm_explorations$linear_algebra$Math$Matrix4$transform, model.b, v);
+		var v = A3($elm_explorations$linear_algebra$Math$Vector3$vec3, p.b, p.c, p.av);
+		var tv = A2($elm_explorations$linear_algebra$Math$Matrix4$transform, model.d, v);
 		var s = model.k;
 		var scaledP = A3(
 			$author$project$Main$Point3D,
 			$elm_explorations$linear_algebra$Math$Vector3$getX(tv) * s,
 			$elm_explorations$linear_algebra$Math$Vector3$getY(tv) * s,
 			$elm_explorations$linear_algebra$Math$Vector3$getZ(tv) * s);
-		return A3($author$project$Main$project, model.Q, model.w, scaledP);
+		return A3($author$project$Main$project, model.R, model.w, scaledP);
 	});
 var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
 var $elm$svg$Svg$Attributes$fontFamily = _VirtualDom_attribute('font-family');
@@ -7845,10 +7845,10 @@ var $elm$svg$Svg$Attributes$y = _VirtualDom_attribute('y');
 var $elm$svg$Svg$Attributes$y1 = _VirtualDom_attribute('y1');
 var $elm$svg$Svg$Attributes$y2 = _VirtualDom_attribute('y2');
 var $author$project$Main$renderAxes = function (model) {
-	if (model.s || (!model.U)) {
+	if (model.s || (!model.W)) {
 		return _List_Nil;
 	} else {
-		var tDir = model.P ? (-1.0) : 1.0;
+		var tDir = model.Q ? (-1.0) : 1.0;
 		var origin = A2(
 			$author$project$Main$applyTransform,
 			model,
@@ -7877,13 +7877,13 @@ var $author$project$Main$renderAxes = function (model) {
 					_List_fromArray(
 						[
 							$elm$svg$Svg$Attributes$x1(
-							$author$project$Main$px(origin.f)),
+							$author$project$Main$px(origin.b)),
 							$elm$svg$Svg$Attributes$y1(
-							$author$project$Main$px(origin.g)),
+							$author$project$Main$px(origin.c)),
 							$elm$svg$Svg$Attributes$x2(
-							$author$project$Main$px(p.f)),
+							$author$project$Main$px(p.b)),
 							$elm$svg$Svg$Attributes$y2(
-							$author$project$Main$px(p.g)),
+							$author$project$Main$px(p.c)),
 							$elm$svg$Svg$Attributes$stroke(col),
 							$elm$svg$Svg$Attributes$strokeWidth('1.5'),
 							$elm$svg$Svg$Attributes$strokeDasharray(dash)
@@ -7897,9 +7897,9 @@ var $author$project$Main$renderAxes = function (model) {
 					_List_fromArray(
 						[
 							$elm$svg$Svg$Attributes$x(
-							$author$project$Main$px(p.f + 4)),
+							$author$project$Main$px(p.b + 4)),
 							$elm$svg$Svg$Attributes$y(
-							$author$project$Main$px(p.g + 4)),
+							$author$project$Main$px(p.c + 4)),
 							$elm$svg$Svg$Attributes$fill(col),
 							$elm$svg$Svg$Attributes$fontSize('10'),
 							$elm$svg$Svg$Attributes$fontFamily('monospace')
@@ -7931,15 +7931,15 @@ var $elm$svg$Svg$g = $elm$svg$Svg$trustedNode('g');
 var $elm$core$Basics$sin = _Basics_sin;
 var $author$project$Main$posX = F2(
 	function (p, t) {
-		return (p.B * $elm$core$Basics$sin((p.q * t) + p.m)) * $author$project$Main$boxW;
+		return (p.C * $elm$core$Basics$sin((p.q * t) + p.m)) * $author$project$Main$boxW;
 	});
 var $author$project$Main$posY = F2(
 	function (p, t) {
-		return (p.C * $elm$core$Basics$sin(p.r * t)) * $author$project$Main$boxW;
+		return (p.D * $elm$core$Basics$sin(p.r * t)) * $author$project$Main$boxW;
 	});
 var $author$project$Main$lissajousPoints = function (model) {
 	var p = model.a;
-	var curT = model.F;
+	var curT = model.G;
 	if (curT <= 0.001) {
 		return _List_Nil;
 	} else {
@@ -7969,7 +7969,7 @@ var $author$project$Main$lissajousPoints = function (model) {
 var $elm$svg$Svg$Attributes$points = _VirtualDom_attribute('points');
 var $elm$svg$Svg$polyline = $elm$svg$Svg$trustedNode('polyline');
 var $author$project$Main$ptStr = function (p) {
-	return $author$project$Main$px(p.f) + (',' + $author$project$Main$px(p.g));
+	return $author$project$Main$px(p.b) + (',' + $author$project$Main$px(p.c));
 };
 var $author$project$Main$ptsToPolyline = function (pts) {
 	return A2(
@@ -8000,7 +8000,7 @@ var $author$project$Main$wavePoints = function (model) {
 		400,
 		2400,
 		$elm$core$Basics$round(((timeWindow * 2.0) * maxFreq) * 18.0));
-	var curT = model.F;
+	var curT = model.G;
 	var tMax = curT + timeWindow;
 	var tMin = curT - timeWindow;
 	var dt = (tMax - tMin) / steps;
@@ -8009,7 +8009,7 @@ var $author$project$Main$wavePoints = function (model) {
 		var sampleT = tMin + (i * dt);
 		var xVal = A2($author$project$Main$posX, p, sampleT);
 		var yVal = A2($author$project$Main$posY, p, sampleT);
-		var zVal = A5($author$project$Main$timeToZ, model.P, curT, sampleT, boxT, timeWindow);
+		var zVal = A5($author$project$Main$timeToZ, model.Q, curT, sampleT, boxT, timeWindow);
 		var ptYT = A2(
 			$author$project$Main$applyTransform,
 			model,
@@ -8061,13 +8061,13 @@ var $author$project$Main$renderCurvesAndCurrent = function (model) {
 				_List_fromArray(
 					[
 						$elm$svg$Svg$Attributes$x1(
-						$author$project$Main$px(p1.f)),
+						$author$project$Main$px(p1.b)),
 						$elm$svg$Svg$Attributes$y1(
-						$author$project$Main$px(p1.g)),
+						$author$project$Main$px(p1.c)),
 						$elm$svg$Svg$Attributes$x2(
-						$author$project$Main$px(p2.f)),
+						$author$project$Main$px(p2.b)),
 						$elm$svg$Svg$Attributes$y2(
-						$author$project$Main$px(p2.g)),
+						$author$project$Main$px(p2.c)),
 						$elm$svg$Svg$Attributes$stroke(col),
 						$elm$svg$Svg$Attributes$strokeWidth(
 						$author$project$Main$px(lw * 0.6)),
@@ -8084,16 +8084,16 @@ var $author$project$Main$renderCurvesAndCurrent = function (model) {
 				_List_fromArray(
 					[
 						$elm$svg$Svg$Attributes$cx(
-						$author$project$Main$px(p2d.f)),
+						$author$project$Main$px(p2d.b)),
 						$elm$svg$Svg$Attributes$cy(
-						$author$project$Main$px(p2d.g)),
+						$author$project$Main$px(p2d.c)),
 						$elm$svg$Svg$Attributes$r(
 						$author$project$Main$px(rad)),
 						$elm$svg$Svg$Attributes$fill(col)
 					]),
 				_List_Nil);
 		});
-	var curT = model.F;
+	var curT = model.G;
 	var curX = A2($author$project$Main$posX, p, curT);
 	var ptXTWall = A2(
 		$author$project$Main$applyTransform,
@@ -8126,11 +8126,10 @@ var $author$project$Main$renderCurvesAndCurrent = function (model) {
 					$author$project$Main$px(lw * 1.2)),
 					$elm$svg$Svg$Attributes$strokeOpacity('0.95')
 				]),
-			_List_Nil),
-			A3(dot, ptCurrent, '#ff4081', 3.0 + (lw * 1.5))
+			_List_Nil)
 		]) : _List_fromArray(
 		[
-			(model.V && (!$elm$core$List$isEmpty(lissPts))) ? A2(
+			(model.T && (!$elm$core$List$isEmpty(lissPts))) ? A2(
 			$elm$svg$Svg$polyline,
 			_List_fromArray(
 				[
@@ -8139,8 +8138,8 @@ var $author$project$Main$renderCurvesAndCurrent = function (model) {
 					$elm$svg$Svg$Attributes$fill('none'),
 					$elm$svg$Svg$Attributes$stroke('#00e5ff'),
 					$elm$svg$Svg$Attributes$strokeWidth(
-					$author$project$Main$px(lw * 0.9)),
-					$elm$svg$Svg$Attributes$strokeOpacity('0.85')
+					$author$project$Main$px(lw * 1.4)),
+					$elm$svg$Svg$Attributes$strokeOpacity('0.95')
 				]),
 			_List_Nil) : A2($elm$svg$Svg$g, _List_Nil, _List_Nil),
 			A2(
@@ -8150,10 +8149,12 @@ var $author$project$Main$renderCurvesAndCurrent = function (model) {
 					$elm$svg$Svg$Attributes$points(
 					$author$project$Main$ptsToPolyline(xtWallPts)),
 					$elm$svg$Svg$Attributes$fill('none'),
-					$elm$svg$Svg$Attributes$stroke('#ff9800'),
+					$elm$svg$Svg$Attributes$stroke(
+					model.y ? '#b86c00' : '#ff9800'),
 					$elm$svg$Svg$Attributes$strokeWidth(
 					$author$project$Main$px(lw * 0.9)),
-					$elm$svg$Svg$Attributes$strokeOpacity('0.85')
+					$elm$svg$Svg$Attributes$strokeOpacity(
+					model.y ? '0.6' : '0.85')
 				]),
 			_List_Nil),
 			A2(
@@ -8163,13 +8164,15 @@ var $author$project$Main$renderCurvesAndCurrent = function (model) {
 					$elm$svg$Svg$Attributes$points(
 					$author$project$Main$ptsToPolyline(ytWallPts)),
 					$elm$svg$Svg$Attributes$fill('none'),
-					$elm$svg$Svg$Attributes$stroke('#69f0ae'),
+					$elm$svg$Svg$Attributes$stroke(
+					model.y ? '#3f9c66' : '#69f0ae'),
 					$elm$svg$Svg$Attributes$strokeWidth(
 					$author$project$Main$px(lw * 0.9)),
-					$elm$svg$Svg$Attributes$strokeOpacity('0.85')
+					$elm$svg$Svg$Attributes$strokeOpacity(
+					model.y ? '0.6' : '0.85')
 				]),
 			_List_Nil),
-			model.W ? A2(
+			model.X ? A2(
 			$elm$svg$Svg$polyline,
 			_List_fromArray(
 				[
@@ -8191,123 +8194,214 @@ var $author$project$Main$renderCurvesAndCurrent = function (model) {
 };
 var $elm$svg$Svg$polygon = $elm$svg$Svg$trustedNode('polygon');
 var $author$project$Main$renderStage = function (model) {
-	if (model.s || (!model.X)) {
+	if (model.s) {
 		return _List_Nil;
 	} else {
-		var tMid1 = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, $author$project$Main$boxW, $author$project$Main$floorY, 0));
-		var tMid0 = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, -$author$project$Main$boxW, $author$project$Main$floorY, 0));
 		var polygonStr = function (pts) {
 			return A2(
 				$elm$core$String$join,
 				' ',
 				A2($elm$core$List$map, $author$project$Main$ptStr, pts));
 		};
+		var lissajousPlaneSvg = function () {
+			if (!model.T) {
+				return _List_Nil;
+			} else {
+				var yMid1 = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, 0, $author$project$Main$floorY, 0));
+				var yMid0 = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, 0, -$author$project$Main$boxW, 0));
+				var xMid1 = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, $author$project$Main$boxW, 0, 0));
+				var xMid0 = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, -$author$project$Main$boxW, 0, 0));
+				var lis_pX_pY = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, $author$project$Main$boxW, $author$project$Main$floorY, 0));
+				var lis_pX_mY = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, $author$project$Main$boxW, -$author$project$Main$boxW, 0));
+				var lis_mX_pY = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, -$author$project$Main$boxW, $author$project$Main$floorY, 0));
+				var lis_mX_mY = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, -$author$project$Main$boxW, -$author$project$Main$boxW, 0));
+				return _List_fromArray(
+					[
+						A2(
+						$elm$svg$Svg$polygon,
+						_List_fromArray(
+							[
+								$elm$svg$Svg$Attributes$points(
+								polygonStr(
+									_List_fromArray(
+										[lis_mX_mY, lis_pX_mY, lis_pX_pY, lis_mX_pY]))),
+								$elm$svg$Svg$Attributes$fill('#00e5ff07'),
+								$elm$svg$Svg$Attributes$stroke('#00e5ff24'),
+								$elm$svg$Svg$Attributes$strokeWidth('1')
+							]),
+						_List_Nil),
+						A2(
+						$elm$svg$Svg$line,
+						_List_fromArray(
+							[
+								$elm$svg$Svg$Attributes$x1(
+								$author$project$Main$px(xMid0.b)),
+								$elm$svg$Svg$Attributes$y1(
+								$author$project$Main$px(xMid0.c)),
+								$elm$svg$Svg$Attributes$x2(
+								$author$project$Main$px(xMid1.b)),
+								$elm$svg$Svg$Attributes$y2(
+								$author$project$Main$px(xMid1.c)),
+								$elm$svg$Svg$Attributes$stroke('#00e5ff18')
+							]),
+						_List_Nil),
+						A2(
+						$elm$svg$Svg$line,
+						_List_fromArray(
+							[
+								$elm$svg$Svg$Attributes$x1(
+								$author$project$Main$px(yMid0.b)),
+								$elm$svg$Svg$Attributes$y1(
+								$author$project$Main$px(yMid0.c)),
+								$elm$svg$Svg$Attributes$x2(
+								$author$project$Main$px(yMid1.b)),
+								$elm$svg$Svg$Attributes$y2(
+								$author$project$Main$px(yMid1.c)),
+								$elm$svg$Svg$Attributes$stroke('#00e5ff18')
+							]),
+						_List_Nil)
+					]);
+			}
+		}();
 		var boxT = $author$project$Main$calcBoxT(model.t);
-		var f_mX_mT = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, -$author$project$Main$boxW, $author$project$Main$floorY, -boxT));
-		var f_mX_pT = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, -$author$project$Main$boxW, $author$project$Main$floorY, boxT));
-		var f_pX_mT = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, $author$project$Main$boxW, $author$project$Main$floorY, -boxT));
-		var f_pX_pT = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, $author$project$Main$boxW, $author$project$Main$floorY, boxT));
-		var w_mY_mT = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, $author$project$Main$sideWallX, -$author$project$Main$boxW, -boxT));
-		var w_mY_pT = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, $author$project$Main$sideWallX, -$author$project$Main$boxW, boxT));
-		var w_pY_mT = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, $author$project$Main$sideWallX, $author$project$Main$floorY, -boxT));
-		var w_pY_pT = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, $author$project$Main$sideWallX, $author$project$Main$floorY, boxT));
-		var xMid0 = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, 0, $author$project$Main$floorY, -boxT));
-		var xMid1 = A2(
-			$author$project$Main$applyTransform,
-			model,
-			A3($author$project$Main$Point3D, 0, $author$project$Main$floorY, boxT));
-		return _List_fromArray(
-			[
-				A2(
-				$elm$svg$Svg$polygon,
-				_List_fromArray(
+		var wallsSvg = function () {
+			if (!model.y) {
+				return _List_Nil;
+			} else {
+				var xMid1 = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, 0, $author$project$Main$floorY, boxT));
+				var xMid0 = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, 0, $author$project$Main$floorY, -boxT));
+				var w_pY_pT = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, $author$project$Main$sideWallX, $author$project$Main$floorY, boxT));
+				var w_pY_mT = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, $author$project$Main$sideWallX, $author$project$Main$floorY, -boxT));
+				var w_mY_pT = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, $author$project$Main$sideWallX, -$author$project$Main$boxW, boxT));
+				var w_mY_mT = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, $author$project$Main$sideWallX, -$author$project$Main$boxW, -boxT));
+				var tMid1 = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, $author$project$Main$boxW, $author$project$Main$floorY, 0));
+				var tMid0 = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, -$author$project$Main$boxW, $author$project$Main$floorY, 0));
+				var f_pX_pT = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, $author$project$Main$boxW, $author$project$Main$floorY, boxT));
+				var f_pX_mT = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, $author$project$Main$boxW, $author$project$Main$floorY, -boxT));
+				var f_mX_pT = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, -$author$project$Main$boxW, $author$project$Main$floorY, boxT));
+				var f_mX_mT = A2(
+					$author$project$Main$applyTransform,
+					model,
+					A3($author$project$Main$Point3D, -$author$project$Main$boxW, $author$project$Main$floorY, -boxT));
+				return _List_fromArray(
 					[
-						$elm$svg$Svg$Attributes$points(
-						polygonStr(
-							_List_fromArray(
-								[f_mX_mT, f_pX_mT, f_pX_pT, f_mX_pT]))),
-						$elm$svg$Svg$Attributes$fill('#ff980006'),
-						$elm$svg$Svg$Attributes$stroke('#ff980020'),
-						$elm$svg$Svg$Attributes$strokeWidth('1')
-					]),
-				_List_Nil),
-				A2(
-				$elm$svg$Svg$polygon,
-				_List_fromArray(
-					[
-						$elm$svg$Svg$Attributes$points(
-						polygonStr(
-							_List_fromArray(
-								[w_mY_mT, w_pY_mT, w_pY_pT, w_mY_pT]))),
-						$elm$svg$Svg$Attributes$fill('#69f0ae06'),
-						$elm$svg$Svg$Attributes$stroke('#69f0ae20'),
-						$elm$svg$Svg$Attributes$strokeWidth('1')
-					]),
-				_List_Nil),
-				A2(
-				$elm$svg$Svg$line,
-				_List_fromArray(
-					[
-						$elm$svg$Svg$Attributes$x1(
-						$author$project$Main$px(tMid0.f)),
-						$elm$svg$Svg$Attributes$y1(
-						$author$project$Main$px(tMid0.g)),
-						$elm$svg$Svg$Attributes$x2(
-						$author$project$Main$px(tMid1.f)),
-						$elm$svg$Svg$Attributes$y2(
-						$author$project$Main$px(tMid1.g)),
-						$elm$svg$Svg$Attributes$stroke('#ffffff18')
-					]),
-				_List_Nil),
-				A2(
-				$elm$svg$Svg$line,
-				_List_fromArray(
-					[
-						$elm$svg$Svg$Attributes$x1(
-						$author$project$Main$px(xMid0.f)),
-						$elm$svg$Svg$Attributes$y1(
-						$author$project$Main$px(xMid0.g)),
-						$elm$svg$Svg$Attributes$x2(
-						$author$project$Main$px(xMid1.f)),
-						$elm$svg$Svg$Attributes$y2(
-						$author$project$Main$px(xMid1.g)),
-						$elm$svg$Svg$Attributes$stroke('#ffffff18')
-					]),
-				_List_Nil)
-			]);
+						A2(
+						$elm$svg$Svg$polygon,
+						_List_fromArray(
+							[
+								$elm$svg$Svg$Attributes$points(
+								polygonStr(
+									_List_fromArray(
+										[f_mX_mT, f_pX_mT, f_pX_pT, f_mX_pT]))),
+								$elm$svg$Svg$Attributes$fill('#ff980006'),
+								$elm$svg$Svg$Attributes$stroke('#ff980020'),
+								$elm$svg$Svg$Attributes$strokeWidth('1')
+							]),
+						_List_Nil),
+						A2(
+						$elm$svg$Svg$polygon,
+						_List_fromArray(
+							[
+								$elm$svg$Svg$Attributes$points(
+								polygonStr(
+									_List_fromArray(
+										[w_mY_mT, w_pY_mT, w_pY_pT, w_mY_pT]))),
+								$elm$svg$Svg$Attributes$fill('#69f0ae06'),
+								$elm$svg$Svg$Attributes$stroke('#69f0ae20'),
+								$elm$svg$Svg$Attributes$strokeWidth('1')
+							]),
+						_List_Nil),
+						A2(
+						$elm$svg$Svg$line,
+						_List_fromArray(
+							[
+								$elm$svg$Svg$Attributes$x1(
+								$author$project$Main$px(tMid0.b)),
+								$elm$svg$Svg$Attributes$y1(
+								$author$project$Main$px(tMid0.c)),
+								$elm$svg$Svg$Attributes$x2(
+								$author$project$Main$px(tMid1.b)),
+								$elm$svg$Svg$Attributes$y2(
+								$author$project$Main$px(tMid1.c)),
+								$elm$svg$Svg$Attributes$stroke('#ffffff18')
+							]),
+						_List_Nil),
+						A2(
+						$elm$svg$Svg$line,
+						_List_fromArray(
+							[
+								$elm$svg$Svg$Attributes$x1(
+								$author$project$Main$px(xMid0.b)),
+								$elm$svg$Svg$Attributes$y1(
+								$author$project$Main$px(xMid0.c)),
+								$elm$svg$Svg$Attributes$x2(
+								$author$project$Main$px(xMid1.b)),
+								$elm$svg$Svg$Attributes$y2(
+								$author$project$Main$px(xMid1.c)),
+								$elm$svg$Svg$Attributes$stroke('#ffffff18')
+							]),
+						_List_Nil)
+					]);
+			}
+		}();
+		return _Utils_ap(wallsSvg, lissajousPlaneSvg);
 	}
 };
 var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
@@ -8557,7 +8651,7 @@ var $author$project$Main$viewTabCamera = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A3($author$project$Main$toggleBtn, '遠近感 (Perspective)', model.Q, $author$project$Main$TogglePerspective)
+						A3($author$project$Main$toggleBtn, '遠近感 (Perspective)', model.R, $author$project$Main$TogglePerspective)
 					])),
 				A8(
 				$author$project$Main$sliderWithButtons,
@@ -8566,8 +8660,8 @@ var $author$project$Main$viewTabCamera = function (model) {
 				'-3.14',
 				'3.14',
 				'0.01',
-				model.y,
-				$author$project$Main$fmtF(model.y),
+				model.z,
+				$author$project$Main$fmtF(model.z),
 				$author$project$Main$SetRotateX),
 				A8(
 				$author$project$Main$sliderWithButtons,
@@ -8576,8 +8670,8 @@ var $author$project$Main$viewTabCamera = function (model) {
 				'-3.14',
 				'3.14',
 				'0.01',
-				model.z,
-				$author$project$Main$fmtF(model.z),
+				model.A,
+				$author$project$Main$fmtF(model.A),
 				$author$project$Main$SetRotateY),
 				A8(
 				$author$project$Main$sliderWithButtons,
@@ -8586,8 +8680,8 @@ var $author$project$Main$viewTabCamera = function (model) {
 				'-3.14',
 				'3.14',
 				'0.01',
-				model.A,
-				$author$project$Main$fmtF(model.A),
+				model.B,
+				$author$project$Main$fmtF(model.B),
 				$author$project$Main$SetRotateZ),
 				A8(
 				$author$project$Main$sliderWithButtons,
@@ -8599,7 +8693,7 @@ var $author$project$Main$viewTabCamera = function (model) {
 				model.k,
 				$author$project$Main$fmtF(model.k),
 				$author$project$Main$SetScale),
-				model.Q ? A8(
+				model.R ? A8(
 				$author$project$Main$sliderWithButtons,
 				'pers',
 				11,
@@ -8765,8 +8859,8 @@ var $author$project$Main$viewTabDisplay = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A3($author$project$Main$toggleBtn, 'T軸方向反転', model.P, $author$project$Main$ToggleInvertT),
-						A3($author$project$Main$toggleBtn, '3D空間曲線', model.W, $author$project$Main$ToggleSpaceCurve)
+						A3($author$project$Main$toggleBtn, 'T軸方向反転', model.Q, $author$project$Main$ToggleInvertT),
+						A3($author$project$Main$toggleBtn, '3D空間曲線', model.X, $author$project$Main$ToggleSpaceCurve)
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -8778,8 +8872,8 @@ var $author$project$Main$viewTabDisplay = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A3($author$project$Main$toggleBtn, '壁・床面', model.X, $author$project$Main$ToggleWalls),
-						A3($author$project$Main$toggleBtn, 'リサジュー面', model.V, $author$project$Main$ToggleLissajous)
+						A3($author$project$Main$toggleBtn, '壁・床面', model.y, $author$project$Main$ToggleWalls),
+						A3($author$project$Main$toggleBtn, 'リサジュー面', model.T, $author$project$Main$ToggleLissajous)
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -8790,7 +8884,7 @@ var $author$project$Main$viewTabDisplay = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A3($author$project$Main$toggleBtn, '座標軸', model.U, $author$project$Main$ToggleAxes)
+						A3($author$project$Main$toggleBtn, '座標軸', model.W, $author$project$Main$ToggleAxes)
 					]))
 			]));
 };
@@ -8918,8 +9012,8 @@ var $author$project$Main$viewTabParams = function (model) {
 				'0.1',
 				'1',
 				'0.05',
-				p.B,
-				$author$project$Main$fmtF(p.B),
+				p.C,
+				$author$project$Main$fmtF(p.C),
 				$author$project$Main$SetAmpX),
 				A8(
 				$author$project$Main$sliderWithButtons,
@@ -8928,8 +9022,8 @@ var $author$project$Main$viewTabParams = function (model) {
 				'0.1',
 				'1',
 				'0.05',
-				p.C,
-				$author$project$Main$fmtF(p.C),
+				p.D,
+				$author$project$Main$fmtF(p.D),
 				$author$project$Main$SetAmpY),
 				A8(
 				$author$project$Main$sliderWithButtons,
@@ -8938,8 +9032,8 @@ var $author$project$Main$viewTabParams = function (model) {
 				'0.1',
 				'3',
 				'0.1',
-				p.E,
-				$author$project$Main$fmtF(p.E),
+				p.F,
+				$author$project$Main$fmtF(p.F),
 				$author$project$Main$SetSpeed),
 				A8(
 				$author$project$Main$sliderWithButtons,
@@ -8967,16 +9061,16 @@ var $author$project$Main$renderControls = function (model) {
 						A2(
 						$elm$html$Html$Attributes$style,
 						'background',
-						_Utils_eq(model.L, tabType) ? '#152535' : '#0d0d16'),
+						_Utils_eq(model.M, tabType) ? '#152535' : '#0d0d16'),
 						A2(
 						$elm$html$Html$Attributes$style,
 						'color',
-						_Utils_eq(model.L, tabType) ? '#00e5ff' : '#666'),
+						_Utils_eq(model.M, tabType) ? '#00e5ff' : '#666'),
 						A2($elm$html$Html$Attributes$style, 'border', 'none'),
 						A2(
 						$elm$html$Html$Attributes$style,
 						'border-bottom',
-						_Utils_eq(model.L, tabType) ? '2px solid #00e5ff' : '2px solid transparent'),
+						_Utils_eq(model.M, tabType) ? '2px solid #00e5ff' : '2px solid transparent'),
 						A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
 						A2($elm$html$Html$Attributes$style, 'font-family', 'monospace'),
 						A2($elm$html$Html$Attributes$style, 'font-size', '11px')
@@ -9022,7 +9116,7 @@ var $author$project$Main$renderControls = function (model) {
 				_List_fromArray(
 					[
 						function () {
-						var _v0 = model.L;
+						var _v0 = model.M;
 						switch (_v0) {
 							case 0:
 								return $author$project$Main$viewTabParams(model);

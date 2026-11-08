@@ -48,8 +48,8 @@ const contents = [
     title: "Notes & Documents",
     items: [
       {
-        title: "リサジュー図形を眺める",
-        description: "SVGで動くリサジュー図形を眺める。",
+        title: "リサジュー図形シミュレーター",
+        description: "リサジュー図形の仕組みを視覚的に理解する。",
         url: "./Lissajousgraph/",
         // thumbnail: "./images/notes-design.png"
       },

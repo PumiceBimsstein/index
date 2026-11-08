@@ -5170,7 +5170,7 @@ var $elm$json$Json$Encode$string = _Json_wrap;
 var $author$project$Main$exportSvg = _Platform_outgoingPort('exportSvg', $elm$json$Json$Encode$string);
 var $elm$browser$Browser$Dom$getViewport = _Browser_withWindow(_Browser_getViewport);
 var $author$project$Types$Batch = 1;
-var $author$project$Types$Drag3D = 0;
+var $author$project$Types$Drag4D = 1;
 var $author$project$Types$Idle = {$: 0};
 var $author$project$Types$SpectrumW = 0;
 var $author$project$Types$TabCurve = 0;
@@ -5218,31 +5218,31 @@ var $author$project$Lissajous4D$batchTrail = F3(
 			},
 			A2($elm$core$List$range, 0, n));
 	});
-var $author$project$Lissajous4D$defaultParams = {T: 3.0, ad: 1.0, ae: 1.0, af: 1.0, ag: 1.0, U: 2.0, V: 5.0, W: 4.0, aj: 1.0, am: 0.0, ap: 0.0, aE: 0.5};
+var $author$project$Lissajous4D$defaultParams = {T: 4.1, ad: 1.0, ae: 1.0, af: 1.0, ag: 1.0, U: 4.2, V: 4.3, W: 4.2, aj: 1.0, am: 0.0, ap: 0.03, aE: 0.5};
 var $author$project$Matrix4D$identity = {f: 1, j: 0, k: 0, l: 0, m: 0, g: 1, n: 0, o: 0, p: 0, q: 0, h: 1, r: 0, s: 0, t: 0, u: 0, i: 1};
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Update$init = function (_v0) {
-	var t = 40.0;
+	var t = 80.0;
 	var p = $author$project$Lissajous4D$defaultParams;
 	var dt = 0.02;
 	return _Utils_Tuple2(
 		{
 			aT: 0,
-			aV: {aS: false, aO: 1.0, bH: true, bI: false, bJ: false, bL: false, bM: false, bO: true},
+			aV: {aS: true, aO: 1.0, bH: true, bI: false, bJ: false, bL: false, bM: true, bO: true},
 			aW: dt,
 			aX: t,
 			a_: 0,
-			a2: 0,
+			a2: 1,
 			ak: $author$project$Types$Idle,
 			a3: 1,
 			aq: $elm$core$Maybe$Nothing,
-			aC: false,
+			aC: true,
 			bi: p,
 			bj: 600.0,
 			bk: 2.8,
 			bm: true,
 			bn: 0.7,
-			bo: true,
+			bo: false,
 			aO: 1.0,
 			bp: 1.4,
 			bs: 0.0,
@@ -7722,7 +7722,7 @@ var $author$project$View$Canvas$viewCanvas = function (model) {
 				$author$project$View$Canvas$viewFormulaMathML
 			]));
 };
-var $author$project$Types$Drag4D = 1;
+var $author$project$Types$Drag3D = 0;
 var $author$project$Types$DragRoll = 2;
 var $author$project$Types$PlaneXW = 3;
 var $author$project$Types$PlaneXY = 0;
