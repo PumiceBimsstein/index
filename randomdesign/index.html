@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-theme="modern">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>個人サイト用プロンプト ランダム生成ジェネレーター</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <!-- ★ id="themeLink" を付与（JSでここを差し替えます） -->
-  <link id="themeLink" rel="stylesheet" href="style.css">
-
-  <!-- テーマ切り替えUIの共通スタイル（テーマCSSの差し替え対象外・CSS変数で各テーマに追従） -->
-  <link rel="stylesheet" href="theme-switcher.css">
+  <!-- CSSを1本に統合 -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ★ 右上に表示されるテーマ切り替えドロップダウン -->
+<!-- 右上に表示されるテーマ切り替えドロップダウン -->
 <div class="theme-switcher-wrapper" data-tooltip="作成例">
   <label for="themeSwitcherSelect">THEME:</label>
   <select id="themeSwitcherSelect" aria-label="テーマ切り替え（作成例）">
@@ -96,7 +93,6 @@
 
 <script src="design-sets.js"></script>
 <script src="app.js"></script>
-<!-- ★ テーマスイッチャー用スクリプトを読み込み -->
 <script src="theme-switcher.js"></script>
 </body>
 </html>

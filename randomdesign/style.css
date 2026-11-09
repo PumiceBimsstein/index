@@ -1,236 +1,129 @@
-:root {
+@charset "UTF-8";
+
+/* ==========================================================
+   外部通信（Google Fonts）は完全撤廃し、すべて内蔵フォントで表示
+   ========================================================== */
+
+/* ==========================================================
+   共通基盤スタイル
+   ========================================================== */
+* {
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   テーマ切り替えUI（共通パーツ・CSS変数で各テーマに追従）
+   ========================================================== */
+.theme-switcher-wrapper {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 6px;
+  background: var(--switcher-bg, rgba(255, 255, 255, 0.92));
+  -webkit-backdrop-filter: var(--switcher-blur, blur(4px));
+  backdrop-filter: var(--switcher-blur, blur(4px));
+  border: var(--switcher-border, 1px solid #bbb);
+  border-radius: var(--switcher-radius, 0);
+  box-shadow: var(--switcher-shadow, 0 1px 4px rgba(0, 0, 0, 0.12));
+  font-family: var(--switcher-font, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  font-size: 11px;
+  line-height: 1;
+  user-select: none;
+}
+
+.theme-switcher-wrapper label {
+  margin: 0;
+  color: var(--switcher-color, #333);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+
+.theme-switcher-wrapper select#themeSwitcherSelect {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  height: 22px;
+  line-height: 20px;
+  font-size: 11px;
+  
+  margin: 0;
+  padding: 0 16px 0 6px;
+  border: var(--switcher-select-border, 1px solid #ccc);
+  border-radius: var(--switcher-select-radius, 0);
+  background-color: var(--switcher-select-bg, #fff);
+  color: var(--switcher-select-color, #111);
+  
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'><polygon points='0,0 8,0 4,5' fill='%23555'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+  cursor: pointer;
+}
+
+.theme-switcher-wrapper select#themeSwitcherSelect:focus,
+.theme-switcher-wrapper select#themeSwitcherSelect:focus-visible {
+  border-color: var(--switcher-accent, #1f5eff);
+  outline: 1px solid var(--switcher-accent, #1f5eff);
+  outline-offset: 1px;
+}
+
+.theme-switcher-wrapper select option {
+  background: var(--switcher-select-bg, #fff);
+  color: var(--switcher-select-color, #111);
+}
+
+.theme-switcher-wrapper::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  padding: 3px 10px;
+  white-space: nowrap;
+  color: var(--switcher-tip-color, #fff);
+  background: var(--switcher-tip-bg, #222);
+  border: var(--switcher-tip-border, 1px solid transparent);
+  border-radius: var(--switcher-tip-radius, 0);
+  box-shadow: var(--switcher-tip-shadow, 0 2px 6px rgba(0, 0, 0, 0.25));
+  font-size: 11px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-3px);
+  transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+  pointer-events: none;
+}
+
+.theme-switcher-wrapper:hover::after,
+.theme-switcher-wrapper:has(select:focus-visible)::after {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switcher-wrapper::after { transition: none; }
+}
+
+
+/* ==========================================================
+   THEME 1: モダンミニマリズム (modern)
+   ========================================================== */
+html[data-theme="modern"] {
   --paper: #ffffff;
   --ink: #111111;
   --ink-soft: #5a5a5a;
   --rule: #d8d8d8;
   --accent: #1f5eff;
   --mono: "SF Mono", "Menlo", "Consolas", "Liberation Mono", "Courier New", monospace;
-  --sans: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
-}
+  --sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
 
-* { box-sizing: border-box; }
-
-body {
-  font-family: var(--sans);
-  background: var(--paper);
-  color: var(--ink);
-  line-height: 1.9;
-  margin: 0;
-  padding: 5rem 1.5rem 6rem;
-  -webkit-font-smoothing: antialiased;
-}
-
-.container {
-  max-width: 680px;
-  margin: 0 auto;
-}
-
-h1 {
-  font-family: var(--mono);
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  margin: 0 0 0.75rem;
-}
-
-.desc {
-  color: var(--ink-soft);
-  font-size: 0.9rem;
-  margin: 0 0 2.5rem;
-}
-
-/* 一括選択パネル */
-.set-selector-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1.25rem;
-  background: #f8f8f8;
-  border: 1px solid var(--rule);
-  margin-bottom: 2rem;
-}
-
-.panel-label {
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--ink-soft);
-}
-
-select {
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  padding: 0.6rem 0.8rem;
-  border: 1px solid var(--rule);
-  background: var(--paper);
-  color: var(--ink);
-  border-radius: 0;
-  cursor: pointer;
-  outline: none;
-}
-
-select:focus {
-  border-color: var(--ink);
-}
-
-.action-panel {
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 3.5rem;
-}
-
-button {
-  font-family: var(--mono);
-  font-size: 0.85rem;
-  cursor: pointer;
-  border-radius: 0;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-button.primary {
-  flex: 2;
-  background: var(--paper);
-  color: var(--ink);
-  border: 1px solid var(--ink);
-  padding: 0.8rem 1.2rem;
-  font-weight: 600;
-}
-
-button.primary:hover {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-button.secondary {
-  flex: 1;
-  background: var(--paper);
-  color: var(--ink-soft);
-  border: 1px solid var(--rule);
-  padding: 0.8rem 1.2rem;
-}
-
-button.secondary:hover {
-  color: var(--ink);
-  border-color: var(--ink);
-}
-
-button:focus-visible, select:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.parts-grid {
-  display: block;
-  margin-bottom: 4rem;
-}
-
-.part-card {
-  border-top: 1px solid var(--rule);
-  padding: 1.75rem 0 2rem;
-}
-
-.part-card:last-child {
-  border-bottom: 1px solid var(--rule);
-}
-
-.part-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
-.part-title {
-  font-family: var(--mono);
-  font-weight: 600;
-  font-size: 0.85rem;
-  color: var(--accent);
-  letter-spacing: 0.02em;
-}
-
-.part-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.part-select {
-  font-size: 0.8rem;
-  padding: 0.3rem 0.5rem;
-  max-width: 190px;
-}
-
-.reroll-btn {
-  background: none;
-  border: none;
-  padding: 0.2rem 0;
-  font-size: 0.75rem;
-  color: var(--ink-soft);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: var(--rule);
-}
-
-.reroll-btn:hover {
-  color: var(--ink);
-  text-decoration-color: var(--ink);
-}
-
-.part-text {
-  font-size: 0.95rem;
-  margin: 0;
-  min-height: 3.5em;
-  color: var(--ink);
-}
-
-.result-box {
-  border-top: 1px solid var(--ink);
-  padding-top: 1.5rem;
-}
-
-.result-box label {
-  display: block;
-  font-family: var(--mono);
-  font-weight: 600;
-  font-size: 0.8rem;
-  color: var(--ink-soft);
-  margin-bottom: 1rem;
-}
-
-textarea {
-  width: 100%;
-  height: 220px;
-  box-sizing: border-box;
-  border: 1px solid var(--rule);
-  border-radius: 0;
-  padding: 1rem;
-  font-size: 0.9rem;
-  line-height: 1.8;
-  font-family: var(--sans);
-  resize: vertical;
-  background: var(--paper);
-  color: var(--ink);
-}
-
-textarea:focus {
-  outline: none;
-  border-color: var(--ink);
-}
-
-@media (max-width: 540px) {
-  body { padding: 3rem 1.25rem 4rem; }
-  .action-panel { flex-direction: column; }
-  .part-header { flex-direction: column; align-items: flex-start; }
-  .part-controls { width: 100%; justify-content: space-between; }
-  .part-select { flex: 1; max-width: none; }
-}
-
-/* ==========================================================
-   テーマ切り替えUI（theme-switcher.css の変数を上書き）
-   ========================================================== */
-:root {
   --switcher-bg: rgba(255, 255, 255, 0.95);
   --switcher-blur: none;
   --switcher-border: 1px solid var(--ink);
@@ -248,4 +141,1897 @@ textarea:focus {
   --switcher-tip-border: 1px solid var(--ink);
   --switcher-tip-radius: 0;
   --switcher-tip-shadow: none;
+
+  background: var(--paper);
+}
+
+html[data-theme="modern"] body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.9;
+  margin: 0;
+  padding: 5rem 1.5rem 6rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+html[data-theme="modern"] .container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+html[data-theme="modern"] h1 {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.75rem;
+}
+
+html[data-theme="modern"] .desc {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0 0 2.5rem;
+}
+
+html[data-theme="modern"] .set-selector-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  background: #f8f8f8;
+  border: 1px solid var(--rule);
+  margin-bottom: 2rem;
+}
+
+html[data-theme="modern"] .panel-label {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+html[data-theme="modern"] select {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+html[data-theme="modern"] select:focus {
+  border-color: var(--ink);
+}
+
+html[data-theme="modern"] .action-panel {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 3.5rem;
+}
+
+html[data-theme="modern"] button {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+html[data-theme="modern"] button.primary {
+  flex: 2;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 0.8rem 1.2rem;
+  font-weight: 600;
+}
+
+html[data-theme="modern"] button.primary:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+html[data-theme="modern"] button.secondary {
+  flex: 1;
+  background: var(--paper);
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  padding: 0.8rem 1.2rem;
+}
+
+html[data-theme="modern"] button.secondary:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+html[data-theme="modern"] button:focus-visible,
+html[data-theme="modern"] select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+html[data-theme="modern"] .parts-grid {
+  display: block;
+  margin-bottom: 4rem;
+}
+
+html[data-theme="modern"] .part-card {
+  border-top: 1px solid var(--rule);
+  padding: 1.75rem 0 2rem;
+}
+
+html[data-theme="modern"] .part-card:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+html[data-theme="modern"] .part-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+html[data-theme="modern"] .part-title {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+html[data-theme="modern"] .part-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+html[data-theme="modern"] .part-select {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.5rem;
+  max-width: 190px;
+}
+
+html[data-theme="modern"] .reroll-btn {
+  background: none;
+  border: none;
+  padding: 0.2rem 0;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--rule);
+}
+
+html[data-theme="modern"] .reroll-btn:hover {
+  color: var(--ink);
+  text-decoration-color: var(--ink);
+}
+
+html[data-theme="modern"] .part-text {
+  font-size: 0.95rem;
+  margin: 0;
+  min-height: 3.5em;
+  color: var(--ink);
+}
+
+html[data-theme="modern"] .result-box {
+  border-top: 1px solid var(--ink);
+  padding-top: 1.5rem;
+}
+
+html[data-theme="modern"] .result-box label {
+  display: block;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+html[data-theme="modern"] textarea {
+  width: 100%;
+  height: 220px;
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  padding: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  font-family: var(--sans);
+  resize: vertical;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+html[data-theme="modern"] textarea:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+@media (max-width: 540px) {
+  html[data-theme="modern"] body { padding: 3rem 1.25rem 4rem; }
+  html[data-theme="modern"] .action-panel { flex-direction: column; }
+  html[data-theme="modern"] .part-header { flex-direction: column; align-items: flex-start; }
+  html[data-theme="modern"] .part-controls { width: 100%; justify-content: space-between; }
+  html[data-theme="modern"] .part-select { flex: 1; max-width: none; }
+}
+
+
+/* ==========================================================
+   THEME 2: 大正浪漫 (taisho-roman)
+   ========================================================== */
+html[data-theme="taisho-roman"] {
+  --wine-red: #681a24;
+  --wine-deep: #470e16;
+  --amber: #c57d2b;
+  --amber-soft: rgba(197, 125, 43, 0.15);
+  --cream-paper: #f8f3e8;
+  --cream-card: #fffdf8;
+  --navy-japan: #182236;
+  --gold-tarnish: #bba061;
+  --gold-border: #9e8346;
+  --wood-antique: #2c1a16;
+
+  /* 内蔵明朝体・セリフフォント */
+  --font-mincho: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "BIZ UDPMincho", "MS P明朝", serif;
+  --font-gothic: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --font-classic-serif: "Georgia", "Baskerville", "Palatino", "Times New Roman", serif;
+
+  --switcher-bg: var(--cream-paper);
+  --switcher-blur: none;
+  --switcher-border: 1px solid var(--gold-border);
+  --switcher-radius: 0;
+  --switcher-shadow: 0 2px 8px rgba(44, 26, 22, 0.2);
+  --switcher-font: var(--font-mincho);
+  --switcher-color: var(--wine-red);
+  --switcher-select-bg: var(--cream-card);
+  --switcher-select-color: var(--wood-antique);
+  --switcher-select-border: 1px solid var(--gold-border);
+  --switcher-select-radius: 0;
+  --switcher-accent: var(--wine-red);
+  --switcher-tip-bg: var(--wine-red);
+  --switcher-tip-color: #fff9f0;
+  --switcher-tip-border: 1px solid var(--wine-deep);
+  --switcher-tip-radius: 0;
+  --switcher-tip-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+html[data-theme="taisho-roman"] body {
+  font-family: var(--font-gothic);
+  background-color: #ede4d1;
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(104, 26, 36, 0.08), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(24, 34, 54, 0.12), transparent 45%),
+    linear-gradient(135deg, rgba(187, 160, 97, 0.08) 25%, transparent 25%),
+    linear-gradient(225deg, rgba(187, 160, 97, 0.08) 25%, transparent 25%),
+    linear-gradient(315deg, rgba(187, 160, 97, 0.08) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(187, 160, 97, 0.08) 25%, transparent 25%);
+  background-size: 100% 100%, 100% 100%, 28px 28px, 28px 28px, 28px 28px, 28px 28px;
+  background-position: center, center, 0 14px, 14px 14px, 14px 0, 0 0;
+  background-attachment: fixed;
+  color: var(--wood-antique);
+  line-height: 1.9;
+  margin: 0;
+  padding: 4rem 1.5rem 6rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+html[data-theme="taisho-roman"] .container {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--cream-card);
+  border: 4px double var(--gold-border);
+  outline: 1px solid var(--wine-red);
+  outline-offset: -10px;
+  box-shadow: 
+    0 16px 40px rgba(44, 26, 22, 0.22),
+    inset 0 0 50px rgba(197, 125, 43, 0.06);
+  padding: 3.5rem 2.8rem;
+  position: relative;
+}
+
+html[data-theme="taisho-roman"] .container::before {
+  content: "— MODERNISME TAISHO ROMANCA —";
+  display: block;
+  font-family: var(--font-classic-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--gold-border);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(187, 160, 97, 0.35);
+}
+
+html[data-theme="taisho-roman"] h1 {
+  font-family: var(--font-mincho);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--wine-red);
+  text-align: center;
+  margin: 0 0 0.4rem;
+}
+
+html[data-theme="taisho-roman"] .desc {
+  font-family: var(--font-gothic);
+  text-align: center;
+  color: var(--navy-japan);
+  font-size: 0.88rem;
+  margin: 0 0 2.5rem;
+  padding-bottom: 1.25rem;
+  background-image: 
+    radial-gradient(circle, var(--wine-red) 2px, transparent 2px),
+    linear-gradient(to right, transparent, var(--gold-border), transparent);
+  background-size: 12px 12px, 70% 1px;
+  background-position: center bottom, center bottom;
+  background-repeat: no-repeat;
+}
+
+html[data-theme="taisho-roman"] .set-selector-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--cream-paper);
+  border: 1px solid var(--gold-border);
+  border-left: 6px solid var(--wine-red);
+  border-right: 6px solid var(--navy-japan);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+html[data-theme="taisho-roman"] .panel-label {
+  font-family: var(--font-mincho);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy-japan);
+  letter-spacing: 0.08em;
+}
+
+html[data-theme="taisho-roman"] select {
+  font-family: var(--font-gothic);
+  font-size: 0.9rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--cream-card);
+  color: var(--wood-antique);
+  border: 1px solid var(--gold-border);
+  border-radius: 0;
+  cursor: pointer;
+}
+
+html[data-theme="taisho-roman"] select:focus {
+  outline: none;
+  border-color: var(--wine-red);
+  box-shadow: 0 0 6px rgba(104, 26, 36, 0.25);
+}
+
+html[data-theme="taisho-roman"] .action-panel {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+html[data-theme="taisho-roman"] button {
+  font-family: var(--font-mincho);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.25s ease;
+}
+
+html[data-theme="taisho-roman"] button.primary {
+  flex: 2;
+  background: var(--wine-red);
+  color: #fff9f0;
+  border: 1px solid var(--wine-deep);
+  padding: 0.85rem 1.4rem;
+  box-shadow: 0 3px 6px rgba(104, 26, 36, 0.25);
+}
+
+html[data-theme="taisho-roman"] button.primary:hover {
+  background: var(--wine-deep);
+  box-shadow: 0 0 10px rgba(197, 125, 43, 0.5);
+}
+
+html[data-theme="taisho-roman"] button.secondary {
+  flex: 1;
+  background: var(--cream-paper);
+  color: var(--navy-japan);
+  border: 1px solid var(--navy-japan);
+  padding: 0.85rem 1.2rem;
+}
+
+html[data-theme="taisho-roman"] button.secondary:hover {
+  background: var(--navy-japan);
+  color: #fff9f0;
+}
+
+html[data-theme="taisho-roman"] .parts-grid {
+  display: block;
+  margin-bottom: 3.5rem;
+}
+
+html[data-theme="taisho-roman"] .part-card {
+  border-top: 1px solid rgba(187, 160, 97, 0.4);
+  padding: 1.8rem 0 2rem;
+}
+
+html[data-theme="taisho-roman"] .part-card:last-child {
+  border-bottom: 1px solid rgba(187, 160, 97, 0.4);
+}
+
+html[data-theme="taisho-roman"] .part-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+html[data-theme="taisho-roman"] .part-title {
+  font-family: var(--font-mincho);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--navy-japan);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+html[data-theme="taisho-roman"] .part-title::before {
+  content: "◆";
+  font-size: 0.75rem;
+  color: var(--amber);
+}
+
+html[data-theme="taisho-roman"] .part-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+html[data-theme="taisho-roman"] .part-select {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.6rem;
+  max-width: 180px;
+}
+
+html[data-theme="taisho-roman"] .reroll-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-mincho);
+  font-size: 0.75rem;
+  color: var(--wine-red);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+html[data-theme="taisho-roman"] .reroll-btn:hover {
+  color: var(--amber);
+}
+
+html[data-theme="taisho-roman"] .part-text {
+  font-family: var(--font-gothic);
+  font-size: 0.94rem;
+  color: var(--wood-antique);
+  margin: 0;
+  min-height: 3.6em;
+  padding-left: 1rem;
+  border-left: 2px solid var(--amber-soft);
+}
+
+html[data-theme="taisho-roman"] .result-box {
+  border-top: 2px solid var(--wine-red);
+  padding-top: 1.8rem;
+}
+
+html[data-theme="taisho-roman"] .result-box label {
+  display: block;
+  font-family: var(--font-mincho);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--wine-red);
+  margin-bottom: 0.85rem;
+}
+
+html[data-theme="taisho-roman"] textarea {
+  width: 100%;
+  height: 230px;
+  background-color: var(--cream-paper);
+  border: 1px solid var(--gold-border);
+  box-shadow: inset 0 2px 6px rgba(44, 26, 22, 0.08);
+  border-radius: 0;
+  padding: 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.85;
+  font-family: var(--font-gothic);
+  color: var(--wood-antique);
+  resize: vertical;
+}
+
+html[data-theme="taisho-roman"] textarea:focus {
+  outline: none;
+  border-color: var(--wine-red);
+  box-shadow: 0 0 8px rgba(104, 26, 36, 0.2);
+}
+
+@media (max-width: 560px) {
+  html[data-theme="taisho-roman"] body { padding: 2rem 1rem 3rem; }
+  html[data-theme="taisho-roman"] .container { padding: 2rem 1.25rem 2.5rem; outline: none; }
+  html[data-theme="taisho-roman"] .action-panel { flex-direction: column; }
+  html[data-theme="taisho-roman"] .part-header { flex-direction: column; align-items: flex-start; }
+  html[data-theme="taisho-roman"] .part-controls { width: 100%; justify-content: space-between; }
+  html[data-theme="taisho-roman"] .part-select { flex: 1; max-width: none; }
+}
+
+
+/* ==========================================================
+   THEME 3: レトロフューチャー (retro-future)
+   ========================================================== */
+html[data-theme="retro-future"] {
+  --bg-cream: #fbf5e6;
+  --mint: #a8e6cf;
+  --mint-deep: #5bb395;
+  --flower-pink: #ffa8b6;
+  --lemon-yellow: #ffeead;
+  --lavender: #d5c6e0;
+  --sprout-green: #88d49e;
+  --ink-retro: #242228;
+
+  /* 内蔵フォント：明朝 / タイプライター等幅 / レトロ欧文サンセリフ */
+  --font-lab: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
+  --font-typewriter: "Courier New", "Courier", "SF Mono", "Menlo", "Consolas", monospace;
+  --font-ui: "Trebuchet MS", "Impact", "Segoe UI", -apple-system, sans-serif;
+
+  --switcher-bg: var(--lemon-yellow);
+  --switcher-blur: none;
+  --switcher-border: 2px solid var(--ink-retro);
+  --switcher-radius: 6px;
+  --switcher-shadow: 3px 3px 0px var(--ink-retro);
+  --switcher-font: var(--font-ui);
+  --switcher-color: var(--ink-retro);
+  --switcher-select-bg: #fff;
+  --switcher-select-color: var(--ink-retro);
+  --switcher-select-border: 1px solid var(--ink-retro);
+  --switcher-select-radius: 4px;
+  --switcher-accent: var(--mint-deep);
+  --switcher-tip-bg: var(--flower-pink);
+  --switcher-tip-color: var(--ink-retro);
+  --switcher-tip-border: 1px solid var(--ink-retro);
+  --switcher-tip-radius: 4px;
+  --switcher-tip-shadow: 2px 2px 0px var(--ink-retro);
+}
+
+html[data-theme="retro-future"] body {
+  font-family: var(--font-lab);
+  background-color: var(--bg-cream);
+  background-image: 
+    repeating-linear-gradient(45deg, rgba(168, 230, 207, 0.15) 0, rgba(168, 230, 207, 0.15) 12px, transparent 12px, transparent 24px);
+  background-attachment: fixed;
+  color: var(--ink-retro);
+  line-height: 1.85;
+  margin: 0;
+  padding: 4rem 1.5rem 6rem;
+}
+
+html[data-theme="retro-future"] .container {
+  max-width: 680px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 3px solid var(--ink-retro);
+  border-radius: 18px;
+  box-shadow: 8px 8px 0px var(--ink-retro);
+  padding: 3rem 2.5rem;
+  position: relative;
+}
+
+html[data-theme="retro-future"] .container::before {
+  content: "EXP. NOTE: BOTANICAL FUTURE // LAB-04";
+  position: absolute;
+  top: -14px;
+  left: 24px;
+  background: var(--flower-pink);
+  border: 2px solid var(--ink-retro);
+  padding: 2px 12px;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  transform: rotate(-1.5deg);
+  box-shadow: 3px 3px 0px var(--ink-retro);
+}
+
+html[data-theme="retro-future"] h1 {
+  font-family: var(--font-lab);
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--ink-retro);
+  margin: 0 0 0.5rem;
+}
+
+html[data-theme="retro-future"] .desc {
+  font-family: var(--font-typewriter);
+  color: #555;
+  font-size: 0.85rem;
+  margin: 0 0 2rem;
+}
+
+html[data-theme="retro-future"] .set-selector-panel {
+  background: var(--lemon-yellow);
+  border: 2px solid var(--ink-retro);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  box-shadow: 4px 4px 0px var(--ink-retro);
+}
+
+html[data-theme="retro-future"] .panel-label {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+html[data-theme="retro-future"] select {
+  font-family: var(--font-lab);
+  font-size: 0.9rem;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid var(--ink-retro);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+html[data-theme="retro-future"] select:focus {
+  outline: none;
+  background: var(--mint);
+}
+
+html[data-theme="retro-future"] .action-panel {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+html[data-theme="retro-future"] button {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid var(--ink-retro);
+  border-radius: 10px;
+  padding: 0.85rem 1.2rem;
+  transition: all 0.15s ease;
+}
+
+html[data-theme="retro-future"] button.primary {
+  flex: 2;
+  background: var(--sprout-green);
+  color: var(--ink-retro);
+  box-shadow: 4px 4px 0px var(--ink-retro);
+}
+
+html[data-theme="retro-future"] button.primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--ink-retro);
+  background: var(--mint);
+}
+
+html[data-theme="retro-future"] button.secondary {
+  flex: 1;
+  background: var(--lavender);
+  color: var(--ink-retro);
+  box-shadow: 4px 4px 0px var(--ink-retro);
+}
+
+html[data-theme="retro-future"] button.secondary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--ink-retro);
+}
+
+html[data-theme="retro-future"] .parts-grid {
+  display: block;
+  margin-bottom: 3rem;
+}
+
+html[data-theme="retro-future"] .part-card {
+  border-top: 2px dashed var(--ink-retro);
+  padding: 1.6rem 0;
+}
+
+html[data-theme="retro-future"] .part-card:last-child {
+  border-bottom: 2px dashed var(--ink-retro);
+}
+
+html[data-theme="retro-future"] .part-title {
+  font-family: var(--font-lab);
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: #2e7d60;
+}
+
+html[data-theme="retro-future"] .reroll-btn {
+  background: var(--flower-pink);
+  border: 1px solid var(--ink-retro);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+html[data-theme="retro-future"] .reroll-btn:hover {
+  background: #ff8e9e;
+}
+
+html[data-theme="retro-future"] .part-text {
+  font-family: var(--font-typewriter);
+  font-size: 0.92rem;
+  margin: 0;
+  color: #333;
+}
+
+html[data-theme="retro-future"] .result-box {
+  border-top: 3px solid var(--ink-retro);
+  padding-top: 1.8rem;
+}
+
+html[data-theme="retro-future"] .result-box label {
+  display: block;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+html[data-theme="retro-future"] textarea {
+  width: 100%;
+  height: 220px;
+  border: 2px solid var(--ink-retro);
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: var(--font-typewriter);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  background: #fff;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+
+html[data-theme="retro-future"] textarea:focus {
+  outline: none;
+  border-color: var(--mint-deep);
+}
+
+
+/* ==========================================================
+   THEME 4: 魔女の研究室 (witch-lab)
+   ========================================================== */
+html[data-theme="witch-lab"] {
+  --void: #0b0612;
+  --violet: #2a1245;
+  --violet-deep: #170a28;
+  --gold: #c9a24a;
+  --gold-dim: #8a6d2c;
+  --gold-pale: #e8d28a;
+  --venom: #7dff3a;
+  --venom-deep: #2f8a12;
+  --parch-light: #d6c394;
+  --parch-mid: #bda573;
+  --parch-dark: #a88f5c;
+  --ink: #2b1a12;
+  --ink-purple: #4b1d72;
+
+  /* 内蔵フォント：クラシカルな洋欧文セリフ / 伝統明朝体 */
+  --display: "Times New Roman", "Baskerville", "Georgia", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "MS P明朝", serif;
+
+  --circle: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' fill='none' stroke='%23c9a24a'><circle cx='300' cy='300' r='292' stroke-width='3'/><circle cx='300' cy='300' r='282' stroke-width='1'/><circle cx='300' cy='300' r='250' stroke-width='1' stroke-dasharray='2 9'/><circle cx='300' cy='300' r='222' stroke-width='2'/><path d='M300 80 429.3 478 90.8 232H509.2L170.7 478Z' stroke-width='2'/><circle cx='300' cy='300' r='110' stroke-width='1.5'/><circle cx='300' cy='300' r='36' stroke-width='1.5'/><path d='M300 264V336M264 300H336' stroke-width='1'/></svg>");
+  --stars: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' fill='%23e8d28a'><circle cx='30' cy='40' r='1.2' opacity='.7'/><circle cx='150' cy='20' r='.9' opacity='.5'/><circle cx='210' cy='110' r='1.4' opacity='.6'/><circle cx='90' cy='170' r='1' opacity='.5'/><circle cx='180' cy='210' r='.8' opacity='.6'/><path d='M120 90l2 7 7 2-7 2-2 7-2-7-7-2 7-2z' opacity='.8'/><path d='M45 195l1.5 5 5 1.5-5 1.5-1.5 5-1.5-5-5-1.5 5-1.5z' opacity='.6'/></svg>");
+  --moon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23e8d28a'><path d='M62 8A44 44 0 1 0 92 72 36 36 0 0 1 62 8z'/></svg>");
+  --divider-star: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='44' height='20' viewBox='0 0 44 20'><rect x='6' width='32' height='20' fill='%230b0612'/><path d='M22 1l2.2 7.8L32 10l-7.8 1.2L22 19l-2.2-7.8L12 10l7.8-1.2z' fill='%23c9a24a'/></svg>");
+  --noise: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .3  0 0 0 0 .2  0 0 0 0 .1  0 0 0 .35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --c-tl: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><g fill='none' stroke='%237a5a1a'><path d='M2 26V2h24' stroke-width='1.6'/><path d='M7 26V7h19' stroke-width='.7'/></g><path d='M2 0l2 2-2 2-2-2z' fill='%237a5a1a'/></svg>");
+  --c-tr: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><g transform='matrix(-1 0 0 1 28 0)'><g fill='none' stroke='%237a5a1a'><path d='M2 26V2h24' stroke-width='1.6'/><path d='M7 26V7h19' stroke-width='.7'/></g><path d='M2 0l2 2-2 2-2-2z' fill='%237a5a1a'/></g></svg>");
+  --c-bl: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><g transform='matrix(1 0 0 -1 0 28)'><g fill='none' stroke='%237a5a1a'><path d='M2 26V2h24' stroke-width='1.6'/><path d='M7 26V7h19' stroke-width='.7'/></g><path d='M2 0l2 2-2 2-2-2z' fill='%237a5a1a'/></g></svg>");
+  --c-br: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><g transform='matrix(-1 0 0 -1 28 28)'><g fill='none' stroke='%237a5a1a'><path d='M2 26V2h24' stroke-width='1.6'/><path d='M7 26V7h19' stroke-width='.7'/></g><path d='M2 0l2 2-2 2-2-2z' fill='%237a5a1a'/></g></svg>");
+
+  --switcher-bg: linear-gradient(160deg, rgba(60, 25, 100, 0.92), rgba(20, 8, 36, 0.96));
+  --switcher-blur: none;
+  --switcher-border: 3px double var(--gold-dim);
+  --switcher-radius: 0;
+  --switcher-shadow: 0 0 16px rgba(90, 40, 140, 0.55);
+  --switcher-font: var(--serif);
+  --switcher-color: var(--gold);
+  --switcher-select-bg: #1a0f26;
+  --switcher-select-color: var(--gold-pale);
+  --switcher-select-border: 1px solid var(--gold-dim);
+  --switcher-select-radius: 0;
+  --switcher-accent: var(--venom);
+  --switcher-tip-bg: var(--parch-light);
+  --switcher-tip-color: var(--ink);
+  --switcher-tip-border: 1px solid #5c4415;
+  --switcher-tip-radius: 0;
+  --switcher-tip-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+
+  background:
+    var(--stars),
+    radial-gradient(ellipse at 15% 0%, rgba(90, 40, 140, 0.45), transparent 55%),
+    radial-gradient(ellipse at 90% 100%, rgba(47, 138, 18, 0.16), transparent 50%),
+    radial-gradient(ellipse at 50% 50%, var(--violet-deep), var(--void) 80%);
+  background-attachment: fixed;
+  background-color: var(--void);
+}
+
+html[data-theme="witch-lab"] body {
+  font-family: var(--serif);
+  background: transparent;
+  color: #e6dcc6;
+  line-height: 2;
+  margin: 0;
+  padding: 5rem 1.5rem 6rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+html[data-theme="witch-lab"] body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(120vmin, 1100px);
+  height: min(120vmin, 1100px);
+  transform: translate(-50%, -50%);
+  background: var(--circle) center / contain no-repeat;
+  opacity: 0.11;
+  pointer-events: none;
+  z-index: -1;
+}
+
+html[data-theme="witch-lab"] body::after {
+  content: "";
+  position: fixed;
+  right: 4vw;
+  bottom: 4vh;
+  width: 120px;
+  height: 120px;
+  background: var(--moon) center / contain no-repeat;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: -1;
+}
+
+html[data-theme="witch-lab"] .container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+html[data-theme="witch-lab"] h1 {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--gold-pale);
+  text-shadow: 0 0 14px rgba(201, 162, 74, 0.5), 0 0 2px rgba(125, 255, 58, 0.25);
+  margin: 0 0 0.5rem;
+}
+
+html[data-theme="witch-lab"] h1::after {
+  content: "";
+  display: block;
+  height: 20px;
+  margin-top: 0.9rem;
+  background:
+    var(--divider-star) center / 44px 20px no-repeat,
+    linear-gradient(90deg, transparent, var(--gold) 25%, var(--gold) 75%, transparent) center / 100% 1px no-repeat;
+}
+
+html[data-theme="witch-lab"] .desc {
+  text-align: center;
+  color: #b9a6d4;
+  font-size: 0.92rem;
+  margin: 0 0 2.5rem;
+}
+
+html[data-theme="witch-lab"] .set-selector-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.4rem 1.5rem;
+  background: linear-gradient(160deg, rgba(60, 25, 100, 0.65), rgba(20, 8, 36, 0.85));
+  border: 3px double var(--gold-dim);
+  box-shadow: 0 0 24px rgba(90, 40, 140, 0.35), inset 0 0 18px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
+}
+
+html[data-theme="witch-lab"] .panel-label {
+  font-family: var(--display);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+
+html[data-theme="witch-lab"] select {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--gold-dim);
+  background: #1a0f26;
+  color: var(--gold-pale);
+  border-radius: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+html[data-theme="witch-lab"] select option {
+  background: #1a0f26;
+  color: var(--gold-pale);
+}
+
+html[data-theme="witch-lab"] select:focus {
+  border-color: var(--venom);
+}
+
+html[data-theme="witch-lab"] .action-panel {
+  display: flex;
+  gap: 0.9rem;
+  margin-bottom: 3rem;
+}
+
+html[data-theme="witch-lab"] button {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.25s, color 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+html[data-theme="witch-lab"] button.primary {
+  flex: 2;
+  background: linear-gradient(180deg, #3a1a5c, #1d0c33);
+  color: var(--gold-pale);
+  border: 1px solid var(--gold);
+  outline: 1px solid var(--gold-dim);
+  outline-offset: 3px;
+  padding: 0.85rem 1.2rem;
+  font-weight: 600;
+}
+
+html[data-theme="witch-lab"] button.primary:hover {
+  color: var(--venom);
+  border-color: var(--venom);
+  box-shadow: 0 0 18px rgba(125, 255, 58, 0.35), inset 0 0 12px rgba(125, 255, 58, 0.12);
+}
+
+html[data-theme="witch-lab"] button.secondary {
+  flex: 1;
+  background: transparent;
+  color: #cbb7e8;
+  border: 1px solid #6c4a9a;
+  outline: 1px solid rgba(108, 74, 154, 0.5);
+  outline-offset: 3px;
+  padding: 0.85rem 1.2rem;
+}
+
+html[data-theme="witch-lab"] button.secondary:hover {
+  color: var(--gold-pale);
+  border-color: var(--gold);
+  box-shadow: 0 0 14px rgba(201, 162, 74, 0.3);
+}
+
+html[data-theme="witch-lab"] button:focus-visible,
+html[data-theme="witch-lab"] select:focus-visible {
+  outline: 2px solid var(--venom);
+  outline-offset: 3px;
+}
+
+html[data-theme="witch-lab"] .parts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  margin: 0 6px 4rem;
+}
+
+html[data-theme="witch-lab"] .part-card {
+  position: relative;
+  padding: 2.1rem 2.2rem 2.3rem;
+  color: var(--ink);
+  border: 1px solid #5c4415;
+  outline: 1px solid var(--gold);
+  outline-offset: 5px;
+  background:
+    var(--c-tl) top 8px left 8px / 28px 28px no-repeat,
+    var(--c-tr) top 8px right 8px / 28px 28px no-repeat,
+    var(--c-bl) bottom 8px left 8px / 28px 28px no-repeat,
+    var(--c-br) bottom 8px right 8px / 28px 28px no-repeat,
+    var(--noise),
+    radial-gradient(ellipse at 20% 12%, rgba(255, 240, 200, 0.4), transparent 55%),
+    radial-gradient(ellipse at 88% 92%, rgba(90, 50, 10, 0.35), transparent 60%),
+    linear-gradient(160deg, var(--parch-light), var(--parch-mid) 60%, var(--parch-dark));
+  box-shadow:
+    inset 0 0 46px rgba(70, 35, 5, 0.55),
+    0 8px 28px rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme="witch-lab"] .part-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(92, 68, 21, 0.5);
+}
+
+html[data-theme="witch-lab"] .part-title {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-purple);
+  text-shadow: 0 1px 0 rgba(255, 240, 200, 0.4);
+}
+
+html[data-theme="witch-lab"] .part-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+html[data-theme="witch-lab"] .part-select {
+  font-size: 0.82rem;
+  padding: 0.35rem 0.5rem;
+  max-width: 190px;
+}
+
+html[data-theme="witch-lab"] .reroll-btn {
+  background: #10220c;
+  color: var(--venom);
+  border: 1px solid var(--venom-deep);
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  text-shadow: 0 0 6px rgba(125, 255, 58, 0.6);
+}
+
+html[data-theme="witch-lab"] .reroll-btn:hover {
+  background: #17340f;
+  border-color: var(--venom);
+  box-shadow: 0 0 12px rgba(125, 255, 58, 0.5);
+}
+
+html[data-theme="witch-lab"] .part-text {
+  font-size: 1rem;
+  line-height: 2.1;
+  margin: 0;
+  min-height: 3.5em;
+  color: var(--ink);
+}
+
+html[data-theme="witch-lab"] .result-box {
+  border-top: 3px double var(--gold-dim);
+  padding-top: 1.6rem;
+}
+
+html[data-theme="witch-lab"] .result-box label {
+  display: block;
+  font-family: var(--display);
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+html[data-theme="witch-lab"] textarea {
+  width: 100%;
+  height: 240px;
+  border: 1px solid var(--gold-dim);
+  outline: 1px solid rgba(138, 109, 44, 0.45);
+  outline-offset: 3px;
+  border-radius: 0;
+  padding: 1rem 1.1rem;
+  font-size: 0.92rem;
+  line-height: 1.9;
+  font-family: var(--serif);
+  resize: vertical;
+  background: rgba(14, 6, 24, 0.85);
+  color: var(--parch-light);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme="witch-lab"] textarea:focus {
+  outline: 1px solid var(--venom);
+  border-color: var(--venom);
+}
+
+@media (max-width: 540px) {
+  html[data-theme="witch-lab"] body { padding: 3.5rem 1.1rem 4rem; }
+  html[data-theme="witch-lab"] h1 { font-size: 1.3rem; }
+  html[data-theme="witch-lab"] .action-panel { flex-direction: column; }
+  html[data-theme="witch-lab"] .part-card { padding: 1.9rem 1.4rem 2rem; }
+  html[data-theme="witch-lab"] .part-header { flex-direction: column; align-items: flex-start; }
+  html[data-theme="witch-lab"] .part-controls { width: 100%; justify-content: space-between; }
+  html[data-theme="witch-lab"] .part-select { flex: 1; max-width: none; }
+  html[data-theme="witch-lab"] body::after { width: 80px; height: 80px; }
+}
+
+
+/* ==========================================================
+   THEME 5: 深海の生態系 (deep-sea)
+   - 外部Webフォント非依存（完全決定性のOS内蔵フォント）
+   - font-weight: 300 の完全撤廃（Windowsでの游ゴシックかすれを根本解消）
+   - 文字サイズ階層は維持したまま、暗色背景での輝度コントラストを最適化
+   ========================================================== */
+html[data-theme="deep-sea"] {
+  --abyss: #040b1c;
+  --navy: #071a3a;
+  --midnight: #0e1f4d;
+  --teal: #138a8c;
+  --glow-cyan: #7ef4ff;
+  --glow-violet: #b79bff;
+  
+  /* 暗い背景×游ゴシックでも線が間引かれないよう、文字の明度を適正化 */
+  --mist: #e5f5fb;
+  --mist-soft: #a2c8dc;
+
+  /* 曖昧な外部フォント名を全廃し、OS標準フォントを明示 */
+  --sans: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  --serif: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --wave: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='12' viewBox='0 0 160 12'><path d='M0 6Q20 0 40 6T80 6T120 6T160 6' fill='none' stroke='%237ef4ff' stroke-width='1.2'/></svg>");
+
+  --switcher-bg: linear-gradient(145deg, rgba(19, 138, 140, 0.25), rgba(14, 31, 77, 0.6));
+  --switcher-blur: blur(12px);
+  --switcher-border: 1px solid rgba(126, 244, 255, 0.35);
+  --switcher-radius: 18px 6px 18px 6px;
+  --switcher-shadow: 0 0 18px rgba(126, 244, 255, 0.2);
+  --switcher-font: var(--sans);
+  --switcher-color: var(--glow-cyan);
+  --switcher-select-bg: rgba(4, 15, 40, 0.85);
+  --switcher-select-color: var(--mist);
+  --switcher-select-border: 1px solid rgba(126, 244, 255, 0.3);
+  --switcher-select-radius: 10px 4px 10px 4px;
+  --switcher-accent: var(--glow-cyan);
+  --switcher-tip-bg: rgba(4, 15, 40, 0.92);
+  --switcher-tip-color: var(--glow-cyan);
+  --switcher-tip-border: 1px solid rgba(126, 244, 255, 0.4);
+  --switcher-tip-radius: 14px 4px 14px 4px;
+  --switcher-tip-shadow: 0 0 14px rgba(126, 244, 255, 0.3);
+
+  background: linear-gradient(180deg, #0a2a52 0%, var(--navy) 35%, var(--abyss) 100%);
+  background-attachment: fixed;
+  background-color: var(--abyss);
+}
+
+html[data-theme="deep-sea"] body {
+  font-family: var(--sans);
+  background: transparent;
+  color: var(--mist);
+  line-height: 2;
+  letter-spacing: 0.04em;
+  margin: 0;
+  padding: 5rem 1.5rem 6rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+html[data-theme="deep-sea"] body::before {
+  content: "";
+  position: fixed;
+  top: -10vh;
+  left: -25%;
+  width: 150%;
+  height: 120vh;
+  background: repeating-conic-gradient(
+    from 168deg at 50% 0%,
+    rgba(126, 244, 255, 0.09) 0deg 3deg,
+    transparent 3deg 9deg
+  );
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 75%);
+  mask-image: linear-gradient(180deg, #000, transparent 75%);
+  transform-origin: 50% 0;
+  animation: deep-sea-sway 16s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -2;
+}
+
+html[data-theme="deep-sea"] body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100vh + 800px);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(126, 244, 255, 0.9) 0, rgba(126, 244, 255, 0.25) 2px, transparent 7px),
+    radial-gradient(circle at 78% 10%, rgba(183, 155, 255, 0.9) 0, rgba(183, 155, 255, 0.25) 2px, transparent 8px),
+    radial-gradient(circle at 45% 35%, rgba(126, 244, 255, 0.6) 0, rgba(126, 244, 255, 0.2) 1.5px, transparent 5px),
+    radial-gradient(circle at 90% 52%, rgba(126, 244, 255, 0.9) 0, rgba(126, 244, 255, 0.25) 2px, transparent 7px),
+    radial-gradient(circle at 28% 62%, rgba(183, 155, 255, 0.7) 0, rgba(183, 155, 255, 0.2) 2px, transparent 6px),
+    radial-gradient(circle at 62% 78%, rgba(126, 244, 255, 0.8) 0, rgba(126, 244, 255, 0.25) 2px, transparent 8px),
+    radial-gradient(circle at 6% 88%, rgba(126, 244, 255, 0.5) 0, rgba(126, 244, 255, 0.15) 1.5px, transparent 5px),
+    radial-gradient(circle at 84% 92%, rgba(183, 155, 255, 0.8) 0, rgba(183, 155, 255, 0.2) 2px, transparent 7px);
+  background-size: 400px 400px;
+  animation: deep-sea-drift 90s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes deep-sea-sway {
+  from { transform: rotate(-4deg) scaleX(1); opacity: 0.55; }
+  to   { transform: rotate(4deg) scaleX(1.12); opacity: 1; }
+}
+
+@keyframes deep-sea-drift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-800px); }
+}
+
+html[data-theme="deep-sea"] .container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+html[data-theme="deep-sea"] h1 {
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  letter-spacing: 0.14em;
+  line-height: 1.6;
+  text-align: center;
+  color: #e6fbff;
+  text-shadow: 0 0 20px rgba(126, 244, 255, 0.55);
+  margin: 0 0 0.5rem;
+}
+
+html[data-theme="deep-sea"] h1::after {
+  content: "";
+  display: block;
+  height: 12px;
+  margin-top: 0.8rem;
+  background: var(--wave) center / 160px 12px repeat-x;
+  filter: drop-shadow(0 0 4px rgba(126, 244, 255, 0.8));
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent);
+}
+
+html[data-theme="deep-sea"] .desc {
+  text-align: center;
+  color: var(--mist-soft);
+  font-size: 0.9rem;
+  margin: 0 0 2.5rem;
+}
+
+html[data-theme="deep-sea"] .set-selector-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.3rem 1.6rem;
+  background: linear-gradient(145deg, rgba(19, 138, 140, 0.16), rgba(14, 31, 77, 0.45));
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(126, 244, 255, 0.25);
+  border-radius: 34px 12px 34px 12px;
+  box-shadow: 0 0 28px rgba(126, 244, 255, 0.08), inset 0 0 22px rgba(126, 244, 255, 0.05);
+  margin-bottom: 1.8rem;
+}
+
+html[data-theme="deep-sea"] .panel-label {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--glow-cyan);
+}
+
+html[data-theme="deep-sea"] select {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(126, 244, 255, 0.35);
+  background: rgba(4, 15, 40, 0.85);
+  color: var(--mist);
+  border-radius: 18px 8px 18px 8px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+html[data-theme="deep-sea"] select option {
+  background: var(--navy);
+  color: var(--mist);
+}
+
+html[data-theme="deep-sea"] select:focus {
+  border-color: var(--glow-cyan);
+  box-shadow: 0 0 14px rgba(126, 244, 255, 0.3);
+}
+
+html[data-theme="deep-sea"] .action-panel {
+  display: flex;
+  gap: 0.9rem;
+  margin-bottom: 3rem;
+}
+
+html[data-theme="deep-sea"] button {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: box-shadow 0.3s, color 0.3s, border-color 0.3s, background 0.3s;
+}
+
+html[data-theme="deep-sea"] button.primary {
+  flex: 2;
+  color: #e8fdff;
+  background: linear-gradient(135deg, rgba(126, 244, 255, 0.22), rgba(183, 155, 255, 0.25));
+  border: 1px solid rgba(126, 244, 255, 0.55);
+  border-radius: 32px 12px 32px 12px;
+  padding: 0.85rem 1.2rem;
+}
+
+html[data-theme="deep-sea"] button.primary:hover {
+  box-shadow: 0 0 24px rgba(126, 244, 255, 0.45), inset 0 0 14px rgba(126, 244, 255, 0.15);
+  border-color: var(--glow-cyan);
+}
+
+html[data-theme="deep-sea"] button.secondary {
+  flex: 1;
+  color: #d9ccff;
+  background: transparent;
+  border: 1px solid rgba(183, 155, 255, 0.4);
+  border-radius: 12px 32px 12px 32px;
+  padding: 0.85rem 1.2rem;
+}
+
+html[data-theme="deep-sea"] button.secondary:hover {
+  box-shadow: 0 0 20px rgba(183, 155, 255, 0.4);
+  border-color: var(--glow-violet);
+}
+
+html[data-theme="deep-sea"] button:focus-visible,
+html[data-theme="deep-sea"] select:focus-visible {
+  outline: 2px solid var(--glow-cyan);
+  outline-offset: 3px;
+}
+
+html[data-theme="deep-sea"] .parts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-bottom: 4rem;
+}
+
+html[data-theme="deep-sea"] .part-card {
+  position: relative;
+  padding: 1.9rem 2.1rem 2.1rem;
+  background: linear-gradient(145deg, rgba(40, 140, 170, 0.18), rgba(20, 40, 110, 0.32));
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(126, 244, 255, 0.2);
+  border-radius: 44px 14px 48px 16px / 24px 42px 20px 38px;
+  box-shadow:
+    0 0 32px rgba(126, 244, 255, 0.07),
+    inset 0 0 26px rgba(126, 244, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+html[data-theme="deep-sea"] .part-card:nth-child(even) {
+  border-radius: 14px 46px 16px 50px / 40px 22px 38px 20px;
+  background: linear-gradient(215deg, rgba(110, 90, 200, 0.2), rgba(14, 40, 100, 0.32));
+}
+
+html[data-theme="deep-sea"] .part-card::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  width: 64px;
+  height: 44px;
+  border-top: 1.5px solid var(--glow-cyan);
+  border-left: 1.5px solid var(--glow-cyan);
+  border-radius: 40px 0 0 0;
+  filter: drop-shadow(0 0 4px var(--glow-cyan));
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+html[data-theme="deep-sea"] .part-card::after {
+  content: "";
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--glow-violet);
+  box-shadow: 0 0 10px 3px rgba(183, 155, 255, 0.7);
+  animation: deep-sea-pulse 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes deep-sea-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.8); }
+  50%      { opacity: 1; transform: scale(1.15); }
+}
+
+html[data-theme="deep-sea"] .part-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.7rem;
+}
+
+html[data-theme="deep-sea"] .part-title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--glow-cyan);
+  text-shadow: 0 0 12px rgba(126, 244, 255, 0.55);
+}
+
+html[data-theme="deep-sea"] .part-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+html[data-theme="deep-sea"] .part-select {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.8rem;
+  max-width: 190px;
+}
+
+html[data-theme="deep-sea"] .reroll-btn {
+  background: none;
+  border: none;
+  padding: 0.2rem 0;
+  font-size: 0.78rem;
+  color: var(--glow-violet);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: rgba(183, 155, 255, 0.4);
+}
+
+html[data-theme="deep-sea"] .reroll-btn:hover {
+  color: #efe8ff;
+  text-shadow: 0 0 10px rgba(183, 155, 255, 0.9);
+  text-decoration-color: var(--glow-violet);
+}
+
+html[data-theme="deep-sea"] .part-text {
+  font-size: 0.95rem;
+  margin: 0;
+  min-height: 3.5em;
+  color: var(--mist);
+}
+
+html[data-theme="deep-sea"] .result-box {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(126, 244, 255, 0.25);
+}
+
+html[data-theme="deep-sea"] .result-box label {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--glow-cyan);
+  margin-bottom: 1rem;
+}
+
+html[data-theme="deep-sea"] textarea {
+  width: 100%;
+  height: 230px;
+  border: 1px solid rgba(126, 244, 255, 0.35);
+  border-radius: 24px 8px 28px 10px;
+  padding: 1.1rem 1.3rem;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  font-family: var(--sans);
+  resize: vertical;
+  background: rgba(2, 10, 30, 0.8);
+  color: var(--mist);
+  box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="deep-sea"] textarea:focus {
+  outline: none;
+  border-color: var(--glow-cyan);
+  box-shadow: 0 0 18px rgba(126, 244, 255, 0.25), inset 0 0 22px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 540px) {
+  html[data-theme="deep-sea"] body { padding: 3.5rem 1.1rem 4rem; }
+  html[data-theme="deep-sea"] h1 { font-size: 1.35rem; }
+  html[data-theme="deep-sea"] .action-panel { flex-direction: column; }
+  html[data-theme="deep-sea"] .part-card { padding: 1.8rem 1.4rem 2rem; }
+  html[data-theme="deep-sea"] .part-header { flex-direction: column; align-items: flex-start; }
+  html[data-theme="deep-sea"] .part-controls { width: 100%; justify-content: space-between; }
+  html[data-theme="deep-sea"] .part-select { flex: 1; max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="deep-sea"] body::before,
+  html[data-theme="deep-sea"] body::after,
+  html[data-theme="deep-sea"] .part-card::after {
+    animation: none;
+  }
+}
+
+
+/* ==========================================================
+   THEME 6: 銀河帝国の行政機関 (galactic-empire)
+   ========================================================== */
+html[data-theme="galactic-empire"] {
+  --navy-deep: #060d1f;
+  --navy: #0a1630;
+  --navy-panel: #0f1f45;
+  --navy-line: #24407a;
+  --white: #f4f7fb;
+  --text: #e3e9f4;
+  --silver: #b8c2d3;
+  --silver-dim: #7d8aa3;
+  --gold: #c8a24a;
+  --gold-bright: #e3c36f;
+
+  /* 内蔵フォント：威厳のあるゴシック / 端正な標準ゴシック */
+  --heading: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --body: "BIZ UDPGothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+
+  --emblem: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'><circle cx='36' cy='36' r='34' fill='none' stroke='%23c8a24a' stroke-width='1.6'/><circle cx='36' cy='36' r='29' fill='none' stroke='%23c8a24a' stroke-width='1' stroke-dasharray='1.5 3'/><path d='M36 16 39.06 28.61 50.14 21.86 43.39 32.94 56 36 43.39 39.06 50.14 50.14 39.06 43.39 36 56 32.94 43.39 21.86 50.14 28.61 39.06 16 36 28.61 32.94 21.86 21.86 32.94 28.61Z' fill='%23c8a24a'/><circle cx='36' cy='36' r='4' fill='%230a1630' stroke='%23c8a24a' stroke-width='1.2'/></svg>");
+  --seal: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><g fill='none' stroke='%23e3c36f'><circle cx='50' cy='50' r='47' stroke-width='2.4'/><circle cx='50' cy='50' r='42' stroke-width='1'/><circle cx='50' cy='50' r='35' stroke-width='1' stroke-dasharray='2 3'/></g><text x='50' y='58' text-anchor='middle' font-size='24' font-weight='900' fill='%23e3c36f' font-family='sans-serif'>&%23x8A8D;&%23x8A3C;</text><path d='M50 17l2 5.5h5.8l-4.7 3.4 1.8 5.5-4.9-3.4-4.9 3.4 1.8-5.5-4.7-3.4H48z' fill='%23e3c36f'/></svg>");
+  --stars: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260' fill='%23ffffff'><circle cx='24' cy='46' r='.9' opacity='.55'/><circle cx='140' cy='18' r='.7' opacity='.4'/><circle cx='222' cy='96' r='1.1' opacity='.5'/><circle cx='80' cy='160' r='.8' opacity='.4'/><circle cx='188' cy='214' r='.7' opacity='.5'/><circle cx='120' cy='110' r='.6' opacity='.3'/><circle cx='36' cy='230' r='1' opacity='.45'/></svg>");
+
+  --switcher-bg: rgba(6, 13, 31, 0.92);
+  --switcher-blur: blur(4px);
+  --switcher-border: 1px solid var(--gold);
+  --switcher-radius: 0;
+  --switcher-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+  --switcher-font: var(--body);
+  --switcher-color: var(--silver);
+  --switcher-select-bg: var(--navy);
+  --switcher-select-color: var(--white);
+  --switcher-select-border: 1px solid var(--silver-dim);
+  --switcher-select-radius: 0;
+  --switcher-accent: var(--gold-bright);
+  --switcher-tip-bg: var(--gold);
+  --switcher-tip-color: var(--navy-deep);
+  --switcher-tip-border: 1px solid var(--gold-bright);
+  --switcher-tip-radius: 0;
+  --switcher-tip-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+
+  background:
+    linear-gradient(rgba(140, 175, 255, 0.11) 1px, transparent 1px) 0 0 / 200px 200px,
+    linear-gradient(90deg, rgba(140, 175, 255, 0.11) 1px, transparent 1px) 0 0 / 200px 200px,
+    linear-gradient(rgba(120, 160, 255, 0.05) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, rgba(120, 160, 255, 0.05) 1px, transparent 1px) 0 0 / 40px 40px,
+    var(--stars),
+    radial-gradient(ellipse at 50% -10%, #14285a, transparent 62%);
+  background-attachment: fixed;
+  background-color: var(--navy-deep);
+}
+
+html[data-theme="galactic-empire"] body {
+  font-family: var(--body);
+  background: transparent;
+  color: var(--text);
+  line-height: 1.9;
+  margin: 0;
+  padding: 5rem 1.5rem 6rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+html[data-theme="galactic-empire"] .container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+html[data-theme="galactic-empire"] h1 {
+  font-family: var(--heading);
+  font-size: 1.55rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--white);
+  margin: 0 0 0.9rem;
+}
+
+html[data-theme="galactic-empire"] h1::before {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1.1rem;
+  background: var(--emblem) center / contain no-repeat;
+}
+
+html[data-theme="galactic-empire"] h1::after {
+  content: "";
+  display: block;
+  height: 6px;
+  margin-top: 1rem;
+  background:
+    linear-gradient(var(--gold), var(--gold)) top / 100% 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) bottom / 100% 1px no-repeat;
+}
+
+html[data-theme="galactic-empire"] .desc {
+  text-align: center;
+  color: var(--silver);
+  font-size: 0.92rem;
+  margin: 0 0 2.5rem;
+}
+
+html[data-theme="galactic-empire"] .set-selector-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.2rem 1.5rem;
+  background: var(--navy-panel);
+  border: 1px solid var(--navy-line);
+  border-left: 4px solid var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+html[data-theme="galactic-empire"] .panel-label {
+  font-family: var(--heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--silver);
+}
+
+html[data-theme="galactic-empire"] select {
+  font-family: var(--body);
+  font-size: 0.92rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--silver-dim);
+  background: var(--navy-deep);
+  color: var(--white);
+  border-radius: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+html[data-theme="galactic-empire"] select option {
+  background: var(--navy-deep);
+  color: var(--white);
+}
+
+html[data-theme="galactic-empire"] select:focus {
+  border-color: var(--gold-bright);
+}
+
+html[data-theme="galactic-empire"] .action-panel {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+html[data-theme="galactic-empire"] button {
+  font-family: var(--heading);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+html[data-theme="galactic-empire"] button.primary {
+  flex: 2;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: var(--navy-deep);
+  border: 1px solid var(--gold-bright);
+  padding: 0.85rem 1.2rem;
+  font-weight: 900;
+}
+
+html[data-theme="galactic-empire"] button.primary:hover {
+  background: var(--white);
+  border-color: var(--white);
+}
+
+html[data-theme="galactic-empire"] button.secondary {
+  flex: 1;
+  background: transparent;
+  color: var(--silver);
+  border: 1px solid var(--silver-dim);
+  padding: 0.85rem 1.2rem;
+  font-weight: 700;
+}
+
+html[data-theme="galactic-empire"] button.secondary:hover {
+  color: var(--white);
+  border-color: var(--white);
+}
+
+html[data-theme="galactic-empire"] button:focus-visible,
+html[data-theme="galactic-empire"] select:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+}
+
+html[data-theme="galactic-empire"] .parts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 4rem;
+  counter-reset: galactic-section;
+}
+
+html[data-theme="galactic-empire"] .part-card {
+  position: relative;
+  counter-increment: galactic-section;
+  padding: 1.5rem 1.8rem 1.8rem 5.4rem;
+  background:
+    linear-gradient(var(--gold), var(--gold)) top 7px right 7px / 14px 1px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) top 7px right 7px / 1px 14px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) bottom 7px right 7px / 14px 1px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) bottom 7px right 7px / 1px 14px no-repeat,
+    linear-gradient(180deg, rgba(20, 40, 90, 0.78), rgba(10, 22, 52, 0.9));
+  border: 1px solid var(--navy-line);
+  border-top: 2px solid var(--gold);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="galactic-empire"] .part-card::before {
+  content: counter(galactic-section, decimal-leading-zero);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 1.3rem;
+  font-family: var(--heading);
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--gold-bright);
+  background: rgba(200, 162, 74, 0.08);
+  border-right: 1px solid var(--navy-line);
+}
+
+html[data-theme="galactic-empire"] .part-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--navy-line);
+}
+
+html[data-theme="galactic-empire"] .part-title {
+  font-family: var(--heading);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--white);
+}
+
+html[data-theme="galactic-empire"] .part-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+html[data-theme="galactic-empire"] .part-select {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.5rem;
+  max-width: 190px;
+}
+
+html[data-theme="galactic-empire"] .reroll-btn {
+  background: transparent;
+  color: var(--gold-bright);
+  border: 1px solid var(--gold);
+  padding: 0.25rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+html[data-theme="galactic-empire"] .reroll-btn:hover {
+  background: var(--gold);
+  color: var(--navy-deep);
+}
+
+html[data-theme="galactic-empire"] .part-text {
+  font-size: 0.97rem;
+  margin: 0;
+  min-height: 3.5em;
+  color: var(--text);
+}
+
+html[data-theme="galactic-empire"] .result-box {
+  position: relative;
+  border-top: 1px solid var(--gold);
+  padding-top: 1.5rem;
+}
+
+html[data-theme="galactic-empire"] .result-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(4px);
+  background: var(--gold);
+}
+
+html[data-theme="galactic-empire"] .result-box::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 14px;
+  width: 92px;
+  height: 92px;
+  background: var(--seal) center / contain no-repeat;
+  opacity: 0.55;
+  transform: rotate(-14deg);
+  pointer-events: none;
+}
+
+html[data-theme="galactic-empire"] .result-box label {
+  display: block;
+  font-family: var(--heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--silver);
+  margin: 0.5rem 0 1.4rem;
+  max-width: calc(100% - 110px);
+}
+
+html[data-theme="galactic-empire"] textarea {
+  width: 100%;
+  height: 230px;
+  border: 1px solid var(--navy-line);
+  border-radius: 0;
+  padding: 1rem 1.1rem;
+  font-size: 0.92rem;
+  line-height: 1.85;
+  font-family: var(--body);
+  resize: vertical;
+  background: #050b1a;
+  color: var(--white);
+}
+
+html[data-theme="galactic-empire"] textarea:focus {
+  outline: none;
+  border-color: var(--gold-bright);
+}
+
+@media (max-width: 540px) {
+  html[data-theme="galactic-empire"] body { padding: 3.5rem 1rem 4rem; }
+  html[data-theme="galactic-empire"] h1 { font-size: 1.25rem; letter-spacing: 0.1em; }
+  html[data-theme="galactic-empire"] .action-panel { flex-direction: column; }
+  html[data-theme="galactic-empire"] .part-card { padding: 1.4rem 1.2rem 1.6rem 3.9rem; }
+  html[data-theme="galactic-empire"] .part-card::before { width: 2.7rem; font-size: 1.15rem; }
+  html[data-theme="galactic-empire"] .part-header { flex-direction: column; align-items: flex-start; }
+  html[data-theme="galactic-empire"] .part-controls { width: 100%; justify-content: space-between; }
+  html[data-theme="galactic-empire"] .part-select { flex: 1; max-width: none; }
+  html[data-theme="galactic-empire"] .result-box::after { width: 68px; height: 68px; right: 6px; }
+  html[data-theme="galactic-empire"] .result-box label { max-width: calc(100% - 80px); }
 }
