@@ -16,7 +16,7 @@ const contents = [
       {
         title: "Mica",
         description: "CSVやJSONをカード形式で表示するデータビューア。PC専用で電子書籍の本棚として作りました。フィルターがいい感じ。",
-        url: "https://pumicebimsstein.github.io/Mica/",
+        url: "https://pumicebimsstein.github.io/Mica/top.html",
         // thumbnail: "./images/palette.png"
       }
     ]
