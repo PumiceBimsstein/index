@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>清朝離宮風 対話規範・文言編纂書</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --lacquer-black: #121413;
+      --deep-jade: #163832;
+      --jade-accent: #235347;
+      --vermilion: #9e2a22;
+      --vermilion-bright: #b8332a;
+      --imperial-gold: #c6a15b;
+      --gold-light: #e5c98b;
+      --gold-dark: #8c6d32;
+      --jade-white: #f4f6f0;
+      --jade-white-dim: #e2e7dc;
+      --ink-text: #1c1f1d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--lacquer-black);
+      color: var(--jade-white);
+      font-family: "Shippori Mincho", "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+      line-height: 1.8;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(22, 56, 50, 0.75) 0%, rgba(18, 20, 19, 0.96) 75%),
+        linear-gradient(90deg, rgba(198, 161, 91, 0.05) 1px, transparent 1px),
+        linear-gradient(rgba(198, 161, 91, 0.05) 1px, transparent 1px);
+      background-size: 100% 100%, 48px 48px, 48px 48px;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .palace-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(22, 56, 50, 0.92) 0%, rgba(18, 20, 19, 0.97) 100%);
+      border: 2px solid var(--imperial-gold);
+      box-shadow:
+        0 0 0 6px var(--lacquer-black),
+        0 0 0 8px var(--gold-dark),
+        0 24px 60px rgba(0, 0, 0, 0.85);
+      position: relative;
+      padding: 2.5rem 2rem;
+    }
+
+    .corner-ornament {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .corner-tl { top: 10px; left: 10px; }
+    .corner-tr { top: 10px; right: 10px; transform: scaleX(-1); }
+    .corner-bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+    .corner-br { bottom: 10px; right: 10px; transform: scale(-1, -1); }
+
+    .top-external-link {
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+    .top-external-link a {
+      color: var(--gold-light);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border-bottom: 1px dotted var(--imperial-gold);
+      padding-bottom: 2px;
+    }
+    .top-external-link a:hover {
+      color: var(--imperial-gold);
+    }
+
+    .palace-header {
+      text-align: center;
+      padding: 1.5rem 1rem 2.2rem;
+      border-bottom: 1px solid rgba(198, 161, 91, 0.4);
+      position: relative;
+      margin-bottom: 2.2rem;
+    }
+
+    .plaque-frame {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: linear-gradient(180deg, #1b0d0c 0%, #2d110f 100%);
+      border: 2px solid var(--imperial-gold);
+      box-shadow: inset 0 0 0 4px var(--vermilion), 0 8px 24px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .palace-subtitle {
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      letter-spacing: 0.4em;
+      margin-bottom: 0.4rem;
+    }
+
+    .palace-title {
+      font-size: clamp(1.4rem, 3vw, 2.1rem);
+      font-weight: 700;
+      color: var(--imperial-gold);
+      letter-spacing: 0.35em;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+      padding-left: 0.35em;
+    }
+
+    .cloud-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      color: var(--imperial-gold);
+    }
+    .cloud-divider::before,
+    .cloud-divider::after {
+      content: "";
+      height: 1px;
+      width: 120px;
+      background: linear-gradient(90deg, transparent, var(--imperial-gold), transparent);
+    }
+
+    .workbench-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 920px) {
+      .workbench-grid {
+        grid-template-columns: 1fr;
+      }
+      .palace-container {
+        padding: 1.8rem 1rem;
+      }
+      .plaque-frame {
+        padding: 0.8rem 1.4rem;
+      }
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.25em;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(198, 161, 91, 0.35);
+      text-align: center;
+    }
+
+    .phrase-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .scroll-card {
+      background-color: var(--jade-white);
+      color: var(--ink-text);
+      border: 1px solid var(--imperial-gold);
+      box-shadow:
+        inset 0 0 0 3px var(--jade-white),
+        inset 0 0 0 4px rgba(198, 161, 91, 0.55),
+        0 6px 18px rgba(0, 0, 0, 0.45);
+      padding: 1.25rem 1.4rem;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .scroll-card:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        inset 0 0 0 3px var(--jade-white),
+        inset 0 0 0 4px var(--imperial-gold),
+        0 10px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .scroll-card.selected {
+      background-color: #fcfdf9;
+      box-shadow:
+        inset 0 0 0 3px var(--jade-white),
+        inset 0 0 0 5px var(--vermilion),
+        0 10px 24px rgba(158, 42, 34, 0.35);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px dashed rgba(22, 56, 50, 0.3);
+    }
+
+    .card-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .imperial-seal-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--vermilion);
+      color: var(--jade-white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.15rem 0.55rem;
+      border: 1px solid #6e1913;
+      letter-spacing: 0.15em;
+      box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--deep-jade);
+      letter-spacing: 0.15em;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-palace {
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      padding: 0.38rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-radius: 2px;
+    }
+
+    .btn-select {
+      background-color: transparent;
+      color: var(--deep-jade);
+      border: 1px solid var(--deep-jade);
+    }
+    .btn-select:hover {
+      background-color: rgba(22, 56, 50, 0.08);
+    }
+    .scroll-card.selected .btn-select {
+      background-color: var(--deep-jade);
+      color: var(--gold-light);
+      border-color: var(--deep-jade);
+    }
+
+    .btn-copy-single {
+      background-color: var(--vermilion);
+      color: var(--jade-white);
+      border: 1px solid #751b15;
+    }
+    .btn-copy-single:hover {
+      background-color: var(--vermilion-bright);
+    }
+
+    .phrase-body {
+      font-size: 0.92rem;
+      color: var(--ink-text);
+      white-space: pre-wrap;
+      line-height: 1.75;
+      background-color: rgba(226, 231, 220, 0.45);
+      padding: 0.85rem 1rem;
+      border-left: 3px solid var(--imperial-gold);
+    }
+
+    .composer-panel {
+      position: sticky;
+      top: 1.5rem;
+      background: linear-gradient(180deg, #102924 0%, #121413 100%);
+      border: 1px solid var(--imperial-gold);
+      box-shadow:
+        inset 0 0 0 4px rgba(198, 161, 91, 0.18),
+        0 12px 32px rgba(0, 0, 0, 0.7);
+      padding: 1.5rem;
+    }
+
+    .composer-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .selected-count {
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      letter-spacing: 0.12em;
+    }
+
+    .control-group {
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .btn-gold-outline {
+      font-family: inherit;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 0.65rem;
+      background: transparent;
+      color: var(--imperial-gold);
+      border: 1px solid rgba(198, 161, 91, 0.6);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-gold-outline:hover {
+      background: rgba(198, 161, 91, 0.15);
+      border-color: var(--imperial-gold);
+    }
+
+    .order-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 1.1rem;
+      min-height: 52px;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(244, 246, 240, 0.08);
+      border: 1px solid rgba(198, 161, 91, 0.4);
+      padding: 0.4rem 0.7rem;
+      font-size: 0.84rem;
+      color: var(--jade-white);
+    }
+
+    .order-item-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .order-num {
+      color: var(--imperial-gold);
+      font-weight: 700;
+    }
+
+    .order-btns {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .btn-mini {
+      background: rgba(18, 20, 19, 0.7);
+      color: var(--gold-light);
+      border: 1px solid rgba(198, 161, 91, 0.45);
+      width: 24px;
+      height: 24px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-mini:hover:not(:disabled) {
+      background: var(--imperial-gold);
+      color: var(--lacquer-black);
+    }
+    .btn-mini:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    .scroll-preview-box {
+      background-color: var(--jade-white);
+      color: var(--ink-text);
+      border-top: 8px solid var(--gold-dark);
+      border-bottom: 8px solid var(--gold-dark);
+      border-left: 1px solid var(--imperial-gold);
+      border-right: 1px solid var(--imperial-gold);
+      padding: 1rem;
+      min-height: 210px;
+      max-height: 360px;
+      overflow-y: auto;
+      font-size: 0.88rem;
+      line-height: 1.75;
+      white-space: pre-wrap;
+      margin-bottom: 1.2rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .scroll-preview-empty {
+      color: #6b756e;
+      text-align: center;
+      padding: 3.5rem 1rem;
+      letter-spacing: 0.15em;
+    }
+
+    .btn-imperial-copy {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      color: var(--jade-white);
+      background: linear-gradient(180deg, var(--vermilion-bright) 0%, var(--vermilion) 100%);
+      border: 2px solid var(--imperial-gold);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+
+    .btn-imperial-copy:hover:not(:disabled) {
+      background: linear-gradient(180deg, #c93b32 0%, #a32921 100%);
+      box-shadow: 0 0 18px rgba(198, 161, 91, 0.45);
+    }
+
+    .btn-imperial-copy:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .seal-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background-color: var(--vermilion);
+      color: var(--jade-white);
+      border: 2px solid var(--imperial-gold);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.8);
+      padding: 0.75rem 2rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 100;
+    }
+
+    .seal-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .palace-footer {
+      margin-top: 2.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(198, 161, 91, 0.3);
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(244, 246, 240, 0.6);
+      letter-spacing: 0.2em;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .palace-footer a {
+      color: var(--gold-light);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--imperial-gold);
+    }
+    .palace-footer a:hover {
+      color: var(--imperial-gold);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="palace-container">
+    <!-- 検索エンジン除外のためのSEO対策（noindex, nofollow, noarchive） -->
+    <!-- 四隅の伝統雷文透かし彫りSVG -->
+    <svg class="corner-ornament corner-tl" viewBox="0 0 44 44" fill="none">
+      <path d="M2 42V2H42V10H10V42H2Z" stroke="#c6a15b" stroke-width="1.5"/>
+      <path d="M14 34V14H34V20H20V34H14Z" stroke="#c6a15b" stroke-width="1.2"/>
+      <rect x="24" y="24" width="6" height="6" stroke="#c6a15b" stroke-width="1.2"/>
+    </svg>
+    <svg class="corner-ornament corner-tr" viewBox="0 0 44 44" fill="none">
+      <path d="M2 42V2H42V10H10V42H2Z" stroke="#c6a15b" stroke-width="1.5"/>
+      <path d="M14 34V14H34V20H20V34H14Z" stroke="#c6a15b" stroke-width="1.2"/>
+      <rect x="24" y="24" width="6" height="6" stroke="#c6a15b" stroke-width="1.2"/>
+    </svg>
+    <svg class="corner-ornament corner-bl" viewBox="0 0 44 44" fill="none">
+      <path d="M2 42V2H42V10H10V42H2Z" stroke="#c6a15b" stroke-width="1.5"/>
+      <path d="M14 34V14H34V20H20V34H14Z" stroke="#c6a15b" stroke-width="1.2"/>
+      <rect x="24" y="24" width="6" height="6" stroke="#c6a15b" stroke-width="1.2"/>
+    </svg>
+    <svg class="corner-ornament corner-br" viewBox="0 0 44 44" fill="none">
+      <path d="M2 42V2H42V10H10V42H2Z" stroke="#c6a15b" stroke-width="1.5"/>
+      <path d="M14 34V14H34V20H20V34H14Z" stroke="#c6a15b" stroke-width="1.2"/>
+      <rect x="24" y="24" width="6" height="6" stroke="#c6a15b" stroke-width="1.2"/>
+    </svg>
+
+    <!-- ページトップのGoogleAIリンク -->
+    <div class="top-external-link">
+      <a href="https://www.google.com/?source=hp&sxsrf=APpeQntUFRTejhy2-HITYeSZgHT4IcgEKg%3A1790852963056&zs=1&ved=2ahUKEwihgtaW15iXAxU7klYBHV-nN5YQoo4PegYIAAgAEAY&azm=9" target="_blank" rel="noopener noreferrer">Google AI</a>
+    </div>
+
+    <!-- ヘッダー扁額 -->
+    <header class="palace-header">
+      <div class="plaque-frame">
+        <p class="palace-subtitle">宮廷書庫・対話規範集</p>
+        <h1 class="palace-title">清雅文言編纂書</h1>
+      </div>
+      <div class="cloud-divider" aria-hidden="true">
+        <svg width="36" height="18" viewBox="0 0 36 18" fill="none">
+          <path d="M18 3C14.5 3 12 5.5 12 8.5C9.5 8.5 7.5 10.5 7.5 13C7.5 15 9.2 16.5 11.5 16.5H24.5C26.8 16.5 28.5 15 28.5 13C28.5 10.5 26.5 8.5 24 8.5C24 5.5 21.5 3 18 3Z" stroke="#c6a15b" stroke-width="1.4"/>
+          <circle cx="18" cy="11" r="2" fill="#c6a15b"/>
+        </svg>
+      </div>
+    </header>
+
+    <!-- 左右対称ワークベンチ -->
+    <main class="workbench-grid">
+      <!-- 左翼：収録文言一覧 -->
+      <section aria-labelledby="heading-library">
+        <h2 id="heading-library" class="section-heading">
+          <span>◆</span> 収録文言一覧 <span>◆</span>
+        </h2>
+        <div id="phrase-list" class="phrase-list"></div>
+      </section>
+
+      <!-- 右翼：巻物編纂・結合コピー台 -->
+      <aside class="composer-panel" aria-labelledby="heading-composer">
+        <h2 id="heading-composer" class="section-heading">
+          <span>❖</span> 巻物編纂・結合複写 <span>❖</span>
+        </h2>
+
+        <div class="composer-controls">
+          <span id="selected-count" class="selected-count">選択数：零件</span>
+          <div class="control-group">
+            <button type="button" id="btn-select-all" class="btn-gold-outline">全選択</button>
+            <button type="button" id="btn-clear-all" class="btn-gold-outline">選択解除</button>
+          </div>
+        </div>
+
+        <div id="order-list" class="order-list"></div>
+
+        <div id="scroll-preview" class="scroll-preview-box">
+          <div class="scroll-preview-empty">左の文言より「編入」を選び、巻物を仕立ててください</div>
+        </div>
+
+        <button type="button" id="btn-copy-combined" class="btn-imperial-copy" disabled>
+          <span>印</span> 組み合わせた文言を複写
+        </button>
+      </aside>
+    </main>
+
+    <!-- ページ最下部のGoogleAIリンク -->
+    <footer class="palace-footer">
+      <div>
+        <a href="https://www.google.com/?source=hp&sxsrf=APpeQntUFRTejhy2-HITYeSZgHT4IcgEKg%3A1790852963056&zs=1&ved=2ahUKEwihgtaW15iXAxU7klYBHV-nN5YQoo4PegYIAAgAEAY&azm=9" target="_blank" rel="noopener noreferrer">Google AI</a>
+      </div>
+      <div>龍鳳呈祥・格調ある対話のための規範文言集</div>
+    </footer>
+  </div>
+
+  <div id="seal-toast" class="seal-toast" role="status" aria-live="polite">
+    玉璽押印・複写完了
+  </div>
+
+  <script>
+    const PHRASES = [
+      {
+        id: "dialogue-prompt",
+        seal: "其壱",
+        title: "基本プロンプト",
+        content: `# 回答に際して以下のことを守ってください
+
+- 私の名前を呼ばず、必要なら「あなた」と呼称すること。
+- 私の質問を評価して賞賛することを禁止します。
+- 回答の最後にこちらへ質問や問題提起をしないこと。
+- 回答は一般向けの学術系書籍のような文章を主体とすること。
+- 箇条書きは最低限に抑え、短い文章の羅列ではなく一続きの文章を志向すること。
+- ですます調を使うこと。
+- 論点をずらさないこと。
+- 私が言っていない主張を勝手に想定して反論（ストローマン）しないこと。
+- 結論に『しかし〜』といった無理な両論併記やバランス調整の段落を入れるのも禁止。
+- 大学生レベルの人に対する回答をお願いします。
+`
+      },
+      {
+        id: "light-chat",
+        seal: "其弐",
+        title: "トークン低消費プロンプト",
+        content: `# トークン節約してください
+
+現在、実装ではなく仕様策定（要件定義）の段階です。厳密なコードのセルフチェックや複雑な推論（Thinking）は不要ですので、私の質問に対して簡潔に、かつ素早く（Low latencyで）テキストベースで回答してください。`
+      },
+      {
+        id: "order-1",
+        seal: "其参",
+        title: "議論用プロンプト",
+        content: `説明の後に反対のことへの注意を促したりさほど重要でもないことを改めて強調するという無意味な引き伸ばしをしないこと。
+説明を求められたら、まずその説明をきちんと完結させればよいのであって、毎回あらゆる誤解の可能性を先回りして潰す必要はない。
+
+次のような発言をやめてください。
+
+- 求められていない反対意見や例外を持ち出す。
+- すでに説明したことを、結論でもう一度強調する。
+- 本筋から離れた補足を追加する。
+- 説明の最後に、必要以上に大きな一般論へ発展させる。
+
+こうした補足はそれ自体が間違っていなくても、文章全体の説得力を下げ、読む気を失わせます。
+説明を長くすることよりも十分なところで説明を終えてください。
+
+また、「ここで重要なのは」を使わないでください。ただし単純に他のフレーズに言い換えるのではなく、そのような文章構成にならない書き方にしてください。`
+      },
+      {
+        id: "order-2",
+        seal: "其四",
+        title: "追加注文",
+        content: `* 根拠のない一般化をしない
+  * 「〜という声もあります」「議論が存在します」といった、出典や実態が曖昧なことを記述してはならない。
+* 事実と推測・意見を明確に分ける
+* 分からないこと・議論が存在しないことはそのまま認める
+  * 話の辻褄を合わせたり、相手に寄り添おうとしたりして、存在しない事実を作り出してはならない。`
+      }
+    ];
+
+    const selectedIds = [];
+
+    const phraseListEl = document.getElementById("phrase-list");
+    const orderListEl = document.getElementById("order-list");
+    const scrollPreviewEl = document.getElementById("scroll-preview");
+    const selectedCountEl = document.getElementById("selected-count");
+    const btnSelectAll = document.getElementById("btn-select-all");
+    const btnClearAll = document.getElementById("btn-clear-all");
+    const btnCopyCombined = document.getElementById("btn-copy-combined");
+    const sealToastEl = document.getElementById("seal-toast");
+
+    let toastTimer = null;
+
+    function showToast(message) {
+      sealToastEl.textContent = message;
+      sealToastEl.classList.add("show");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        sealToastEl.classList.remove("show");
+      }, 2200);
+    }
+
+    async function copyToClipboard(text, label) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast(label);
+      } catch (err) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        showToast(label);
+      }
+    }
+
+    function toggleSelect(id) {
+      const idx = selectedIds.indexOf(id);
+      if (idx === -1) {
+        selectedIds.push(id);
+      } else {
+        selectedIds.splice(idx, 1);
+      }
+      renderAll();
+    }
+
+    function moveSelected(index, direction) {
+      const targetIndex = index + direction;
+      if (targetIndex < 0 || targetIndex >= selectedIds.length) return;
+      const temp = selectedIds[index];
+      selectedIds[index] = selectedIds[targetIndex];
+      selectedIds[targetIndex] = temp;
+      renderAll();
+    }
+
+    function getCombinedText() {
+      return selectedIds
+        .map((id) => PHRASES.find((p) => p.id === id))
+        .filter(Boolean)
+        .map((p) => p.content)
+        .join("\n\n---\n\n");
+    }
+
+    function renderPhraseCards() {
+      phraseListEl.innerHTML = "";
+      PHRASES.forEach((phrase) => {
+        const isSelected = selectedIds.includes(phrase.id);
+        const card = document.createElement("article");
+        card.className = `scroll-card${isSelected ? " selected" : ""}`;
+
+        const header = document.createElement("div");
+        header.className = "card-header";
+
+        const titleGroup = document.createElement("div");
+        titleGroup.className = "card-title-group";
+
+        const seal = document.createElement("span");
+        seal.className = "imperial-seal-tag";
+        seal.textContent = phrase.seal;
+
+        const title = document.createElement("h3");
+        title.className = "card-title";
+        title.textContent = phrase.title;
+
+        titleGroup.appendChild(seal);
+        titleGroup.appendChild(title);
+
+        const actions = document.createElement("div");
+        actions.className = "card-actions";
+
+        const btnSelect = document.createElement("button");
+        btnSelect.type = "button";
+        btnSelect.className = "btn-palace btn-select";
+        btnSelect.textContent = isSelected ? "✓ 編入済" : "+ 編入";
+        btnSelect.addEventListener("click", () => toggleSelect(phrase.id));
+
+        const btnCopy = document.createElement("button");
+        btnCopy.type = "button";
+        btnCopy.className = "btn-palace btn-copy-single";
+        btnCopy.textContent = "単独複写";
+        btnCopy.addEventListener("click", () => {
+          copyToClipboard(phrase.content, `「${phrase.title}」を複写しました`);
+        });
+
+        actions.appendChild(btnSelect);
+        actions.appendChild(btnCopy);
+
+        header.appendChild(titleGroup);
+        header.appendChild(actions);
+
+        const body = document.createElement("div");
+        body.className = "phrase-body";
+        body.textContent = phrase.content;
+
+        card.appendChild(header);
+        card.appendChild(body);
+        phraseListEl.appendChild(card);
+      });
+    }
+
+    function renderComposer() {
+      const countKanji = ["零", "壱", "弐", "参", "肆"];
+      const countLabel = countKanji[selectedIds.length] || selectedIds.length;
+      selectedCountEl.textContent = `選択数：${countLabel}件`;
+
+      orderListEl.innerHTML = "";
+      selectedIds.forEach((id, index) => {
+        const phrase = PHRASES.find((p) => p.id === id);
+        if (!phrase) return;
+
+        const item = document.createElement("div");
+        item.className = "order-item";
+
+        const itemTitle = document.createElement("div");
+        itemTitle.className = "order-item-title";
+
+        const num = document.createElement("span");
+        num.className = "order-num";
+        num.textContent = `${index + 1}.`;
+
+        const text = document.createElement("span");
+        text.textContent = phrase.title;
+
+        itemTitle.appendChild(num);
+        itemTitle.appendChild(text);
+
+        const btns = document.createElement("div");
+        btns.className = "order-btns";
+
+        const btnUp = document.createElement("button");
+        btnUp.type = "button";
+        btnUp.className = "btn-mini";
+        btnUp.textContent = "↑";
+        btnUp.title = "上へ移動";
+        btnUp.disabled = index === 0;
+        btnUp.addEventListener("click", () => moveSelected(index, -1));
+
+        const btnDown = document.createElement("button");
+        btnDown.type = "button";
+        btnDown.className = "btn-mini";
+        btnDown.textContent = "↓";
+        btnDown.title = "下へ移動";
+        btnDown.disabled = index === selectedIds.length - 1;
+        btnDown.addEventListener("click", () => moveSelected(index, 1));
+
+        const btnRemove = document.createElement("button");
+        btnRemove.type = "button";
+        btnRemove.className = "btn-mini";
+        btnRemove.textContent = "×";
+        btnRemove.title = "除外";
+        btnRemove.addEventListener("click", () => toggleSelect(id));
+
+        btns.appendChild(btnUp);
+        btns.appendChild(btnDown);
+        btns.appendChild(btnRemove);
+
+        item.appendChild(itemTitle);
+        item.appendChild(btns);
+        orderListEl.appendChild(item);
+      });
+
+      if (selectedIds.length === 0) {
+        scrollPreviewEl.innerHTML = '<div class="scroll-preview-empty">左の文言より「編入」を選び、巻物を仕立ててください</div>';
+        btnCopyCombined.disabled = true;
+      } else {
+        scrollPreviewEl.textContent = getCombinedText();
+        btnCopyCombined.disabled = false;
+      }
+    }
+
+    function renderAll() {
+      renderPhraseCards();
+      renderComposer();
+    }
+
+    btnSelectAll.addEventListener("click", () => {
+      selectedIds.length = 0;
+      PHRASES.forEach((p) => selectedIds.push(p.id));
+      renderAll();
+    });
+
+    btnClearAll.addEventListener("click", () => {
+      selectedIds.length = 0;
+      renderAll();
+    });
+
+    btnCopyCombined.addEventListener("click", () => {
+      if (selectedIds.length === 0) return;
+      copyToClipboard(getCombinedText(), "編纂した巻物の文言を複写しました");
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
