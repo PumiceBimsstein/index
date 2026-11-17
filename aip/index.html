@@ -68,20 +68,30 @@
     .corner-bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
     .corner-br { bottom: 10px; right: 10px; transform: scale(-1, -1); }
 
-    .top-external-link {
+    .palace-link-btn-wrapper {
       text-align: right;
       margin-bottom: 1rem;
     }
-    .top-external-link a {
+
+    .palace-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: linear-gradient(180deg, #1b0d0c 0%, #2d110f 100%);
       color: var(--gold-light);
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
+      border: 1px solid var(--imperial-gold);
+      padding: 0.4rem 1rem;
+      font-family: inherit;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
       text-decoration: none;
-      border-bottom: 1px dotted var(--imperial-gold);
-      padding-bottom: 2px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
     }
-    .top-external-link a:hover {
-      color: var(--imperial-gold);
+    .palace-link-btn:hover {
+      color: var(--jade-white);
+      border-color: var(--gold-light);
+      background: linear-gradient(180deg, #2d110f 0%, #3d1715 100%);
     }
 
     .palace-header {
@@ -208,6 +218,10 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 0.5rem;
+      margin-bottom: 0;
+    }
+
+    .scroll-card.open .card-header {
       margin-bottom: 0.85rem;
       padding-bottom: 0.5rem;
       border-bottom: 1px dashed rgba(22, 56, 50, 0.3);
@@ -282,7 +296,17 @@
       background-color: var(--vermilion-bright);
     }
 
+    .btn-toggle-body {
+      background-color: transparent;
+      color: var(--deep-jade);
+      border: 1px dotted var(--deep-jade);
+    }
+    .btn-toggle-body:hover {
+      background-color: rgba(22, 56, 50, 0.08);
+    }
+
     .phrase-body {
+      display: none;
       font-size: 0.92rem;
       color: var(--ink-text);
       white-space: pre-wrap;
@@ -290,6 +314,9 @@
       background-color: rgba(226, 231, 220, 0.45);
       padding: 0.85rem 1rem;
       border-left: 3px solid var(--imperial-gold);
+    }
+    .scroll-card.open .phrase-body {
+      display: block;
     }
 
     .composer-panel {
@@ -483,25 +510,14 @@
       letter-spacing: 0.2em;
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 1rem;
       align-items: center;
-    }
-
-    .palace-footer a {
-      color: var(--gold-light);
-      text-decoration: none;
-      border-bottom: 1px dotted var(--imperial-gold);
-    }
-    .palace-footer a:hover {
-      color: var(--imperial-gold);
     }
   </style>
 </head>
 <body>
 
   <div class="palace-container">
-    <!-- 検索エンジン除外のためのSEO対策（noindex, nofollow, noarchive） -->
-    <!-- 四隅の伝統雷文透かし彫りSVG -->
     <svg class="corner-ornament corner-tl" viewBox="0 0 44 44" fill="none">
       <path d="M2 42V2H42V10H10V42H2Z" stroke="#c6a15b" stroke-width="1.5"/>
       <path d="M14 34V14H34V20H20V34H14Z" stroke="#c6a15b" stroke-width="1.2"/>
@@ -523,9 +539,11 @@
       <rect x="24" y="24" width="6" height="6" stroke="#c6a15b" stroke-width="1.2"/>
     </svg>
 
-    <!-- ページトップのGoogleAIリンク -->
-    <div class="top-external-link">
-      <a href="https://www.google.com/?source=hp&sxsrf=APpeQntUFRTejhy2-HITYeSZgHT4IcgEKg%3A1790852963056&zs=1&ved=2ahUKEwihgtaW15iXAxU7klYBHV-nN5YQoo4PegYIAAgAEAY&azm=9" target="_blank" rel="noopener noreferrer">Google AI</a>
+    <!-- ページトップの宮殿風ボタンリンク -->
+    <div class="palace-link-btn-wrapper">
+      <a href="https://www.google.com/?source=hp&sxsrf=APpeQntUFRTejhy2-HITYeSZgHT4IcgEKg%3A1790852963056&zs=1&ved=2ahUKEwihgtaW15iXAxU7klYBHV-nN5YQoo4PegYIAAgAEAY&azm=9" target="_blank" rel="noopener noreferrer" class="palace-link-btn">
+        <span>❖</span> Google AI
+      </a>
     </div>
 
     <!-- ヘッダー扁額 -->
@@ -573,15 +591,17 @@
         </div>
 
         <button type="button" id="btn-copy-combined" class="btn-imperial-copy" disabled>
-          <span>印</span> 組み合わせた文言を複写
+          文言を複写
         </button>
       </aside>
     </main>
 
-    <!-- ページ最下部のGoogleAIリンク -->
+    <!-- ページ最下部の宮殿風ボタンリンク -->
     <footer class="palace-footer">
       <div>
-        <a href="https://www.google.com/?source=hp&sxsrf=APpeQntUFRTejhy2-HITYeSZgHT4IcgEKg%3A1790852963056&zs=1&ved=2ahUKEwihgtaW15iXAxU7klYBHV-nN5YQoo4PegYIAAgAEAY&azm=9" target="_blank" rel="noopener noreferrer">Google AI</a>
+        <a href="https://www.google.com/?source=hp&sxsrf=APpeQntUFRTejhy2-HITYeSZgHT4IcgEKg%3A1790852963056&zs=1&ved=2ahUKEwihgtaW15iXAxU7klYBHV-nN5YQoo4PegYIAAgAEAY&azm=9" target="_blank" rel="noopener noreferrer" class="palace-link-btn">
+          <span>❖</span> Google AI
+        </a>
       </div>
       <div>龍鳳呈祥・格調ある対話のための規範文言集</div>
     </footer>
@@ -651,6 +671,7 @@
     ];
 
     const selectedIds = [];
+    const openCardIds = new Set(); // デフォルトは空（すべて折り畳み状態）
 
     const phraseListEl = document.getElementById("phrase-list");
     const orderListEl = document.getElementById("order-list");
@@ -699,6 +720,15 @@
       renderAll();
     }
 
+    function toggleCardOpen(id) {
+      if (openCardIds.has(id)) {
+        openCardIds.delete(id);
+      } else {
+        openCardIds.add(id);
+      }
+      renderAll();
+    }
+
     function moveSelected(index, direction) {
       const targetIndex = index + direction;
       if (targetIndex < 0 || targetIndex >= selectedIds.length) return;
@@ -720,8 +750,10 @@
       phraseListEl.innerHTML = "";
       PHRASES.forEach((phrase) => {
         const isSelected = selectedIds.includes(phrase.id);
+        const isOpen = openCardIds.has(phrase.id);
+
         const card = document.createElement("article");
-        card.className = `scroll-card${isSelected ? " selected" : ""}`;
+        card.className = `scroll-card${isSelected ? " selected" : ""}${isOpen ? " open" : ""}`;
 
         const header = document.createElement("div");
         header.className = "card-header";
@@ -743,6 +775,12 @@
         const actions = document.createElement("div");
         actions.className = "card-actions";
 
+        const btnToggle = document.createElement("button");
+        btnToggle.type = "button";
+        btnToggle.className = "btn-palace btn-toggle-body";
+        btnToggle.textContent = isOpen ? "折り畳む" : "展開";
+        btnToggle.addEventListener("click", () => toggleCardOpen(phrase.id));
+
         const btnSelect = document.createElement("button");
         btnSelect.type = "button";
         btnSelect.className = "btn-palace btn-select";
@@ -757,6 +795,7 @@
           copyToClipboard(phrase.content, `「${phrase.title}」を複写しました`);
         });
 
+        actions.appendChild(btnToggle);
         actions.appendChild(btnSelect);
         actions.appendChild(btnCopy);
 
