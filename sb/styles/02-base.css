@@ -1,0 +1,102 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    border-radius: var(--radius-sm);
+    padding: var(--space-1) var(--space-2);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+    background: var(--color-surface-subtle);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+input[type="text"],
+input[type="search"],
+input[type="number"],
+input[type="time"],
+input[type="date"],
+select,
+textarea {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-surface);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -1px;
+}
+
+@keyframes sb-highlight-blink {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(59, 91, 219, 0.7);
+        background-color: var(--color-primary);
+        color: #ffffff;
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(59, 91, 219, 0);
+        background-color: #5c7cfa;
+        color: #ffffff;
+    }
+}
+
+[data-highlight-blink="true"] {
+    animation: sb-highlight-blink 1.4s ease-in-out infinite;
+    border-color: var(--color-primary);
+}
+
+.btn--primary {
+    background: var(--color-primary);
+    color: #ffffff;
+    border-color: var(--color-primary);
+}
+
+.btn--primary:hover:not(:disabled) {
+    background: var(--color-primary-hover);
+}
+
+.btn--danger {
+    background: var(--color-danger);
+    color: #ffffff;
+    border-color: var(--color-danger);
+}
+
+.btn--danger:hover:not(:disabled) {
+    background: #c92a2a;
+}
+
+.btn--ghost {
+    border-color: transparent;
+    background: transparent;
+}

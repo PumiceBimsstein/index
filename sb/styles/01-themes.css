@@ -1,0 +1,75 @@
+:root {
+    --color-bg: #f8f9fa;
+    --color-surface: #ffffff;
+    --color-surface-subtle: #f1f3f5;
+    --color-border: #dee2e6;
+    --color-text: #212529;
+    --color-text-muted: #6c757d;
+
+    --color-primary: #3b5bdb;
+    --color-primary-hover: #364fc7;
+    --color-primary-soft: #edf2ff;
+    --color-danger: #e03131;
+    --color-danger-soft: #fff5f5;
+    --color-schedule-active: #f76707;
+    --color-schedule-soft: #fff4e6;
+
+    /* Status Palette Colors */
+    --status-yellow-bg: #fff9db;
+    --status-yellow-border: #fcc419;
+
+    --status-blue-bg: #e7f5ff;
+    --status-blue-border: #4dabf7;
+
+    --status-green-bg: #ebfbee;
+    --status-green-border: #40c057;
+
+    --status-orange-bg: #fff4e6;
+    --status-orange-border: #ffa94d;
+
+    --status-purple-bg: #f3f0ff;
+    --status-purple-border: #9775fa;
+
+    --status-gray-bg: #f1f3f5;
+    --status-gray-border: #adb5bd;
+
+    --status-pink-bg: #fff0f6;
+    --status-pink-border: #f06595;
+
+    --status-teal-bg: #e6fcf5;
+    --status-teal-border: #20c997;
+
+    /* Workspace Background Tones */
+    --ws-bg: #f8f9fa;
+    --ws-pattern-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-bg-tone="default"] {
+    --ws-bg: #f8f9fa;
+    --ws-pattern-color: rgba(33, 37, 41, 0.08);
+}
+
+[data-bg-tone="warm"] {
+    --ws-bg: #fff8f0;
+    --ws-pattern-color: rgba(180, 95, 30, 0.1);
+}
+
+[data-bg-tone="cool"] {
+    --ws-bg: #f0f6ff;
+    --ws-pattern-color: rgba(40, 90, 180, 0.1);
+}
+
+[data-bg-tone="mint"] {
+    --ws-bg: #effaf3;
+    --ws-pattern-color: rgba(30, 130, 76, 0.1);
+}
+
+[data-bg-tone="lavender"] {
+    --ws-bg: #f6f2ff;
+    --ws-pattern-color: rgba(103, 65, 217, 0.1);
+}
+
+[data-bg-tone="sand"] {
+    --ws-bg: #f7f4ea;
+    --ws-pattern-color: rgba(120, 100, 50, 0.1);
+}
