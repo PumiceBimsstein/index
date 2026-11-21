@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+@layer reset, tokens, base, layout, components;
+
+@layer tokens {
+  :root {
+    color-scheme: light dark;
+
+    /* 共通サイズ */
+    --container-max-width: 60rem; /* 960px */
+
+    /* カラーパレット（Paper の文字コントラストを引き締め済み） */
+    --bg-canvas: light-dark(oklch(0.962 0.011 85), oklch(0.184 0.008 265));
+    --bg-hover: light-dark(oklch(0.931 0.014 85), oklch(0.228 0.010 265));
+    --bg-subtle: light-dark(oklch(0.905 0.016 85), oklch(0.249 0.011 265));
+    --text-main: light-dark(oklch(0.21 0.012 65), oklch(0.955 0.004 265));
+    --text-muted: light-dark(oklch(0.44 0.014 75), oklch(0.654 0.016 265));
+    --accent: light-dark(oklch(0.517 0.145 30), oklch(0.648 0.184 260));
+    --border-color: light-dark(oklch(0.861 0.017 85), oklch(0.275 0.011 265));
+
+    /* トグルスイッチの色 */
+    --switch-track-off: light-dark(var(--border-color), oklch(0.342 0.013 265));
+    --switch-thumb: light-dark(var(--bg-canvas), var(--text-main));
+    --switch-shadow: light-dark(oklch(0 0 0 / 0.15), oklch(0 0 0 / 0.4));
+
+    /* 本文用フォント（Paper / Dark 共通で読みやすいシステム UI フォント） */
+    --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    /* Paper テーマ固有の質感（見出しのみ明朝体） */
+    --font-heading: "Hiragino Mincho ProN", "BIZ UDPMincho", "BIZ UDP明朝", "Yu Mincho", Georgia, serif;
+    --line-height-base: 1.8;
+    --line-height-desc: 1.75;
+    --letter-spacing-base: 0.02em;
+    --letter-spacing-heading: 0.05em;
+    --radius: 3px;
+    --radius-thumb: 2px;
+    --title-size: 1.85rem;
+    --cat-bar-width: 3px;
+    --cat-title-size: 1.1rem;
+    --item-title-size: 1.04rem;
+    --item-title-lh: 1.55;
+    --footer-link-size: 0.88rem;
+    --footer-link-weight: 600;
+  }
+
+  /* 手動で Paper / Dark を選択したときの color-scheme 上書き */
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  /* Dark テーマ固有の質感（見出しもシステム UI フォントに統一） */
+  :root[data-theme="dark"] {
+    --font-heading: var(--font-body);
+    --line-height-base: 1.8;
+    --line-height-desc: 1.7;
+    --letter-spacing-base: 0.02em;
+    --letter-spacing-heading: 0.01em;
+    --radius: 6px;
+    --radius-thumb: 4px;
+    --title-size: 1.75rem;
+    --cat-bar-width: 4px;
+    --cat-title-size: 1.05rem;
+    --item-title-size: 1rem;
+    --item-title-lh: 1.5;
+    --footer-link-size: 0.86rem;
+    --footer-link-weight: 500;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --font-heading: var(--font-body);
+      --line-height-base: 1.8;
+      --line-height-desc: 1.7;
+      --letter-spacing-base: 0.02em;
+      --letter-spacing-heading: 0.01em;
+      --radius: 6px;
+      --radius-thumb: 4px;
+      --title-size: 1.75rem;
+      --cat-bar-width: 4px;
+      --cat-title-size: 1.05rem;
+      --item-title-size: 1rem;
+      --item-title-lh: 1.5;
+      --footer-link-size: 0.86rem;
+      --footer-link-weight: 500;
+    }
+  }
+
+  /* light-dark() 非対応ブラウザ向けフォールバック */
+  @supports not (color: light-dark(white, black)) {
+    :root,
+    :root[data-theme="light"] {
+      --bg-canvas: #f6f3eb;
+      --bg-hover: #ede8dc;
+      --bg-subtle: #e6e0d2;
+      --text-main: #1c1916;
+      --text-muted: #59534c;
+      --accent: #b0432c;
+      --border-color: #d8d1c2;
+      --switch-track-off: #d8d1c2;
+      --switch-thumb: #f6f3eb;
+      --switch-shadow: rgba(0, 0, 0, 0.15);
+    }
+
+    :root[data-theme="dark"] {
+      --bg-canvas: #121316;
+      --bg-hover: #1c1d22;
+      --bg-subtle: #202227;
+      --text-main: #f0f0f2;
+      --text-muted: #8d919b;
+      --accent: #4d8cff;
+      --border-color: #26282e;
+      --switch-track-off: #363940;
+      --switch-thumb: #f0f0f2;
+      --switch-shadow: rgba(0, 0, 0, 0.4);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg-canvas: #121316;
+        --bg-hover: #1c1d22;
+        --bg-subtle: #202227;
+        --text-main: #f0f0f2;
+        --text-muted: #8d919b;
+        --accent: #4d8cff;
+        --border-color: #26282e;
+        --switch-track-off: #363940;
+        --switch-thumb: #f0f0f2;
+        --switch-shadow: rgba(0, 0, 0, 0.4);
+      }
+    }
+  }
+}

@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <title>Archive</title>
   <meta name="description" content="制作したWebアプリ、ツール、資料のアーカイブです。">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
-  <!-- Google Fonts: Noto Sans JP -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
-
+  <!-- 描画前のちらつき防止：保存済みテーマをファーストペイント前に適用 -->
   <script>
-    (function() {
-      const theme = localStorage.getItem("selected-theme") === "dark" ? "dark" : "paper";
-      document.write('<link id="theme-style" rel="stylesheet" href="./style-' + theme + '.css">');
+    (() => {
+      const saved = localStorage.getItem("selected-theme");
+      if (saved === "light" || saved === "dark") {
+        document.documentElement.dataset.theme = saved;
+        document.querySelector('meta[name="color-scheme"]')?.setAttribute("content", saved);
+      }
     })();
   </script>
-  <noscript>
-    <link id="theme-style" rel="stylesheet" href="./style-paper.css">
-  </noscript>
 
-  <script src="./contents.js" defer></script>
-  <script src="./main.js" defer></script>
+  <link rel="stylesheet" href="./tokens.css">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./main.js"></script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">メインコンテンツへ移動</a>
+
   <div class="site-wrapper">
     <!-- ヘッダー -->
     <header class="site-header">
@@ -35,14 +35,78 @@
         </h1>
         <p class="site-description">自作のWebアプリ、ツール、各種資料を整理した個人アーカイブです。</p>
       </div>
-      <button type="button" id="theme-toggle" class="theme-toggle" role="switch" aria-checked="false" aria-label="ダークモード切り替え">
-        <span class="toggle-slider"></span>
-      </button>
+
+      <label class="theme-switch" title="テーマ切り替え（Paper / Dark）">
+        <input
+          type="checkbox"
+          switch
+          id="theme-toggle"
+          class="theme-switch-input"
+          aria-label="ダークモード切り替え"
+        >
+      </label>
     </header>
 
-    <!-- メインコンテンツ（main.js により動的生成） -->
-    <main class="site-main" id="main-content" aria-live="polite">
-      <!-- カテゴリーセクションがここに展開されます -->
+    <!-- メインコンテンツ -->
+    <main class="site-main" id="main-content">
+      <section class="category-section">
+        <h2 class="category-title">Web Apps</h2>
+        <ul class="items-grid">
+          <li class="content-item">
+            <!-- サムネイルを使う場合の例：
+            <a href="https://pumicebimsstein.github.io/Pumice/" class="item-thumbnail-wrap" tabindex="-1" aria-hidden="true">
+              <img class="item-thumbnail" src="./images/Pumice.png" alt="" loading="lazy">
+            </a>
+            -->
+            <h3 class="item-title">
+              <a href="https://pumicebimsstein.github.io/Pumice/" class="item-title-link">Pumice</a>
+            </h3>
+            <p class="item-description">Markdown対応のドキュメント作成・閲覧ツール。PC専用でデータはローカルに保存され、AI機能はなし。自信作。</p>
+          </li>
+          <li class="content-item">
+            <h3 class="item-title">
+              <a href="https://pumicebimsstein.github.io/Mica/" class="item-title-link">Mica</a>
+            </h3>
+            <p class="item-description">CSVやJSONをカード形式で表示するデータビューア。PC専用で電子書籍の本棚として作りました。フィルターがいい感じ。</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="category-section">
+        <h2 class="category-title">Tools</h2>
+        <ul class="items-grid">
+          <li class="content-item">
+            <h3 class="item-title">
+              <a href="./randomdesign/" class="item-title-link">ページデザインランダム生成</a>
+            </h3>
+            <p class="item-description">ウェブページのデザイン案をランダムに組み合わせてAI用プロンプトを生成するツール。思いもよらないデザインが生まれます。</p>
+          </li>
+          <li class="content-item">
+            <h3 class="item-title">
+              <span class="item-title-text">書籍データ収集のためのブラウザ拡張機能(現在非公開)</span>
+            </h3>
+            <p class="item-description">電子書籍サイトから購入済みの書籍のデータを取得して一覧にする拡張機能。Micaで使用するデータを収集するために作成。面倒なので使う価値なし。</p>
+          </li>
+          <li class="content-item">
+            <h3 class="item-title">
+              <a href="./bookmarklet/" class="item-title-link">書籍データ収集ツール（簡易版）</a>
+            </h3>
+            <p class="item-description">電子書籍サイトから購入済みの書籍の一覧と最低限の情報を取得する。Micaで使用するデータを収集するために作成。</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="category-section">
+        <h2 class="category-title">Notes &amp; Documents</h2>
+        <ul class="items-grid">
+          <li class="content-item">
+            <h3 class="item-title">
+              <a href="./Lissajousgraph/" class="item-title-link">リサジュー図形シミュレーター</a>
+            </h3>
+            <p class="item-description">リサジュー図形の仕組みを視覚的に理解する。</p>
+          </li>
+        </ul>
+      </section>
     </main>
 
     <!-- フッター -->
@@ -54,7 +118,6 @@
             <!-- <li><a href="./rss.xml">RSS</a></li> -->
           </ul>
         </nav>
-
         <p class="copyright">&copy; 2026 Archive. All rights reserved.</p>
       </div>
     </footer>
