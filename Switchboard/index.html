@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switchboard — 思考と作業場を、瞬時に切り替えるワークスペース</title>
+    <meta name="description" content="Switchboardは、メモやプロジェクトごとに作業場を切り替え、自由配置ボードで思考を整理できるブラウザ完結型のノート・タスクワークスペースです。">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233b5bdb'/%3E%3Crect x='6' y='7' width='8' height='8' rx='2' fill='%23ffffff'/%3E%3Crect x='18' y='7' width='8' height='8' rx='2' fill='%23dbe4ff'/%3E%3Crect x='6' y='17' width='8' height='8' rx='2' fill='%23dbe4ff'/%3E%3Crect x='18' y='17' width='8' height='8' rx='2' fill='%23ffffff'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#" class="brand">
+                <svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true">
+                    <rect width="32" height="32" rx="8" fill="#3b5bdb"/>
+                    <rect x="6" y="7" width="8" height="8" rx="2" fill="#ffffff"/>
+                    <rect x="18" y="7" width="8" height="8" rx="2" fill="#dbe4ff"/>
+                    <rect x="6" y="17" width="8" height="8" rx="2" fill="#dbe4ff"/>
+                    <rect x="18" y="17" width="8" height="8" rx="2" fill="#ffffff"/>
+                </svg>
+                <span>Switchboard</span>
+            </a>
+
+            <nav class="header-nav" aria-label="メインナビゲーション">
+                <a href="#features">主な機能</a>
+                <a href="#workflow">使い方</a>
+                <a href="#privacy">データ管理</a>
+                <a href="#faq">よくある質問</a>
+            </nav>
+
+            <a href="./app/" class="btn btn-primary">アプリを開く</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-copy">
+                <div class="hero-badge">登録不要 ・ ブラウザですぐ使える</div>
+                <h1 class="hero-title">
+                    あのプロジェクトも、<br><span>たまには思い出そう。</span>
+                </h1>
+                <p class="hero-lead">
+                    Switchboard は、ほったらかしのプロジェクトを思い出して少しでも進めるためのワークスペースです。
+                </p>
+                <div class="hero-actions">
+                    <a href="./app/" class="btn btn-primary btn-lg">今すぐアプリを開く</a>
+                    <a href="#features" class="btn btn-secondary btn-lg">機能を見る</a>
+                </div>
+            </div>
+
+            <!-- App Visual Mockup -->
+            <div class="mockup-wrap" aria-hidden="true">
+                <div class="mockup-topbar">
+                    <div class="mockup-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="mockup-url">Switchboard Workspace</div>
+                    <div class="mockup-spacer"></div>
+                </div>
+                <div class="mockup-body">
+                    <aside class="mock-sidebar">
+                        <div class="mock-sidebar-title">
+                            <span>Switchboard</span>
+                            <span class="mock-undo">↩</span>
+                        </div>
+                        <div>
+                            <div class="mock-group-label">共通領域</div>
+                            <div class="mock-nav-item">メモ</div>
+                        </div>
+                        <div>
+                            <div class="mock-group-label">プロジェクト</div>
+                            <div class="mock-nav-item active">
+                                <span>新企画アイデア</span>
+                                <span class="mock-schedule-pill">予定中</span>
+                            </div>
+                            <div class="mock-nav-item">執筆・調査ノート</div>
+                            <div class="mock-nav-item">リリース準備</div>
+                        </div>
+                    </aside>
+
+                    <div class="mock-board">
+                        <div class="mock-board-toolbar">
+                            <div class="mock-board-name">
+                                新企画アイデア
+                                <span class="mock-chip">neutral / dots</span>
+                                <span class="mock-chip">100%</span>
+                            </div>
+                            <span class="mock-chip">＋ カードを追加</span>
+                        </div>
+                        <div class="mock-canvas-area">
+                            <svg class="mock-link-svg" viewBox="0 0 780 290" preserveAspectRatio="none">
+                                <path d="M 240 65 C 290 65, 220 170, 260 170" fill="none" stroke="#9aa2ae" stroke-width="2" stroke-dasharray="5 5"/>
+                                <path d="M 480 170 C 520 170, 500 75, 536 75" fill="none" stroke="#9aa2ae" stroke-width="2" stroke-dasharray="5 5"/>
+                            </svg>
+
+                            <div class="mock-card mock-card-1">
+                                <span class="mock-card-status st-blue">アイデア</span>
+                                <h4>トップページの構成案</h4>
+                                <p>ファーストビューで全体像が伝わる画面イメージを置く</p>
+                            </div>
+                            <div class="mock-card mock-card-2">
+                                <span class="mock-card-status st-orange">進行中</span>
+                                <h4>文言とキャッチコピー</h4>
+                                <p>プロジェクト切替と自由配置の強みを簡潔にまとめる</p>
+                            </div>
+                            <div class="mock-card mock-card-3">
+                                <span class="mock-card-status st-green">完了</span>
+                                <h4>テーマスタイルの準備</h4>
+                                <p>雰囲気に合わせてスタイルを切り替えられるようにした</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section section-surface">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-kicker">Features</div>
+                <h2 class="section-title">便利な機能群</h2>
+                <p class="section-desc">複数のプロジェクトを並行して進めるときでも、作業場ごとに頭を切り替えられます。</p>
+            </div>
+
+            <div class="features-grid">
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="18" rx="1.5"/>
+                            <rect x="14" y="3" width="7" height="8" rx="1.5"/>
+                            <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+                        </svg>
+                    </div>
+                    <h3>作業場（プロジェクト）切替</h3>
+                    <p>「共通メモ」と、「プロジェクト」をサイドバーから切替える。作成・名前変更・並べ替えも可能。</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="8" height="6" rx="1.5"/>
+                            <rect x="13" y="14" width="8" height="6" rx="1.5"/>
+                            <path d="M11 7h3a2 2 0 0 1 2 2v5"/>
+                        </svg>
+                    </div>
+                    <h3>自由配置ボード＆カード連結</h3>
+                    <p>拡大縮小できるボードにカードをドラッグ配置。カード同士の関連付け、折りたたみ・複製・別プロジェクトへの移動もできます。</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>カードの「状態」設定</h3>
+                    <p>「未着手」「調査中」「完了」など、プロジェクトごとに状態の名称・色・並び順をカスタマイズ。状態はホイール操作で素早く変更できます。</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="13" r="8"/>
+                            <path d="M12 9v4l2.5 2.5"/>
+                            <path d="M9 2h6"/>
+                        </svg>
+                    </div>
+                    <h3>作業スケジュール通知</h3>
+                    <p>固定時刻やランダム時間帯、毎日・曜日指定・単発日付で予定を登録。時刻が来るとお知らせし、15分スヌーズやスキップにも対応します。</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 3a9 9 0 1 0 9 9c0-.5-.4-1-1-1h-2.5a2.5 2.5 0 0 1 0-5H19c.6 0 1-.4 1-1a9 9 0 0 0-8-2z"/>
+                        </svg>
+                    </div>
+                    <h3>背景＆スタイルの着せ替え</h3>
+                    <p>作業場ごとの背景色と模様に加えて、アプリ全体の雰囲気を変えられるスタイル切替が可能。</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6"/>
+                            <path d="M8 13h8"/>
+                            <path d="M8 17h5"/>
+                        </svg>
+                    </div>
+                    <h3>Markdown 書き出し</h3>
+                    <p>すべてのカード、あるいは選んだカードを Markdown 形式のファイルとしてダウンロードできます。</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow -->
+    <!-- <section id="workflow" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-kicker">Workflow</div>
+                <h2 class="section-title">はじめかた</h2>
+                <p class="section-desc">メモ書きから始めて、プロジェクト単位の整理へ自然につなげられます。</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span class="step-num">STEP 01</span>
+                    <h3>共通領域にまずメモを取る</h3>
+                    <p>頭に浮かんだことは「共通領域（メモ）」へ。後でプロジェクトを作ったら、カードをそのまま移動できます。</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">STEP 02</span>
+                    <h3>ボード上で並べて関連付ける</h3>
+                    <p>カードの位置を動かしたり、関連するカード同士を繋いだりしながら全体像を整理。不要な詳細は折りたたんでスッキリ保てます。</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">STEP 03</span>
+                    <h3>スケジュールで作業時間を確保</h3>
+                    <p>取り組みたいプロジェクトに予定を入れておけば、時間になったとき自動でリマインド。作業場を切り替えるきっかけを作れます。</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Privacy & Data -->
+    <section id="privacy" class="section section-surface">
+        <div class="container">
+            <div class="trust-box">
+                <div>
+                    <div class="section-kicker">Local First</div>
+                    <h2 class="section-title">あなたのデータは、あなたのブラウザに。</h2>
+                    <p class="section-desc">
+                        Switchboard は外部サーバーにノート内容を送信しません。すべての作業データは端末のブラウザ内に自動保存されます。
+                    </p>
+                    <ul class="trust-list">
+                        <li><span class="trust-check">✓</span><span>ログイン・会員登録なしで開いた瞬間から利用可能</span></li>
+                        <li><span class="trust-check">✓</span><span>操作ミスしても UNDO（Ctrl+Z / Cmd+Z）でやり直し可能</span></li>
+                        <li><span class="trust-check">✓</span><span>設定メニューからいつでも JSON バックアップを書き出し・復元</span></li>
+                    </ul>
+                </div>
+
+                <div class="trust-cards">
+                    <div class="trust-mini">
+                        <strong>IndexedDB 自動保存</strong>
+                        <span>編集内容は即座にブラウザ内のストレージへ記録されます。</span>
+                    </div>
+                    <div class="trust-mini">
+                        <strong>JSON バックアップ</strong>
+                        <span>PC の引っ越しや定期保存用に、全データを1ファイルで保存・復元できます。</span>
+                    </div>
+                    <div class="trust-mini">
+                        <strong>Markdown エクスポート</strong>
+                        <span>書いたメモは標準的な Markdown としていつでも外へ持ち出せます。</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-kicker">FAQ</div>
+                <h2 class="section-title">よくある質問</h2>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3>利用にあたってアカウント登録や料金は必要ですか？</h3>
+                    <p>いいえ、不要です。ページを開けばそのまま無料でお使いいただけます。</p>
+                </div>
+                <div class="faq-item">
+                    <h3>スマートフォンでも使えますか？</h3>
+                    <p>はい。画面幅が狭い環境では、片手で扱いやすい縦リスト表示に切り替わり、ドラッグで並び替えやカード連結も行えます。</p>
+                </div>
+                <div class="faq-item">
+                    <h3>別のパソコンやブラウザにデータを移せますか？</h3>
+                    <p>サイドバーの「設定 ＞ バックアップ書き出し」から JSON ファイルをダウンロードし、移行先の Switchboard で「バックアップ復元」を行うことでそのまま引き継げます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-banner">
+                <h2>使ってみよう</h2>
+                <p>登録やインストールは不要です。まずは忘れがちなプロジェクトを登録しましょう。</p>
+                <a href="./app/" class="btn btn-paper btn-lg">Switchboard を開く</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <span>Switchboard</span>
+            <span>Local-first Workspace</span>
+        </div>
+    </footer>
+
+</body>
+</html>
